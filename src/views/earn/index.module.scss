@@ -1,0 +1,503 @@
+@import "src/styles/lib";
+.pic_bg {
+  width: resize(1590);
+  height: resize(1507);
+  position: fixed;
+  top:0;
+  left:0;
+  z-index: 0;
+    @media (max-width: 768px) {
+            display: none;
+        }
+}
+.pic_earn {
+  width: resize(496);
+  height: resize(322);
+  position: fixed;
+  right: resize(180);
+  top:resize(100);
+  z-index: 0;
+    @media (max-width: 768px) {
+            display: none;
+        }
+}
+.container {
+  margin-top:resize(96);
+  position: relative;
+    @media (max-width: 768px) {
+      margin-top:0;
+        }
+  
+  
+  .content {
+    width: $web_content;
+    margin:0 auto;
+    margin-top: resize(36);
+    @media (max-width: 768px) {
+      padding:0 15px;
+      width: 100%;
+    }
+    h1 {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 600;
+      font-size: resize(64);
+      line-height: resize(81);
+      /* identical to box height */
+
+      letter-spacing: 0.38px;
+
+      color: #FFFFFF;
+      @media (max-width: 768px) {
+        font-size: 28px;
+        line-height: 35px;
+      }
+    }
+    >.desc {
+      width: resize(840);
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: resize(18);
+      line-height: 150%;
+      text-transform: capitalize;
+      color: #868AAE;
+      @media (max-width: 768px) {
+        width: 100%;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 14px;
+      }
+    }
+    .search_container {
+      margin-top: resize(48);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+        @media (max-width: 768px) {
+                flex-direction: column;
+          align-items: flex-end;
+            }
+      .input_container {
+        width: resize(600);
+        height: resize(84);
+        background: #14161E;
+        border-radius: resize(16);
+        display: flex;
+        align-items: center;
+        padding:0 resize(24);
+        @media (max-width: 768px) {
+          width: 100%;
+          height: 42px;
+          box-shadow: -4px -4px 20px rgba(255, 168, 69, 0.5), 4px 4px 20px #FFA845;
+          padding:0 12px;
+        }
+        .icon_search {
+          width: resize(48);
+          height: resize(48);
+          margin-right: resize(16);
+          position: relative;
+          @media (max-width: 768px) {
+            width: 24px;
+            height: 24px;
+          }
+        }
+        .input {
+          flex:1;
+          background: transparent;
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 400;
+          font-size: resize(24);
+          line-height: resize(30);
+          display: flex;
+          align-items: center;
+          text-transform: capitalize;
+
+          color: #FFFFFF;
+          @media (max-width: 768px) {
+            font-size: 14px;
+            line-height: 18px;
+          }
+        }
+      }
+      .switch_container {
+        display: flex;
+        align-items: center;
+        @media (max-width: 768px) {
+         margin-top: 44px;
+        }
+        .title {
+          font-family: 'Outfit';
+          font-style: normal;
+          font-weight: 500;
+          font-size: resize(20);
+          line-height: resize(25);
+          display: flex;
+          align-items: center;
+          text-transform: capitalize;
+
+          color: #FFFFFF;
+          margin-right: resize(12);
+        }
+        .switch {
+          //background-color: $color_orange;
+
+
+        }
+        :global{
+          .ant-switch {
+            background-color: gray;
+          }
+          .ant-switch-checked {
+            background-color: $color_orange;
+          }
+
+        }
+      }
+    }
+    .mining_container {
+      background: linear-gradient(182.67deg, rgba(71, 71, 107, 0.8) 0.95%, rgba(50, 55, 75, 0.8) 43.12%, rgba(1, 1, 1, 0.8) 91.71%);
+      border-radius: resize(36);
+      padding:resize(48);
+      margin-top:resize(48);
+      margin-bottom:resize(48);
+        @media (max-width: 768px) {
+          padding:24px 10px;
+            }
+    }
+    .lp_wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: resize(36);
+      border-bottom: 1px solid #868AAE;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+      .time {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(21);
+        line-height: resize(26);
+        color: #D3DEFC;
+        margin-right: resize(16);
+      }
+      .status {
+        width: resize(96);
+        height: resize(36);
+        border:1px solid #FFA845;
+        background-color: #8C6A43;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(18);
+        line-height: resize(23);
+        /* identical to box height */
+
+
+        color: #FFB96A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: resize(6);
+      }
+    }
+    .lp_total_warp {
+      margin-top: resize(36);
+
+      background: linear-gradient(180deg, #90A8EB 0%, #536FB8 100%);
+      border: 0.5px solid #8BA4E7;
+      border-radius: resize(16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:resize(29) resize(24);
+        @media (max-width: 768px) {
+          padding:16px 12px;
+          margin-top: 24px;
+            }
+      &.blue {
+        background: linear-gradient(180deg, #5182FF 0%, #122555 100%);
+      }
+      &.black {
+        padding:resize(24);
+        background: linear-gradient(180deg, #494F88 0%, #1A1D31 100%);
+        align-items: flex-start;
+        .amount {
+          margin-top:resize(16);
+        }
+      }
+      .left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .name {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(24);
+        line-height: resize(30);
+
+        color: #D3DEFC;
+          @media (max-width: 768px) {
+            font-size: 12px;
+            line-height: 15px;
+
+          }
+      }
+      .amount {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: resize(32);
+        line-height: resize(40);
+        text-align: right;
+
+        color: #FFFFFF;
+        @media (max-width: 768px) {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+      .title_record {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(24);
+        line-height: resize(30);
+
+        color: #FFA845;
+          @media (max-width: 768px) {
+            font-size: 12px;
+            line-height: 15px;
+              }
+
+      }
+      .icon_record {
+        width: resize(24);
+        height: resize(24);
+        margin-left: resize(12);
+        position: relative;
+          @media (max-width: 768px) {
+            width: 16px;
+            height: 16px;
+            margin-left: 2px;
+              }
+      }
+    }
+    .bottom_wrap {
+      display: flex;
+      margin-top: resize(36);
+      text-align: center;
+      .left {
+        flex:1;
+        >div:last-child {
+          justify-content: space-between;
+        }
+      }
+      .right {
+        flex:1;
+        .btn {
+          background: #FFA845;
+        }
+        >div:last-child {
+          justify-content: space-between;
+        }
+      }
+      .amount {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: resize(36);
+        line-height: resize(45);
+
+        color: #FFFFFF;
+          @media (max-width: 768px) {
+            font-size: 16px;
+            line-height: 20px;
+              }
+      }
+      .btn {
+        height: resize(80);
+
+        background: linear-gradient(180deg, #BDCFFF 0%, #859FE3 100%);
+        border-radius: resize(16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 500;
+        font-size: resize(32);
+        line-height: resize(48);
+        /* identical to box height, or 150% */
+
+        text-align: right;
+
+        color: #010101;
+        margin-top: resize(43);
+        margin-bottom: resize(28);
+        cursor: pointer;
+          @media (max-width: 768px) {
+            height: 44px;
+            font-size: 16px;
+            line-height: 20px;
+            border-radius: 8px;
+              }
+      }
+      .desc {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(24);
+        line-height: resize(30);
+        text-align: center;
+
+        color: #D3DEFC;
+        margin-top: resize(16);
+        @media (max-width: 768px) {
+          font-size: 12px;
+          line-height: 15px;
+          margin-top: 10px;
+        }
+      }
+      .icon_arrow_right_gray {
+        width: resize(32);
+        height: resize(32);
+        position: relative;
+          @media (max-width: 768px) {
+                  width: 16px;
+            height: 16px;
+              }
+      }
+      .line {
+        height: resize(72);
+        border-right: 1px solid #868AAE;
+        margin-left: resize(92);
+        margin-right: resize(92);
+          @media (max-width: 768px) {
+            height: 36px;
+            margin-left: 15px;
+            margin-right: 15px;
+              }
+      }
+      .txt_extract_record {
+        font-family: 'Outfit';
+        font-style: normal;
+        font-weight: 400;
+        font-size: resize(24);
+        line-height: resize(30);
+
+        color: #D3DEFC;
+          @media (max-width: 768px) {
+            font-size: 12px;
+            line-height: 15px;
+
+          }
+      }
+    }
+  }
+}
+.tab_container {
+  .content {
+    width: $web_content;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    padding:0 38px;
+      @media (max-width: 768px) {
+        width: 100%;
+        background: rgba(20, 22, 30, 0.8);
+        border-bottom: 0.5px solid #3E3E3E;
+      }
+    .item {
+      font-family: 'Outfit';
+      font-style: normal;
+      font-weight: 500;
+      font-size: resize(20);
+      line-height: resize(56);
+      /* identical to box height, or 120% */
+
+      text-align: center;
+      text-transform: capitalize;
+      color: #FFFFFF;
+      position: relative;
+      cursor: pointer;
+      margin-right: resize(64);
+      border-bottom: 2px solid transparent;
+        @media (max-width: 768px) {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+            }
+      &.active {
+        color: #FFA845;
+        border-bottom: 2px solid #FFA845;
+      }
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+  }
+}
+.lp_pair_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: resize(20);
+  .lp_pair_wrap {
+    display: flex;
+    align-items: center;
+    .icon_coin:first-child {
+      width: resize(48);
+      height: resize(48);
+      position: relative;
+      transform: translateX(0);
+        @media (max-width: 768px) {
+          width: 32px;
+          height: 32px;
+            }
+    }
+    .icon_coin {
+      width: resize(36);
+      height: resize(36);
+      position: relative;
+      transform: translateX(-50%);
+      @media (max-width: 768px) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  .icon_arrow_right_orange {
+    width: resize(48);
+    height: resize(48);
+    position: relative;
+    margin-left: resize(42);
+    margin-right: resize(42);
+    @media (max-width: 768px) {
+      width: 24px;
+      height: 24px;
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  }
+  .lp_name {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: resize(24);
+    line-height: resize(42);
+    /* identical to box height, or 175% */
+
+
+    color: #FFFFFF;
+      @media (max-width: 768px) {
+        font-size: 16px;
+        line-height: 28px;
+          }
+  }
+}
+

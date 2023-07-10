@@ -1,0 +1,11 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/no-unknown-property": ["error", { "ignore": [
+      "x5-playsinline",
+      "webkit-playsinline",
+      "x5-video-player-type",
+      "x5-video-player-fullscreen"
+    ] }]
+  }
+}

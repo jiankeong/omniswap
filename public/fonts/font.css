@@ -1,0 +1,58 @@
+
+/* @font-face {
+  font-family: 'PaladinsExpanded';
+  src: url('/fonts/PaladinsExpanded.ttf') format('truetype');
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: 'BoldItalicAlt';
+  src: url('/fonts/DIN-BoldItalicAlt.otf') format('opentype');
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'OutfitBlack';
+  src: url('/fonts/Outfit-Black.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitBold';
+  src: url('/fonts/Outfit-Bold.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitExtraBold';
+  src: url('/fonts/Outfit-ExtraBold.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitExtraLight';
+  src: url('/fonts/Outfit-ExtraLight.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitLight';
+  src: url('/fonts/Outfit-Light.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitMedium';
+  src: url('/fonts/Outfit-Medium.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitRegular';
+  src: url('/fonts/Outfit-Regular.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitSemiBold';
+  src: url('/fonts/Outfit-SemiBold.otf') format('opentype');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'OutfitThin';
+  src: url('/fonts/Outfit-Thin.otf') format('opentype');
+  font-style: normal;
+}

@@ -1,0 +1,45 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+input{
+  border: 0;/*清除自带的2px的边框*/
+  padding: 0;/*清除自带的padding间距*/
+}
+input:focus {
+  outline: none;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+.flex-center-justify-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: #000;
+  }
+}
+#__next {
+  height:100%;
+  background-color:#000
+}
