@@ -30,6 +30,7 @@ export enum NetworkId {
   HECO = 128,
 
   BSC = 56,
+  BSC_TESTNET = 97,
 }
 
 export const BSCChain: Chain = {
@@ -46,6 +47,24 @@ export const BSCChain: Chain = {
   },
   blockExplorers: {
     default: { name: 'bscscan', url: 'https://bscscan.com/' },
+  },
+  testnet: false,
+}
+
+export const BSCTestnetChain: Chain = {
+  id: 97,
+  name: 'BSC Testnet',
+  network: 'BSC Testnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BSC',
+    symbol: 'BNB',
+  },
+  rpcUrls: {
+    default: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+  },
+  blockExplorers: {
+    default: { name: 'bscscan', url: 'https://testnet.bscscan.com/' },
   },
   testnet: false,
 }

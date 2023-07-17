@@ -21,7 +21,7 @@ import { InjectedConnector } from 'wagmi/connectors/injected'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import { Chain, configureChains, createClient, WagmiConfig } from 'wagmi'
-import { BSCChain } from '../networkDetails'
+import { BSCChain, BSCTestnetChain } from '../networkDetails'
 import { ReactQueryProvider } from '../lib/react-query'
 import dynamic from 'next/dynamic'
 import { FlexViewColumn } from '../components/Common'
@@ -37,7 +37,8 @@ const FooterDynamic = dynamic(() => import('../components/Footer'), { ssr: false
 
 
 const { chains, provider } = configureChains(
-  [BSCChain],
+  [BSCTestnetChain], // testnet 
+  // [BSCChain], // production 
   [alchemyProvider({}), publicProvider()]
 )
 
