@@ -37,8 +37,8 @@ const FooterDynamic = dynamic(() => import('../components/Footer'), { ssr: false
 
 
 const { chains, provider } = configureChains(
-  [BSCTestnetChain], // testnet 
-  // [BSCChain], // production 
+  // [BSCTestnetChain], // testnet 
+  [BSCChain], // production 
   [alchemyProvider({}), publicProvider()]
 )
 
