@@ -6,13 +6,14 @@ import ImageToken from "../../../public/tokens/ImageToken"
 import { autoWidthVW } from "../../common/Common"
 import useTranslationLanguage from "../../hooks/useTranslationLanguage"
 import { useModalContext } from "../../provider/modalProvider"
-import { BaseInput, FlexView, FlexViewBetween, FlexViewCenter, FlexViewColumn } from "../Common"
+import { BaseInput, FlexView, FlexViewBetween, FlexViewCenter, FlexViewColumn, LoadingRow } from "../Common"
 import { Text, TextBlack, TextBold, TextExtraBold, TextSemiBold } from "../Text"
-import TokenList from "./TokenList"
+import TokenList, { swapTokens } from "./TokenList"
+import { useCoinsBalanceInfo } from "@/src/contract"
 
 interface SwapTokenInterface {
   editable?:Boolean,
-  coin?:string,
+  coin:string,
   max?:Boolean,
   onChoose?:(info:any)=>void,
   value?:string,
@@ -24,7 +25,7 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
   const {t} = useTranslationLanguage()
   const [inputValue,setInpuValue] = useState(value)
   const [selectCoin,setSelectCoin] = useState(coin)
-
+  const balanceInfo = useCoinsBalanceInfo(swapTokens)
   useEffect(()=>{
     setSelectCoin(coin)
   },[coin])
@@ -35,6 +36,9 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
     onValueChange && onValueChange(e.target.value)
   }
   function onMax(){
+    if (balanceInfo.data){
+      setInpuValue(balanceInfo.data[coin])
+    }
   }
   function onChooseToken(){
     modalContext.show(<TokenList onClose={()=>{
@@ -51,7 +55,7 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
   return <Content>
     {showBalance && <FlexViewBetween>
       <Text size={16} webSize={24}>{t('Balance')}</Text>
-      <Text size={14} webSize={24}>0</Text>
+      {!balanceInfo.data ? <LoadingRow width='30%'/> : <Text size={14} webSize={24}>{balanceInfo.data[coin]}</Text>}
     </FlexViewBetween>}
     <SwapView>
       <FlexView style={{height:'100%'}}>

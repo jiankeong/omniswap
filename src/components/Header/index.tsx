@@ -21,26 +21,26 @@ import { Menus } from "../LeftMenu"
 export default function Header() {
   const router = useRouter()
   return <HeaderView style={{
-    background:router.pathname == '/' ? 'transparent' : 'rgba(20, 22, 30, 0.8)'
+    background: router.pathname == '/' ? 'transparent' : 'rgba(20, 22, 30, 0.8)'
   }}>
     <Content>
       <Logo onClick={() => {
         router.push('/')
       }}>
-        <Image src={ImageCommon.logoicon} alt='' layout='fill' priority={false}/>
+        <Image src={ImageCommon.logoicon} alt='' layout='fill' priority={false} />
       </Logo>
       <FlexView>
         <MenuView>
-          <Menus/>
-          <ConnectWallet/>
-          <SpaceWidth width={25}/>
+          <Menus />
+          <ConnectWallet />
+          <SpaceWidth width={25} />
         </MenuView>
         <MenuViewMobile>
-          <ConnectWalletMobile/>
+          <ConnectWalletMobile />
         </MenuViewMobile>
-        <Language/>
-        <SpaceWidth width={24} webWidth={0}/>
-        <PhoneMenuIcon/>
+        <Language />
+        <SpaceWidth width={24} webWidth={0} />
+        <PhoneMenuIcon />
       </FlexView>
     </Content>
   </HeaderView>

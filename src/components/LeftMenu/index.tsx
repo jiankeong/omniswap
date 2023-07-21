@@ -25,7 +25,7 @@ const menus = [
     height:20,
     icon:ImageCommon.menus,
     name:'Swap',
-    able:false,
+    able:true,
     link:'/swap'
   },
   {

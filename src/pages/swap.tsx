@@ -24,13 +24,20 @@ import { useRouter } from 'next/router'
 import { message } from 'antd'
 import { useAccount, useNetwork } from 'wagmi'
 import copy from 'copy-to-clipboard';
-import { autoWidthVW, formatAccount } from '../common/Common'
-import { useEffect, useState } from 'react'
-import { useSendTransaction } from '../contract'
+import { ApprovalState, autoWidthVW, balanceToBigNumber, formatAccount, formatBalance, getDeadLine } from '../common/Common'
+import { useContext, useEffect, useState } from 'react'
+import { getBetterPath, useApprove, useSendTransaction, useSwapPrice, useSwapPriceShow } from '../contract'
 import SwapToken from '../components/SwapToken'
 import { swapTokens } from '../components/SwapToken/TokenList'
 import { useModalContext } from '../provider/modalProvider'
 import Slippage from '../components/SwapToken/Slippage'
+import { useDeadline, useGasPrice, useSlippage } from '../state/setting'
+import { useOmniSwapRouterContract } from '../hooks/useContract'
+import { OmniSwapRouter_ADDRESSSES } from '../constants/addresses'
+import { NetworkId } from '../networkDetails'
+import { LoadingContext, LoadingType } from '../provider/loadingProvider'
+import { parseUnits } from 'ethers/lib/utils'
+import {TransactionResponse} from "@ethersproject/providers";
 
 
 
@@ -42,6 +49,29 @@ const Swap: NextPage = (props: any) => {
   const modalContext = useModalContext()
   const [fromToken,setFromToken] = useState<any>(swapTokens[0])
   const [toToken,setToToken] = useState<any>({})
+  const [swapAmount,setSwapAmount] = useState('')
+  const routerContract = useOmniSwapRouterContract(OmniSwapRouter_ADDRESSSES);
+  const [swapPath,setSwapPath] = useState([""])
+  const [reverse,setReverse] = useState(false)
+  const swapPrice = useSwapPrice(swapAmount,swapTokens,swapPath,reverse)
+  const swapPriceShow = useSwapPriceShow(swapTokens,swapPath)
+  const [approval, approveCallback] = useApprove({[NetworkId.BSC]: fromToken.value[chain.id]}, OmniSwapRouter_ADDRESSSES)
+  const gasPrice = useGasPrice()
+  const outScale = useSlippage()
+  const deadLine = useDeadline()
+  const loading = useContext(LoadingContext)
+
+  useEffect(()=>{
+    async function getPath(){
+      if (fromToken.name && toToken.name){
+        const path = await getBetterPath(routerContract,chain?.id,[fromToken.value[chain.id],toToken.value[chain.id]])
+        console.log('path==========',path)
+        setSwapPath(path)
+      }
+    }
+    getPath()
+  },[fromToken,toToken])
+
 
   function onFromToken(info:any){
     console.log('from===',info.name,info.value[chain.id])
@@ -62,7 +92,49 @@ const Swap: NextPage = (props: any) => {
     console.log('to==========',to)
     setFromToken(from)
     setToToken(to)
+    setReverse(!reverse)
   }
+
+  function onFromValueChange(fromValue:string){
+    console.log('fromValue==========',fromValue)
+    setSwapAmount(fromValue)
+    console.log('fromToken==========',fromToken)
+    console.log('toToken==========',toToken)
+
+  }
+
+  function onSwap(){
+    if (approval != ApprovalState.APPROVED){
+      approveCallback()
+      return
+    }
+    if (!routerContract){
+      return
+    }
+
+    loading.show(LoadingType.confirm, "swap")
+    routerContract.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name],8)),
+      balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name]*(1-outScale),8)),
+      swapPath,
+      address??'',
+      getDeadLine(deadLine),
+      {
+        gasPrice:parseUnits(String(gasPrice),"gwei"),
+        gasLimit:1500000
+      })
+    .then(async (response: TransactionResponse) => {
+      loading.show(LoadingType.pending, response.hash)
+      await response.wait();
+      loading.show(LoadingType.success, response.hash)
+      setSwapAmount('0')
+    })
+    .catch((err: any) => {
+      console.log('err',err);
+      loading.show(LoadingType.error, err.data?.message || err.message)
+    })
+  }
+
 
   function onSlippage(){
     modalContext.show(<Slippage onClose={()=>{
@@ -99,7 +171,7 @@ const Swap: NextPage = (props: any) => {
       </FlexViewBetween>
       <Line/>
       <SwapView>
-        <SwapToken coin={fromToken.name} onChoose={onFromToken}/>
+        <SwapToken coin={fromToken.name} onChoose={onFromToken} onValueChange={onFromValueChange}/>
         <FlexViewColumn>
           <SpaceHeight height={0} webHeight={50}/>
           <EchangeIcon onClick={onExchange}>
@@ -111,8 +183,10 @@ const Swap: NextPage = (props: any) => {
       <FlexViewEnd>
         <TextSemiBold size={14} webSize={24} color='#FFA845'>1 {fromToken.name} ≈ 1 {toToken.name}</TextSemiBold>
       </FlexViewEnd>
-      <SwapButton>
-        <TextExtraBold size={16} webSize={32} color='#000'>{t('approve')}</TextExtraBold>
+      <SwapButton onClick={onSwap}>
+        <TextExtraBold size={16} webSize={32} color='#000'>
+          {approval != ApprovalState.APPROVED ? t('approve') : t('Swap')}
+        </TextExtraBold>
       </SwapButton>
       <Line/>
       <SwapInfo>
@@ -188,4 +262,59 @@ export async function getStaticProps() {
     // revalidate: 24*60*60,  //1天更新一次 (单位秒)
   }
 }
-// image:'/images/Mobilink_new.png',
+
+/**
+  const [approval, approveCallback] = useApprove({[NetworkId.BSC]: fromInfo.address}, TalmudRouter_ADDRESSES)
+  const routerContract = useTalmudRouterContract(TalmudRouter_ADDRESSES)
+  const gasPrice = useGasPrice()
+  const outScale = useSlippage()
+  const deadLine = useDeadLine()
+
+  const [swapPath,setSwapPath] = useState([""])
+  const [swapPath,setSwapPath] = useState([""])
+  const [swapTokens,setSwapTokens] = useState([""])
+  const [reverse,setReverse] = useState(false)
+  const swapPrice = useSwapPrice(swapAmount,swapTokens,swapPath,reverse)
+  const swapPriceShow = useSwapPriceShow(swapTokens,swapPath)
+
+
+  path = await getBetterPath(routerContract,chain?.id,[fromInfo.address,data.address])
+
+
+  useSwapPrice  每次输入A都要计算出B的数量 防抖
+
+  contract.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+    balanceToBigNumber(formatBalance(swapPrice.data?.[fromInfo.symbol],8)),
+    balanceToBigNumber(formatBalance(swapPrice.data?.[fromInfo.symbol]*(1-outScale),8)),
+    swapPath,
+    address??'',
+    getDeadLine(deadLine),
+    {
+      gasPrice:parseUnits(String(gasPrice),"gwei"),
+      gasLimit:1500000
+    })
+  .then(async (response: TransactionResponse) => {
+    loading.show(LoadingType.pending, response.hash)
+    await response.wait();
+    loading.show(LoadingType.success, response.hash)
+    setSwapAmount('0')
+  })
+  .catch((err: any) => {
+    console.log('err',err);
+    loading.show(LoadingType.error, err.data?.message || err.message)
+  })
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+

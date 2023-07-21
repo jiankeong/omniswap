@@ -1,9 +1,10 @@
-import { Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES } from './../constants/addresses';
+import { Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES } from './../constants/addresses';
 import {
     useDynamic721Contract,
     useONFTContract,
     useOMINTContract,
     useOMNIRelationontract,
+    useOmniSwapRouterContract,
 } from './../hooks/useContract';
 import {useMutation, useQuery} from 'react-query';
 import {useCallback, useContext, useEffect, useState} from 'react'
@@ -567,3 +568,190 @@ export function useInvList() {
 }
 
 
+/**
+ * 获取币种列表信息
+ */
+export function useCoinsBalanceInfo(coins: any) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const networkId = chain?.id
+  const provider = useProvider()
+
+
+  const fetchData = async () => {
+    if (!address || !networkId || !coins.length) {
+        return;
+    }
+    if (!provider) {
+        return
+    }
+    coins = coins.filter((item: any, index: number) => {
+      return item.symbol !== "BNB"
+    })
+    let callContextArr:any = []
+    coins.forEach((item: any, index: number) => {
+      const coinContract = new ethers.Contract(item.value[networkId], ERC20_ABI, provider);
+      callContextArr.push(coinContract.balanceOf(address))
+    })
+    const multicallResult = await Promise.all(callContextArr)
+    let data: any = {}
+    multicallResult.map((item:BigNumber,index:number)=>{
+      data[coins[index].name] = Number(bigNumberToBalance(item))
+      data[coins[index].name+'_decimals'] = 18
+    })
+    data["BNB"] = Number(bigNumberToBalance(await provider.getBalance(address)))
+    data["BNB_decimals"] = 18
+    return data
+  }
+  return useQuery(["useCoinsBalanceInfo"],fetchData,{
+    enabled:!!networkId && !!address  ,
+    refetchInterval: config.refreshInterval,
+})
+}
+
+// 获取swap价格
+export function useSwapPrice(amount:number|string,tokens:string[],path:string[],reverse:boolean) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const provider = useProvider()
+
+  console.log('amount===',amount)
+  console.log('tokens===',tokens)
+  console.log('path===',path)
+  console.log('reverse===',reverse)
+
+
+
+  const routerContract = useOmniSwapRouterContract(OmniSwapRouter_ADDRESSSES);
+  const [info, setInfo] = useState<any>({
+      loading: true,
+      data: {}
+  });
+  amount = Number(amount)
+  // console.log(amount,tokens,path)
+  useEffect(() => {
+      // console.log(tokens,path)
+      const getResult = async () => {
+          if (amount === 0 || tokens.includes("") || path.includes("")) {
+              setInfo({
+                  loading: false,
+                  data: {
+                      [tokens[0]]: 0,
+                      [tokens[tokens.length-1]]: 0
+                  }
+              })
+              return
+          }
+          if (!address || !routerContract) {
+              return;
+          }
+          try {
+            const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
+            const amountA = bigNumberToBalance(res[0])
+            const amountB = bigNumberToBalance(res[res.length-1])
+
+            setInfo({
+                loading:false,
+                data:{
+                  [tokens[0]]:amountA,
+                  [tokens[tokens.length-1]]:amountB
+                }
+            })
+          } catch (e:any) {
+            console.log('===',e)
+          }
+      };
+      getResult()
+      const interval = setInterval(getResult, config.refreshInterval);
+      return () => clearInterval(interval);
+  }, [address, routerContract, amount, tokens.join(","), path.join(",")])
+  return info;
+}
+
+// 获取展示swap价格
+export function useSwapPriceShow(tokens:string[],path:string[]) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const provider = useProvider()
+
+  const routerContract = useOmniSwapRouterContract(OmniSwapRouter_ADDRESSSES);
+  const [info, setInfo] = useState<any>({
+      loading: true,
+      data: {}
+  });
+  const amount = 1
+  // console.log(amount,tokens,path)
+  useEffect(() => {
+      // console.log(tokens,path)
+      const getResult = async () => {
+          if (tokens.includes("") || path.includes("")) {
+              setInfo({
+                  loading: false,
+                  data: {
+                      [tokens[0]]: 0,
+                      [tokens[tokens.length-1]]: 0
+                  }
+              })
+              return
+          }
+          if (!address || !routerContract) {
+              return;
+          }
+          // console.log(amount)
+          const outRes:any = await routerContract.getAmountsOut(balanceToBigNumber(amount),path)
+          const inRes:any = await routerContract.getAmountsIn(balanceToBigNumber(amount),path)
+          // console.log(res)
+          const amountOut = bigNumberToBalance(outRes[outRes.length-1])
+          const amountIn = bigNumberToBalance(outRes[0])
+          setInfo({
+              loading:false,
+              data:{
+                  out:amountOut,
+                  in:amountIn
+              }
+          })
+      };
+      getResult()
+      const interval = setInterval(getResult, config.refreshInterval);
+      return () => clearInterval(interval);
+  }, [address, routerContract, amount, tokens.join(","), path.join(",")])
+  return info;
+}
+
+export async function getBetterPath(contract:any,chainId:number|undefined,path:string[]){
+  return path
+  // if(!contract || !chainId ||path.length<2) {
+  //     console.log("参数非法","getBetterPath")
+  //     return path
+  // }
+  // let betterpath = path
+  // let betterAmount = BigNumber.from(0)
+  // let tokenList = TOKEN_LIST.filter((item:any,index)=>{
+  //     return item.chainId === chainId
+  // })
+  // const centerCoin = tokenList.filter((item,index)=>{
+  //     return !path.includes(item.address)
+  // })
+  // const allPath = [path]
+  // for(let i=0,len=centerCoin.length;i<len;i++){
+  //     const currentPath = JSON.parse(JSON.stringify(path))
+  //     currentPath.splice(1,0,centerCoin[i].address)
+  //     allPath.push(currentPath)
+  // }
+
+  //     for(let i=0,len=allPath.length;i<len;i++){
+  //         try {
+  //             // console.log(allPath[i])
+  //             const res:any = await contract.getAmountsOut(balanceToBigNumber(1),allPath[i])
+  //             // console.log(res[res.length-1].gt(betterAmount),res[res.length-1],betterAmount)
+  //             if(res[res.length-1].gt(betterAmount)){
+  //                 betterpath = allPath[i]
+  //                 betterAmount = res[res.length-1]
+  //             }
+  //         }catch (e) {
+  //             logError("getBetterPath",e)
+  //         }
+  //     }
+
+  // return betterpath
+}

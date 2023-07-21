@@ -10,12 +10,21 @@ import {
   ERC20,
   OMINT,
   ONFT,
-  OMNIRelation
+  OMNIRelation,
+  OmniStakePool,
+  OmniSwapFactory,
+  OmniSwapPair,
+  OmniSwapRouter
 } from "../typechain";
 import ONFT_ABI from "../abiJson/ONFT.json";
 import OMINT_ABI from "../abiJson/OMINT.json";
 
 import OMNIRelation_ABI from "../abiJson/OMNIRelation.json";
+
+import OmniStakePool_ABI from "../abiJson/OmniStakePool.json"
+import OmniSwapFactory_ABI from "../abiJson/OmniSwapFactory.json"
+import OmniSwapPair_ABI from "../abiJson/OmniSwapPair.json"
+import OmniSwapRouter_ABI from "../abiJson/OmniSwapRouter.json"
 
 
 export function getContract(address: string, abi: any, other?: any) {
@@ -106,4 +115,7 @@ export const useONFTContract = createDynamicContract<ONFT>(ONFT_ABI);
 export const useOMINTContract = createDynamicContract<OMINT>(OMINT_ABI);
 
 
- 
+export const useOmniStakePoolContract = createDynamicContract<OmniStakePool>(OmniStakePool_ABI);
+export const useOmniSwapFactoryContract = createDynamicContract<OmniSwapFactory>(OmniSwapFactory_ABI);
+export const useOmniSwapPairContract = createDynamicContract<OmniSwapPair>(OmniSwapPair_ABI);
+export const useOmniSwapRouterContract = createDynamicContract<OmniSwapRouter>(OmniSwapRouter_ABI);

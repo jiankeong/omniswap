@@ -6,3 +6,7 @@ export { ERC721__factory } from "./ERC721__factory";
 export { OMINT__factory } from "./OMINT__factory";
 export { OMNIRelation__factory } from "./OMNIRelation__factory";
 export { ONFT__factory } from "./ONFT__factory";
+export { OmniStakePool__factory } from "./OmniStakePool__factory";
+export { OmniSwapFactory__factory } from "./OmniSwapFactory__factory";
+export { OmniSwapPair__factory } from "./OmniSwapPair__factory";
+export { OmniSwapRouter__factory } from "./OmniSwapRouter__factory";

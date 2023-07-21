@@ -5,24 +5,29 @@ import {AppState} from "../index";
 
 export interface SettingState {
   language:LocalLanguage,
-  slippage:string,
-  deadlineTime:string
+  slippage:number,
+  deadlineTime:number,
+  gasprice:number,
 }
-export const slippageDefault = '1.0'
-export const deadlineDefault = '20'
+export const slippageDefault = 1
+export const deadlineDefault = 20
 
 const initialState:SettingState = {
   language:LocalLanguage.EN,
   slippage:slippageDefault,
-  deadlineTime:deadlineDefault
+  deadlineTime:deadlineDefault,
+  gasprice:5,
+}
+export function useGasPrice(): number {
+  return useSelector((state: AppState) => state.setting.gasprice)
 }
 export function useLanguage(): LocalLanguage {
   return useSelector((state: AppState) => state.setting.language)
 }
-export function useSlippage(): string {
+export function useSlippage(): number {
   return useSelector((state: AppState) => state.setting.slippage)
 }
-export function useDeadline(): string {
+export function useDeadline(): number {
   return useSelector((state: AppState) => state.setting.deadlineTime)
 }
 export const settingSlice = createSlice({
@@ -32,14 +37,17 @@ export const settingSlice = createSlice({
       changeLangugae:(state,action:PayloadAction<LocalLanguage>)=>{
         state.language = action.payload
       },
-      changeSlippage:(state,action:PayloadAction<string>)=>{
+      changeSlippage:(state,action:PayloadAction<number>)=>{
         state.slippage = action.payload
       },
-      changeDeadline:(state,action:PayloadAction<string>)=>{
+      changeDeadline:(state,action:PayloadAction<number>)=>{
         state.deadlineTime = action.payload
-      }
+      },
+      changeGasPrice:(state,action:PayloadAction<SettingState>)=>{
+        state.gasprice = action.payload.gasprice
+      },
     }
 })
-export const {changeLangugae,changeSlippage,changeDeadline} = settingSlice.actions
+export const {changeLangugae,changeSlippage,changeDeadline, changeGasPrice} = settingSlice.actions
 
 export default settingSlice.reducer

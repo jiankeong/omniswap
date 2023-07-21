@@ -21,9 +21,12 @@ export const USDC_ADDRESSSES = {
   [NetworkId.BSC]: "0xe",
 };
 export const OMNI_ADDRESSSES = {
-  [NetworkId.BSC]: "0x8ce12f697088746a260ec8990dbde7a40a0a9b7c",
+  [NetworkId.BSC]: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
   // [NetworkId.BSC_TESTNET]: "0x6E5Cc3C7235F27603ec14013f03c08C341203957",
 };
+
+// 0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82  cake
+// 0x8ce12f697088746a260ec8990dbde7a40a0a9b7c   omni
 
 
 export const OMINT_ADDRESSSES = {
@@ -44,3 +47,21 @@ export const ONFT_ADDRESSSES = {
 
 // ONFT 0x37a28c00C7A4c3E10cD3e05E3de2985Fe696E73f
 // OMINT 0xC80a9E622D0df2368eAAE527734873B784716bBd
+
+
+
+export const OmniStakePool_ADDRESSSES = {
+  [NetworkId.BSC]: "0x1f2d503eD9C8510359b513dA58Dda1C70a3Ce4dc",
+};
+
+export const OmniSwapFactory_ADDRESSSES = {
+  [NetworkId.BSC]: "0xaC85a98CC1D8D66D183e0e2B966cC6b30a61Ca09",
+};
+
+export const OmniSwapPair_ADDRESSSES = {
+  [NetworkId.BSC]: "0x3867bC9D720F5f00c1B2d9f14c6293179876B296",
+};
+
+export const OmniSwapRouter_ADDRESSSES = {
+  [NetworkId.BSC]: "0xC9520AAab90B138Eca4349c801C76581b75c382D",
+};

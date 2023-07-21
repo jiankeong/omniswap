@@ -10,19 +10,22 @@ import { BaseInput, FlexView, FlexViewBetween, FlexViewCenter, FlexViewColumn, S
 import { TextSemiBold, Text } from "../Text"
 import * as _ from 'lodash';
 import { useNetwork } from "wagmi"
+import { useCoinsBalanceInfo } from "@/src/contract"
 
 export const swapTokens:any = [
   {name:'OMNI',value:OMNI_ADDRESSSES},
-  {name:'BTC',value:BTC_ADDRESSSES},
-  {name:'BNB',value:BNB_ADDRESSSES},
-  {name:'ETH',value:ETH_ADDRESSSES},
   {name:'USDT',value:USDT_ADDRESSSES},
-  {name:'USDC',value:USDC_ADDRESSSES}
+
+  // {name:'BTC',value:BTC_ADDRESSSES},
+  // {name:'BNB',value:BNB_ADDRESSSES},
+  // {name:'ETH',value:ETH_ADDRESSSES},
+  // {name:'USDC',value:USDC_ADDRESSSES}
 ]
 
 export default function TokenList({onClose,onChoose}:any){
   const {t} = useTranslationLanguage()
   const [tokenList,setTokenList] = useState(swapTokens)
+  const balanceInfo = useCoinsBalanceInfo(swapTokens)
   const {chain = {id: 56}} = useNetwork()
   const onChange = _.debounce((e:any)=>{
     if (e.target.value.startsWith('0x') || e.target.value.startsWith('0X')){
@@ -61,13 +64,16 @@ export default function TokenList({onClose,onChoose}:any){
         <Text size={14} webSize={28}>{t('no result')}</Text>
       </FlexViewCenter> : tokenList.map((item:any,index:number)=>{
         return <Item key={index+'tokenlist'} onClick={()=>onChooseToken(index)}>
-          <FlexView>
-            <Close>
-              <Image src={ImageToken[item.name]} layout='fill'/>
-            </Close>
-            <SpaceWidth width={10}/>
-            <Text size={14} webSize={28}>{item.name}</Text>
-          </FlexView>
+          <FlexViewBetween>
+            <FlexView>
+              <Close>
+                <Image src={ImageToken[item.name]} layout='fill'/>
+              </Close>
+              <SpaceWidth width={10}/>
+              <Text size={14} webSize={28}>{item.name}</Text>
+            </FlexView>
+            {balanceInfo.data && <Text size={14} webSize={28}>{balanceInfo.data[item.name]}</Text>}
+          </FlexViewBetween>
           {index != tokenList.length - 1 && <Line/>}
         </Item>
       })
