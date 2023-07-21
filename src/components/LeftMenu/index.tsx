@@ -33,7 +33,7 @@ const menus = [
     height:22,
     icon:ImageCommon.earnic,
     name:'Earn',
-    able:false,
+    able:true,
     link:'earn'
   },
   {
@@ -41,7 +41,7 @@ const menus = [
     height:20,
     icon:ImageCommon.inv,
     name:'Node Ranking',
-    able:false,
+    able:true,
     link:'nodeRanking'
   },
   {

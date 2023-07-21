@@ -15,7 +15,7 @@ export default function Slippage({onClose}:any){
   const [deadlineTime,setDeadlingTime] = useState(useDeadline())
   const dispatch = useDispatch()
   function onSlippageInputChange(e:any){
-    setSlippageValue(e.target.value)
+    setSlippageValue(Number(e.target.value))
   }
   function onSlippageInputBlur(){
     if (Number(slippageValue) <= 0){
@@ -47,26 +47,26 @@ export default function Slippage({onClose}:any){
     <Text size={16} webSize={32}>{t('Slippage Tolerance')}</Text>
     <SpaceHeight height={12}/>
     <FlexView>
-      <SlippageItem select={slippageValue == '0.1'} onClick={()=>{
-        setSlippageValue('0.1')
-        dispatch(changeSlippage('0.1'))
+      <SlippageItem select={slippageValue == 0.1} onClick={()=>{
+        setSlippageValue(0.1)
+        dispatch(changeSlippage(0.1))
       }}>
-        <Text size={12} webSize={24} color={slippageValue == '0.1' ? '#fff' : '#989DAA'}>0.1</Text>
+        <Text size={12} webSize={24} color={slippageValue == 0.1 ? '#fff' : '#989DAA'}>0.1</Text>
       </SlippageItem>
-      <SlippageItem select={slippageValue == '0.5'} onClick={()=>{
-        setSlippageValue('0.5')
-        dispatch(changeSlippage('0.5'))
+      <SlippageItem select={slippageValue == 0.5} onClick={()=>{
+        setSlippageValue(0.1)
+        dispatch(changeSlippage(0.1))
       }}>
-        <Text size={12} webSize={24} color={slippageValue == '0.5' ? '#fff' : '#989DAA'}>0.5</Text>
+        <Text size={12} webSize={24} color={slippageValue == 0.1 ? '#fff' : '#989DAA'}>0.5</Text>
       </SlippageItem>
-      <SlippageItem select={slippageValue == '1.0'} onClick={()=>{
-        setSlippageValue('1.0')
-        dispatch(changeSlippage('1.0'))
+      <SlippageItem select={slippageValue == 1.0} onClick={()=>{
+        setSlippageValue(1.0)
+        dispatch(changeSlippage(1.0))
       }}>
-        <Text size={12} webSize={24} color={slippageValue == '1.0' ? '#fff' : '#989DAA'}>1.0</Text>
+        <Text size={12} webSize={24} color={slippageValue == 1.0 ? '#fff' : '#989DAA'}>1.0</Text>
       </SlippageItem>
       <SlippageItem select={
-        slippageValue != '1.0' && slippageValue != '0.1' && slippageValue != '0.5'
+        slippageValue != 1.0 && slippageValue != 0.1 && slippageValue != 0.5
       }>
         <SlippageInput value={slippageValue} onChange={onSlippageInputChange} onBlur={onSlippageInputBlur}/>
         <Text size={12} webSize={24} color='#989DAA'>%</Text>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import ImageCommon from "../../../public/images/ImageCommon"
 import ImageToken from "../../../public/tokens/ImageToken"
-import { autoWidthVW } from "../../common/Common"
+import { autoWidthVW, formatBalance } from "../../common/Common"
 import useTranslationLanguage from "../../hooks/useTranslationLanguage"
 import { useModalContext } from "../../provider/modalProvider"
 import { BaseInput, FlexView, FlexViewBetween, FlexViewCenter, FlexViewColumn, LoadingRow } from "../Common"
@@ -18,10 +18,11 @@ interface SwapTokenInterface {
   onChoose?:(info:any)=>void,
   value?:string,
   onValueChange?:(info:any)=>void,
-  showBalance?:Boolean
+  showBalance?:Boolean,
+  showToken?:Boolean
 }
 
-export default function SwapToken({showBalance=true,coin,editable=true,max=true,onChoose,value='',onValueChange}:SwapTokenInterface){
+export default function SwapToken({showToken=true,showBalance=true,coin,editable=true,max=true,onChoose,value='',onValueChange}:SwapTokenInterface){
   const {t} = useTranslationLanguage()
   const [inputValue,setInpuValue] = useState(value)
   const [selectCoin,setSelectCoin] = useState(coin)
@@ -29,6 +30,10 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
   useEffect(()=>{
     setSelectCoin(coin)
   },[coin])
+
+  useEffect(()=>{
+    setInpuValue(value)
+  },[value])
 
   const modalContext = useModalContext()
   function onChange(e:any){
@@ -38,9 +43,13 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
   function onMax(){
     if (balanceInfo.data){
       setInpuValue(balanceInfo.data[coin])
+      onValueChange && onValueChange(balanceInfo.data[coin])
     }
   }
   function onChooseToken(){
+    if (!showToken){
+      return
+    }
     modalContext.show(<TokenList onClose={()=>{
       modalContext.hidden()
     }} onChoose={(tokenInfo:any)=>{
@@ -55,7 +64,7 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
   return <Content>
     {showBalance && <FlexViewBetween>
       <Text size={16} webSize={24}>{t('Balance')}</Text>
-      {!balanceInfo.data ? <LoadingRow width='30%'/> : <Text size={14} webSize={24}>{balanceInfo.data[coin]}</Text>}
+      {!balanceInfo.data ? <LoadingRow width='30%'/> : <Text size={14} webSize={24}>{formatBalance(balanceInfo.data[coin])}</Text>}
     </FlexViewBetween>}
     <SwapView>
       <FlexView style={{height:'100%'}}>
@@ -67,12 +76,13 @@ export default function SwapToken({showBalance=true,coin,editable=true,max=true,
             <TextSemiBold size={16} webSize={24}>{selectCoin}</TextSemiBold>
           </FlexView> : <Text color='#989DAA' size={14} webSize={24}>{t('Celect Token')}</Text>}
         </LeftView>
-        <Arrow>
+        {showToken && <Arrow>
           <Image src={ImageCommon.arrowdown} layout='fill'/>
-        </Arrow>
+        </Arrow>}
         <LineV/>
         {max && <MaxButton onClick={onMax}>
-          <TextBold size={14} webSize={24} color='#FFA845'>{t('MAX')}</TextBold>
+        MAX
+          {/* <TextBold size={14} webSize={24} color='#FFA845'>{t('MAX')}</TextBold> */}
         </MaxButton>}
       </FlexView>
       <Input disabled={!editable} value={inputValue} placeholder="0.00" onChange={onChange}/>
@@ -96,7 +106,12 @@ const MaxButton = styled(FlexViewCenter)`
   :hover {
     opacity:0.8
   };
-  cursor:pointer
+  cursor:pointer;
+  color:#FFA845;
+  font-size: ${autoWidthVW(24)};
+  @media (max-width: 768px) {
+    font-size: ${autoWidthVW(14)};
+  }
 `
 const LineV = styled.div`
   background:#989DAA;

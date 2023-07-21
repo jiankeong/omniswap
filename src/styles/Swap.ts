@@ -106,13 +106,15 @@ export const EchangeIcon = styled(FlexView)`
     opacity:0.8
   }
 `
-export const SwapButton = styled(FlexViewCenter)`
+export const SwapButton = styled(FlexViewCenter)<{
+  disable:Boolean
+}>`
   width:100%;
   padding:0 ${autoWidthVW(20)};
   border-radius: ${autoWidthVW(8)};
   height:${autoWidthVW(60)};
-  background:#FFA845;
-  cursor:pointer;
+  background:${({disable})=>disable?'#303030':"#FFA845"};
+  cursor:${({disable})=>disable?'no-drop':"pointer"};
   margin-top:${autoWidthVW(35)};
   @media (max-width: 768px) {
     padding:0;

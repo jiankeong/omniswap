@@ -194,6 +194,7 @@ const LoadingDesc = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  width:100%;
   @media (max-width: 768px) {
     font-size: ${autoWidthVW(16)};
   }

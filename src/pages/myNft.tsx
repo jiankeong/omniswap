@@ -25,9 +25,9 @@ import { useRouter } from 'next/router'
 import { message } from 'antd'
 import { useSpring, animated } from '@react-spring/web'
 import { isBrowser } from 'react-device-detect'
-import { useApprove, useMyNftListInfo, useNfInfo, useSendTransaction } from '../contract'
-import { useNFTContract } from '../hooks/useContract'
-import { USDT_ADDRESSSES } from '../constants/addresses'
+import { useApprove, useMyNftInfo, useMyNftListInfo, useNfInfo, useSendTransaction } from '../contract'
+import { useNFTContract, useOmniNFTPoolContract } from '../hooks/useContract'
+import { OMNINFTPOOL_ADDRESSSES, USDT_ADDRESSSES } from '../constants/addresses'
 import { ApprovalState, autoWidthVW, formatAccount } from '../common/Common'
 import NotData from '../components/NotData'
 
@@ -56,6 +56,9 @@ function NFTListMobile(){
   const {t} = useTranslationLanguage()
   const nfts = useMyNftListInfo()
 
+  function onReceive(item:any){
+
+  }
   return <FlexViewCenterColumn style={{width:'100%'}}>
     {
       nfts.isLoading ? <LoadingRow/> : (nfts.data?.list.length == 0 ? <NotData/> : nfts.data?.list.map((item:any,index:number)=>{
@@ -82,7 +85,7 @@ function NFTListMobile(){
             </FlexViewColumn>
           </FlexViewBetween>
           <Line/>
-          <ReceiveButton>
+          <ReceiveButton onClick={()=>onReceive(item)}>
             <Text size={14} webSize={32} color='#fff'>{t('Receive earnings')}</Text>
           </ReceiveButton>
         </FlexViewColumn>
@@ -94,6 +97,7 @@ function NFTListMobile(){
 function NFTList(){
   const {t} = useTranslationLanguage()
   const nfts = useMyNftListInfo()
+
   return <AddressView>
     <AddressTitle>
       <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('NFT')}</TextSemiBold>
@@ -105,26 +109,46 @@ function NFTList(){
     {
       nfts.isLoading ? <LoadingRow/> : (nfts.data?.list.length == 0 ? <NotData/> : nfts.data?.list.map((item:any,index:number)=>{
         return <AddressViewItem key={index+'webnft'}>
-          <FlexViewBetween>
-            <FlexView style={{flex:1}}>
-              <NFTSmallIcon>
-                <Image src={ImageCommon[item.nftImg]} layout='fill'/>
-              </NFTSmallIcon>
-            </FlexView>
-            <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{item.nftPrice} USDT</Text>
-            <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>0 USDT</Text>
-            <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>0 USDT</Text>
-            <FlexViewEnd style={{flex:2}}>
-              <ReceiveButton>
-                <Text size={14} webSize={32} color='#000'>{t('Receive earnings')}</Text>
-              </ReceiveButton>
-            </FlexViewEnd>
-          </FlexViewBetween>
+          <NFTItem index={index}/>
           {index != (nfts.data?.list.length || 0) - 1 && <Line/>}
         </AddressViewItem>
       }))
     }
   </AddressView>
+}
+function NFTItem({index}:any){
+  const {t} = useTranslationLanguage()
+  const nftInfo = useMyNftInfo(index)
+  const sendTransaction = useSendTransaction()
+  const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
+  function onReceive(){
+
+    if (!OmniNFTPoolContract){
+      return
+    }
+    sendTransaction.mutate({
+      title:'Claim',
+      func:OmniNFTPoolContract.getReward,
+      args:[nftInfo.data?.tokenOfOwnerByIndex]
+    })
+
+
+  }
+  return <FlexViewBetween>
+    {nftInfo.isLoading ? <LoadingRow width='20%'/> : <FlexView style={{flex:1}}>
+      <NFTSmallIcon>
+        {nftInfo.data && <Image src={ImageCommon[nftInfo.data.nftImg]} layout='fill'/>}
+      </NFTSmallIcon>
+    </FlexView>}
+    <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.nftPrice} USDT</Text>
+    <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.viewReward} OMNI</Text>
+    <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.claimedReward} OMNI</Text>
+    <FlexViewEnd style={{flex:2}}>
+      <ReceiveButton disable={!nftInfo.data?.viewReward} onClick={onReceive}>
+        <Text size={14} webSize={32} color='#000'>{t('Receive earnings')}</Text>
+      </ReceiveButton>
+    </FlexViewEnd>
+  </FlexViewBetween>
 }
 export default MyNFT
 export async function getStaticProps() {

@@ -32,20 +32,57 @@ import getContent from "@src/common/languageLib";
 import {useTab} from "@src/hooks";
 import Community from "@src/views/earn/community";
 import { TextBold } from '../../components/Text'
+import { useEarnInfo, useSendTransaction } from '@/src/contract'
+import { useOmniStakePoolContract } from '@/src/hooks/useContract'
+import { OmniStakePool_ADDRESSSES } from '@/src/constants/addresses'
+import { balanceToBigNumber, bigNumberToBalance } from '@/src/common/Common'
+import PutUSDT from './PutUSDT'
+import { LoadingRow } from '@/src/components/Common'
 
 const Earn: NextPage = (props: any) => {
     const {t} = useTranslationLanguage()
-    const [pageHeight, setPageHeight] = useState('fit-content')
     const dispatch = useDispatch()
     const modalContext = useModalContext()
     const tab = useTab()
+    const sendTransaction = useSendTransaction()
+    const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+    const earnInfo = useEarnInfo()
     useEffect(() => {
-        setPageHeight(window.innerHeight + 'px')
         getContent()
     }, [])
 
     function onExtractClick() {
         modalContext.show(<Modal onClose={modalContext.hidden}></Modal>)
+    }
+
+    function onReceive(){
+      if (!omniStakePoolContract){
+        return
+      }
+      sendTransaction.mutate({
+        title: 'Receive',
+        func: omniStakePoolContract?.claim,
+        args: [balanceToBigNumber(10000),1,1,''],
+        onSuccess:()=>{
+          earnInfo.refetch()
+        }
+      })
+    }
+
+    function onPutIn(){
+      modalContext.show(<PutUSDT onClose={modalContext.hidden} onPutIn={(amount:string)=>{
+        if (!omniStakePoolContract){
+          return
+        }
+        sendTransaction.mutate({
+          title: 'Put In USDT',
+          func: omniStakePoolContract?.stake,
+          args: [balanceToBigNumber(amount)],
+          onSuccess:()=>{
+            earnInfo.refetch()
+          }
+        })
+      }}/>)
     }
 
     if (tab.tabIndex === 1) {
@@ -71,12 +108,10 @@ const Earn: NextPage = (props: any) => {
                     title: t("Community Mining Income"),
                     path: "/earn_community"
                 }]} onChange={(index: number) => tab.setTabIndex(index)} initialIndex={0}></Tab>
-                
-
             <div className={styles.content}>
                 <TextBold size={28} webSize={64}>{t('LP Mining Income')}</TextBold>
                 <p className={styles.desc}>{t("After the funds")}</p>
-                <div className={styles.search_container}>
+                {/* <div className={styles.search_container}>
                     <div className={styles.input_container}>
                         <div className={styles.icon_search}>
                             <Image src={ImageCommon.icon_search} layout={"fill"}></Image>
@@ -88,30 +123,30 @@ const Earn: NextPage = (props: any) => {
                         <Switch className={styles.switch} defaultChecked onChange={() => {
                         }}/>;
                     </div>
-                </div>
+                </div> */}
                 <div className={styles.mining_container}>
                     <div className={styles.lp_wrap}>
 
                         <LpPair pairs={[ImageToken.OMNI, ImageToken.USDT]}></LpPair>
 
 
-                        <div className={"flex-center"}>
+                        {/* <div className={"flex-center"}>
                             <div className={styles.time}>{t("Creation Time")}: 2023-04-23</div>
                             <div className={styles.status}>{t("Live")}</div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.lp_total_warp}>
                         <div className={styles.name}>{t("LP Total Computing")}</div>
-                        <div className={styles.amount}>15258908.6246</div>
+                        {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.lpPower}</div>}
                     </div>
                     <div className={classNames(styles.lp_total_warp, styles.blue)}>
                         <div className={styles.name}>{t("Your Current LP")}</div>
-                        <div className={styles.amount}>908.6246</div>
+                        {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.myLpPower}</div>}
                     </div>
                     <div className={classNames(styles.lp_total_warp, styles.black)}>
                         <div className={styles.left}>
                             <div className={styles.name}>{t("Your LP Mining")}</div>
-                            <div className={styles.amount}>908.6246</div>
+                            {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.lpMint}</div>}
                         </div>
                         <div className={"flex-center"}>
                             <div className={styles.title_record}>{t("Revenye Record")}</div>
@@ -122,25 +157,26 @@ const Earn: NextPage = (props: any) => {
                     </div>
                     <div className={styles.bottom_wrap}>
                         <div className={styles.left}>
-                            <div className={styles.amount}>908.6246</div>
+                            {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.waitReceive}</div>}
                             <div className={styles.desc}>{t("Pending Receipt")}</div>
-                            <div className={styles.btn} onClick={onExtractClick}>{t("Extract")}</div>
-                            <div className={"flex-center-justify-end"}>
+                            <div className={styles.btn} onClick={onReceive}>{t("Extract")}</div>
+                            <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={onExtractClick}>
                                 <div className={styles.txt_extract_record}>
                                     {t("Extract Record")}
                                 </div>
                                 <div className={styles.icon_arrow_right_gray}>
                                     <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
                                 </div>
-
                             </div>
                         </div>
                         <div className={styles.line}></div>
                         <div className={styles.right}>
-                            <div className={styles.amount}>23458.6246</div>
+                            {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.received}</div>}
                             <div className={styles.desc}>{t("Benefits Receipt")}</div>
-                            <div className={styles.btn}>{t("Put in USDT")}</div>
-                            <div className={"flex-center-justify-end"}>
+                            <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
+                            <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                              window.open('https://bscscan.com/')
+                            }}>
                                 <div className={styles.txt_extract_record}>
                                     {t("View Mining Pool Contract")}
                                 </div>

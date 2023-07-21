@@ -6,7 +6,7 @@ export interface TabbarState {
 }
 
 const initialState:TabbarState = {
-  tabIndex:0,
+  tabIndex:-1,
 }
 export function useTabIndex(): number {
     return useSelector((state: AppState) => state.tabbar.tabIndex)

@@ -1,10 +1,13 @@
-import { Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES } from './../constants/addresses';
+import { Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES, OmniStakePool_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES, OMNINFTPOOL_ADDRESSSES } from './../constants/addresses';
 import {
     useDynamic721Contract,
     useONFTContract,
     useOMINTContract,
     useOMNIRelationontract,
     useOmniSwapRouterContract,
+    useOmniStakePoolContract,
+    useTokenContract,
+    useOmniNFTPoolContract,
 } from './../hooks/useContract';
 import {useMutation, useQuery} from 'react-query';
 import {useCallback, useContext, useEffect, useState} from 'react'
@@ -33,6 +36,7 @@ import {useNetwork, useAccount, useProvider, chainId} from 'wagmi'
 import {} from '../hooks/useContract'
 import WalletTokens from "../constants/walletTokens";
 import dayjs from 'dayjs';
+import { NetworkId } from '../networkDetails';
 
 // 授权方法
 export function useApprove(tokenAddressMap: AddressMap, spenderAddressMap: AddressMap,cost?:string): [ApprovalState, () => Promise<void>] {
@@ -325,6 +329,7 @@ export function useNfInfo(id:number,index:number) {
 export function useMyNftListInfo() {
 
     const {address} = useAccount()
+    // const address = '0x1fabba9dffb82673f70db78359c04fd655d31c1e'
     const {chain} = useNetwork()
     const networkId = chain?.id
 
@@ -341,59 +346,13 @@ export function useMyNftListInfo() {
         console.log('account',Number(account.toString()))
         const total = Number(account.toString())
 
-        if (total == 0){
-          return {
-            list:[]
-          }
-        }
-
-        console.log('tokenOfOwnerByIndex')
-        const tokenOfOwnerByIndex = await ONFTContract.tokenOfOwnerByIndex(address,total - 1)
-        console.log('tokenOfOwnerByIndex',tokenOfOwnerByIndex.toString())
-
-        const getType = await ONFTContract.getType(tokenOfOwnerByIndex)
-        console.log('getType',getType.toString())
-
-
-        let showID = Number(getType.toString())
-        let nftPrice = 100
-        let nftImg = 'NFT_1'
-
-        if (showID == 1){
-          nftPrice = 100
-          nftImg = 'NFT_1'
-        }
-        if (showID == 2){
-          nftPrice = 500
-          nftImg = 'NFT_2'
-        }
-        if (showID == 3){
-          nftPrice = 1000
-          nftImg = 'NFT_3'
-        }
-        if (showID == 4){
-          nftPrice = 5000
-          nftImg = 'NFT_4'
-        }
-        if (showID == 5){
-          nftPrice = 10000
-          nftImg = 'NFT_5'
-        }
-        if (showID == 6){
-          nftPrice = 50000
-          nftImg = 'NFT_6'
-        }
-        if (showID == 7){
-          nftPrice = 100000
-          nftImg = 'NFT_7'
+        let list:any[] = []
+        for (let index = 0; index < total; index++) {
+          list.push(index)
         }
 
         return {
-          list:[{
-            account: total,
-            nftPrice,
-            nftImg
-          }]
+          list
         }
     }
 
@@ -401,6 +360,89 @@ export function useMyNftListInfo() {
         // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
         refetchInterval: config.refreshInterval,
     })
+}
+
+
+export function useMyNftInfo(index:number) {
+
+  const {address} = useAccount()
+  // const address = '0x1fabba9dffb82673f70db78359c04fd655d31c1e'
+  const {chain} = useNetwork()
+  const networkId = chain?.id
+
+  const ONFTContract = useONFTContract(ONFT_ADDRESSSES)
+  const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
+
+  async function fetchData() {
+
+      if (!address || !ONFTContract || !OmniNFTPoolContract) {
+          return
+      }
+
+
+      // 0-647
+      const tokenOfOwnerByIndex = await ONFTContract.tokenOfOwnerByIndex(address,index)
+      console.log('tokenOfOwnerByIndex',tokenOfOwnerByIndex.toString())
+
+      const getType = await ONFTContract.getType(tokenOfOwnerByIndex)
+      console.log('getType',getType.toString())
+
+
+
+      const viewReward = await OmniNFTPoolContract.viewReward(tokenOfOwnerByIndex)
+      const claimedReward = await OmniNFTPoolContract.claimedReward(tokenOfOwnerByIndex)
+      console.log('viewReward',bigNumberToBalance(viewReward))
+      console.log('claimedReward',bigNumberToBalance(claimedReward))
+
+
+
+      let showID = Number(getType.toString())
+      let nftPrice = 100
+      let nftImg = 'NFT_1'
+
+      if (showID == 1){
+        nftPrice = 100
+        nftImg = 'NFT_1'
+      }
+      if (showID == 2){
+        nftPrice = 500
+        nftImg = 'NFT_2'
+      }
+      if (showID == 3){
+        nftPrice = 1000
+        nftImg = 'NFT_3'
+      }
+      if (showID == 4){
+        nftPrice = 5000
+        nftImg = 'NFT_4'
+      }
+      if (showID == 5){
+        nftPrice = 10000
+        nftImg = 'NFT_5'
+      }
+      if (showID == 6){
+        nftPrice = 50000
+        nftImg = 'NFT_6'
+      }
+      if (showID == 7){
+        nftPrice = 100000
+        nftImg = 'NFT_7'
+      }
+
+      return {
+        nftPrice,
+        nftImg,
+        tokenOfOwnerByIndex:tokenOfOwnerByIndex.toString(),
+        viewReward:formatBalance(bigNumberToBalance(viewReward)),
+        claimedReward:formatBalance(bigNumberToBalance(claimedReward))
+
+      }
+  }
+
+  return useQuery(["useMyNftInfo" + index + address], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: config.longRefreshInterval,
+  })
 }
 
 
@@ -610,34 +652,26 @@ export function useCoinsBalanceInfo(coins: any) {
 }
 
 // 获取swap价格
-export function useSwapPrice(amount:number|string,tokens:string[],path:string[],reverse:boolean) {
+export function useSwapPrice(amount:number|string,tokenNames:string[],path:string[],reverse:boolean) {
   const {address} = useAccount()
-  const {chain} = useNetwork()
+  const {chain = {id: 56}} = useNetwork()
   const provider = useProvider()
-
-  console.log('amount===',amount)
-  console.log('tokens===',tokens)
-  console.log('path===',path)
-  console.log('reverse===',reverse)
-
-
 
   const routerContract = useOmniSwapRouterContract(OmniSwapRouter_ADDRESSSES);
   const [info, setInfo] = useState<any>({
       loading: true,
       data: {}
   });
-  amount = Number(amount)
   // console.log(amount,tokens,path)
   useEffect(() => {
       // console.log(tokens,path)
       const getResult = async () => {
-          if (amount === 0 || tokens.includes("") || path.includes("")) {
+          if (!amount || tokenNames.includes("") || path.includes("")) {
               setInfo({
                   loading: false,
                   data: {
-                      [tokens[0]]: 0,
-                      [tokens[tokens.length-1]]: 0
+                      [tokenNames[0]]: '',
+                      [tokenNames[tokenNames.length-1]]: ''
                   }
               })
               return
@@ -646,15 +680,16 @@ export function useSwapPrice(amount:number|string,tokens:string[],path:string[],
               return;
           }
           try {
-            const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
+            const res:any = await routerContract["getAmountsOut"](balanceToBigNumber(amount),path)
+            // 左边输入调用out  右边输入调用in
+            // const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
             const amountA = bigNumberToBalance(res[0])
             const amountB = bigNumberToBalance(res[res.length-1])
-
             setInfo({
                 loading:false,
                 data:{
-                  [tokens[0]]:amountA,
-                  [tokens[tokens.length-1]]:amountB
+                  [tokenNames[0]]:Number(amountA),
+                  [tokenNames[tokenNames.length-1]]:amountB
                 }
             })
           } catch (e:any) {
@@ -664,7 +699,7 @@ export function useSwapPrice(amount:number|string,tokens:string[],path:string[],
       getResult()
       const interval = setInterval(getResult, config.refreshInterval);
       return () => clearInterval(interval);
-  }, [address, routerContract, amount, tokens.join(","), path.join(",")])
+  }, [address, routerContract, amount, tokenNames.join(","), path.join(",")])
   return info;
 }
 
@@ -754,4 +789,106 @@ export async function getBetterPath(contract:any,chainId:number|undefined,path:s
   //     }
 
   // return betterpath
+}
+
+export function useEarnInfo() {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const networkId = chain?.id
+
+  const stakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+
+  async function fetchData() {
+
+      if (!address || !stakePoolContract) {
+          return
+      }
+      let lpPower = '1'
+      let myLpPower = '2'
+      let lpMint = '3'
+      let waitReceive = '4'
+      let received = '5'
+      // const pauseStats = await stakePoolContract.mintPause(typeID)
+      return {
+        lpPower,
+        myLpPower,
+        lpMint,
+        waitReceive,
+        received
+      }
+  }
+
+  return useQuery(["useEarnInfo"], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: config.refreshInterval,
+  })
+}
+
+
+
+export function useCommunityEarnInfo() {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const networkId = chain?.id
+
+  const stakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+
+  async function fetchData() {
+
+      if (!address || !stakePoolContract) {
+          return
+      }
+
+      let waitReceive = '1'
+      let received = '2'
+      let lastMint = '3'
+      let myLastMint = '4'
+      let communityTotal = '5'
+      let lastDirect = '6'
+      let myPower = '7'
+      let myNodePower = '8'
+
+      // const pauseStats = await stakePoolContract.mintPause(typeID)
+      return {
+        waitReceive,
+        received,
+        lastMint,
+        myLastMint,
+        communityTotal,
+        lastDirect,
+        myPower,
+        myNodePower
+      }
+  }
+
+  return useQuery(["useCommunityEarnInfo"], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: config.refreshInterval,
+  })
+}
+
+
+
+export function useOMNIDestoryInfo() {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const networkId = chain?.id
+
+  const tokenContract = useDynamicTokenContract(OMNI_ADDRESSSES);
+  async function fetchData() {
+
+      if (!address || !tokenContract) {
+          return
+      }
+
+      const balacne = await tokenContract.balanceOf('0x000000000000000000000000000000000000dEaD')
+      return {
+        destory: formatBalance(bigNumberToBalance(balacne))
+      }
+  }
+
+  return useQuery(["useOMNIDestoryInfo"], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: config.refreshInterval,
+  })
 }

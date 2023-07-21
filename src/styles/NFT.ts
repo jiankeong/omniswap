@@ -149,13 +149,14 @@ export const ConfirButton = styled(FlexViewCenter)<{
     opacity:0.8
   }
 `
-export const ReceiveButton = styled(FlexViewCenter)`
+export const ReceiveButton = styled(FlexViewCenter)<{
+  disable?:Boolean
+}>`
   width:fit-content;
   padding:0 ${autoWidthVW(20)};
   border-radius: ${autoWidthVW(8)};
   height:${autoWidthVW(60)};
-  background:#FFA845;
-  background:#989DAA;
+  background:${({disable})=>!disable?'#989DAA':'#FFA845'};
   cursor:pointer;
   @media (max-width: 768px) {
     width:100%;
