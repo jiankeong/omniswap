@@ -50,7 +50,7 @@
   "Tx deadline (mins)":"發送截止時間（分鐘）",
   "Today’s Node ranking":"今日節點排行榜",
   "Your Current Rank--Keep Going!":"您當前的排名——繼續前進！",
-  "Node ranking Content":"今日節點排名根據邀請用戶節點的算力N值計算，前51名為超級節點，可獲得超級節點獎勵，第52-561名為普通節點，可獲得普通節點獎勵",
+  "Node ranking Content":"前88名為超級節點，可獲得超級節點獎勵，第89～888名為普通節點，可獲得普通節點獎勵。",
   "Super Node Ranking":"超級節點排行榜",
   "Ranking":"排名",
   "Total Node Hash Rate N ":"節點總算力 N",
@@ -107,7 +107,10 @@
   "Node performance":"節點業績",
   "yes":"是",
   "no":"否",
-  "sold out":"已售完"
+  "sold out":"已售完",
+  "status":"状态",
+  "activated":"已激活",
+  "active":"激活"
 }
 
 

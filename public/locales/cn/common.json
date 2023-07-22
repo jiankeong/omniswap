@@ -50,7 +50,7 @@
   "Tx deadline (mins)":"交易截止期限（分钟）",
   "Today’s Node ranking":"今日节点排行榜",
   "Your Current Rank--Keep Going!":"您当前的排名——继续前进！",
-  "Node ranking Content":"今日节点排名根据邀请用户节点的算力N值计算，前51名为超级节点，可获得超级节点奖励，第52-561名为普通节点，可获得普通节点奖励",
+  "Node ranking Content":"前88名为超级节点，可获得超级节点奖励，第89～888名为普通节点，可获得普通节点奖励。",
   "Super Node Ranking":"超级节点排行榜",
   "Ranking":"排名",
   "Total Node Hash Rate N ":"节点总算力 N",
@@ -107,7 +107,10 @@
   "Node performance":"节点业绩",
   "yes":"是",
   "no":"否",
-  "sold out":"已售完"
+  "sold out":"已售完",
+  "status":"状态",
+  "activated":"已激活",
+  "active":"激活"
 }
 
 

@@ -30,6 +30,8 @@ import type {
 export interface OmniNFTPoolInterface extends utils.Interface {
   functions: {
     "OMNI()": FunctionFragment;
+    "active(uint256)": FunctionFragment;
+    "activeStats(uint256)": FunctionFragment;
     "addAdmin(address)": FunctionFragment;
     "addReward(uint256)": FunctionFragment;
     "allAdmins()": FunctionFragment;
@@ -37,11 +39,14 @@ export interface OmniNFTPoolInterface extends utils.Interface {
     "getReward(uint256)": FunctionFragment;
     "isAdmin(address)": FunctionFragment;
     "migrate(address,address,uint256)": FunctionFragment;
+    "nftPower(uint256)": FunctionFragment;
     "nftReward(uint256)": FunctionFragment;
     "onft()": FunctionFragment;
     "removeAdmin(address)": FunctionFragment;
     "renounceAdmin()": FunctionFragment;
     "setNFT(address)": FunctionFragment;
+    "setStakePool(address)": FunctionFragment;
+    "stakePool()": FunctionFragment;
     "starttime()": FunctionFragment;
     "totalReward()": FunctionFragment;
     "updateStartTime(uint256)": FunctionFragment;
@@ -52,6 +57,8 @@ export interface OmniNFTPoolInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "OMNI"
+      | "active"
+      | "activeStats"
       | "addAdmin"
       | "addReward"
       | "allAdmins"
@@ -59,11 +66,14 @@ export interface OmniNFTPoolInterface extends utils.Interface {
       | "getReward"
       | "isAdmin"
       | "migrate"
+      | "nftPower"
       | "nftReward"
       | "onft"
       | "removeAdmin"
       | "renounceAdmin"
       | "setNFT"
+      | "setStakePool"
+      | "stakePool"
       | "starttime"
       | "totalReward"
       | "updateStartTime"
@@ -72,6 +82,14 @@ export interface OmniNFTPoolInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(functionFragment: "OMNI", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "active",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "activeStats",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "addAdmin",
     values: [PromiseOrValue<string>]
@@ -102,6 +120,10 @@ export interface OmniNFTPoolInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "nftPower",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "nftReward",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -118,6 +140,11 @@ export interface OmniNFTPoolInterface extends utils.Interface {
     functionFragment: "setNFT",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "setStakePool",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(functionFragment: "stakePool", values?: undefined): string;
   encodeFunctionData(functionFragment: "starttime", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "totalReward",
@@ -137,6 +164,11 @@ export interface OmniNFTPoolInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "OMNI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "active", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "activeStats",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "addAdmin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "addReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allAdmins", data: BytesLike): Result;
@@ -147,6 +179,7 @@ export interface OmniNFTPoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isAdmin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "migrate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nftPower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nftReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "onft", data: BytesLike): Result;
   decodeFunctionResult(
@@ -158,6 +191,11 @@ export interface OmniNFTPoolInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "setNFT", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setStakePool",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "stakePool", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "starttime", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalReward",
@@ -225,6 +263,16 @@ export interface OmniNFTPool extends BaseContract {
   functions: {
     OMNI(overrides?: CallOverrides): Promise<[string]>;
 
+    active(
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    activeStats(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     addAdmin(
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -261,6 +309,11 @@ export interface OmniNFTPool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    nftPower(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     nftReward(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -281,6 +334,13 @@ export interface OmniNFTPool extends BaseContract {
       nft_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    setStakePool(
+      pool_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    stakePool(overrides?: CallOverrides): Promise<[string]>;
 
     starttime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -303,6 +363,16 @@ export interface OmniNFTPool extends BaseContract {
   };
 
   OMNI(overrides?: CallOverrides): Promise<string>;
+
+  active(
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  activeStats(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   addAdmin(
     account: PromiseOrValue<string>,
@@ -338,6 +408,11 @@ export interface OmniNFTPool extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  nftPower(
+    arg0: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   nftReward(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -358,6 +433,13 @@ export interface OmniNFTPool extends BaseContract {
     nft_: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  setStakePool(
+    pool_: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  stakePool(overrides?: CallOverrides): Promise<string>;
 
   starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -380,6 +462,16 @@ export interface OmniNFTPool extends BaseContract {
 
   callStatic: {
     OMNI(overrides?: CallOverrides): Promise<string>;
+
+    active(
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    activeStats(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
 
     addAdmin(
       account: PromiseOrValue<string>,
@@ -415,6 +507,11 @@ export interface OmniNFTPool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    nftPower(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     nftReward(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -433,6 +530,13 @@ export interface OmniNFTPool extends BaseContract {
       nft_: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    setStakePool(
+      pool_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    stakePool(overrides?: CallOverrides): Promise<string>;
 
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -471,6 +575,16 @@ export interface OmniNFTPool extends BaseContract {
   estimateGas: {
     OMNI(overrides?: CallOverrides): Promise<BigNumber>;
 
+    active(
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    activeStats(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     addAdmin(
       account: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -505,6 +619,11 @@ export interface OmniNFTPool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    nftPower(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     nftReward(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -525,6 +644,13 @@ export interface OmniNFTPool extends BaseContract {
       nft_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    setStakePool(
+      pool_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    stakePool(overrides?: CallOverrides): Promise<BigNumber>;
 
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -548,6 +674,16 @@ export interface OmniNFTPool extends BaseContract {
 
   populateTransaction: {
     OMNI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    active(
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    activeStats(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     addAdmin(
       account: PromiseOrValue<string>,
@@ -583,6 +719,11 @@ export interface OmniNFTPool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    nftPower(
+      arg0: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     nftReward(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -603,6 +744,13 @@ export interface OmniNFTPool extends BaseContract {
       nft_: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    setStakePool(
+      pool_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    stakePool(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     starttime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

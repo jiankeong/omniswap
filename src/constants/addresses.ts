@@ -25,17 +25,15 @@ export const USDT_ADDRESSSES = {
 
 export const OMNI_ADDRESSSES = {
   [NetworkId.BSC]: "0xa68C1c2fAEdD8E2701A0326C07a9019aB7BCb944",
-  // [NetworkId.BSC_TESTNET]: "0x6E5Cc3C7235F27603ec14013f03c08C341203957",
 };
-// 0xa68C1c2fAEdD8E2701A0326C07a9019aB7BCb944  test
-// 0x8ce12f697088746a260ec8990dbde7a40a0a9b7c  omni
+// 0xa68C1c2fAEdD8E2701A0326C07a9019aB7BCb944  omni test
+// 0x8ce12f697088746a260ec8990dbde7a40a0a9b7c  omni pro
 
-
-export const OMINT_ADDRESSSES = {
-  [NetworkId.BSC]: "0xC80a9E622D0df2368eAAE527734873B784716bBd",
-};
 export const Relation_ADDRESSSES = {
   [NetworkId.BSC]: "0x4cA03CaECEeB65Ae6b83fC6b3a02ab4823B407C6",
+};
+export const OMINT_ADDRESSSES = {
+  [NetworkId.BSC]: "0xC80a9E622D0df2368eAAE527734873B784716bBd",
 };
 export const ONFT_ADDRESSSES = {
   [NetworkId.BSC]: "0x37a28c00C7A4c3E10cD3e05E3de2985Fe696E73f",
@@ -66,5 +64,5 @@ export const OmniSwapRouter_ADDRESSSES = {
 };
 
 export const OMNINFTPOOL_ADDRESSSES = {
-  [NetworkId.BSC]: "0xbC8570bE7339706cA743cd0cf2281CD9b4409B2B",
+  [NetworkId.BSC]: "0x064f3EfdAaDea26Cdb152beE39ec79B30e040C5c",
 };

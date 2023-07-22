@@ -382,19 +382,16 @@ export function useMyNftInfo(index:number) {
 
       // 0-647
       const tokenOfOwnerByIndex = await ONFTContract.tokenOfOwnerByIndex(address,index)
-      console.log('tokenOfOwnerByIndex',tokenOfOwnerByIndex.toString())
 
       const getType = await ONFTContract.getType(tokenOfOwnerByIndex)
-      console.log('getType',getType.toString())
-
 
 
       const viewReward = await OmniNFTPoolContract.viewReward(tokenOfOwnerByIndex)
       const claimedReward = await OmniNFTPoolContract.claimedReward(tokenOfOwnerByIndex)
-      console.log('viewReward',bigNumberToBalance(viewReward))
-      console.log('claimedReward',bigNumberToBalance(claimedReward))
 
+      const activeStats = await OmniNFTPoolContract.activeStats(tokenOfOwnerByIndex)
 
+      
 
       let showID = Number(getType.toString())
       let nftPrice = 100
@@ -433,9 +430,9 @@ export function useMyNftInfo(index:number) {
         nftPrice,
         nftImg,
         tokenOfOwnerByIndex:tokenOfOwnerByIndex.toString(),
-        viewReward:formatBalance(bigNumberToBalance(viewReward)),
-        claimedReward:formatBalance(bigNumberToBalance(claimedReward))
-
+        viewReward:Number(formatBalance(bigNumberToBalance(viewReward))),
+        claimedReward:Number(formatBalance(bigNumberToBalance(claimedReward))),
+        activeStats
       }
   }
 

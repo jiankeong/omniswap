@@ -1,7 +1,7 @@
 import type {NextPage} from 'next'
 import Image from 'next/image'
 import ImageCommon from '../../public/images/ImageCommon'
-import { FlexViewBetween, FlexView, FlexViewColumn, SpaceHeight, LoadingRow, FlexViewEnd, FlexViewCenterColumn } from '../components/Common'
+import { FlexViewBetween, FlexView, FlexViewColumn, SpaceHeight, LoadingRow, FlexViewEnd, FlexViewCenterColumn, FlexViewCenter } from '../components/Common'
 import { Text, TextBold, TextExtraBold, TextExtraLight, TextSemiBold } from '../components/Text'
 import useTranslationLanguage from '../hooks/useTranslationLanguage'
 import {
@@ -104,10 +104,12 @@ function NFTList(){
       <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('The weight of nft')}</TextSemiBold>
       <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('Earnings to be collected')}</TextSemiBold>
       <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('Earnings issued')}</TextSemiBold>
-      <TextSemiBold style={{flex:2,textAlign:'center'}} size={12} webSize={24} color='#010101'></TextSemiBold>
+      <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'></TextSemiBold>
+      <TextSemiBold style={{flex:1,textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('status')}</TextSemiBold>
+
     </AddressTitle>
     {
-      nfts.isLoading ? <LoadingRow/> : (nfts.data?.list.length == 0 ? <NotData/> : nfts.data?.list.map((item:any,index:number)=>{
+      nfts.isLoading ? <LoadingRow width='100%'/> : (nfts.data?.list.length == 0 ? <NotData/> : nfts.data?.list.map((item:any,index:number)=>{
         return <AddressViewItem key={index+'webnft'}>
           <NFTItem index={index}/>
           {index != (nfts.data?.list.length || 0) - 1 && <Line/>}
@@ -123,7 +125,7 @@ function NFTItem({index}:any){
   const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
   function onReceive(){
 
-    if (!OmniNFTPoolContract){
+    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0){
       return
     }
     sendTransaction.mutate({
@@ -131,8 +133,16 @@ function NFTItem({index}:any){
       func:OmniNFTPoolContract.getReward,
       args:[nftInfo.data?.tokenOfOwnerByIndex]
     })
-
-
+  }
+  function onActive(){
+    if (!OmniNFTPoolContract){
+      return
+    }
+    sendTransaction.mutate({
+      title:'Active',
+      func:OmniNFTPoolContract.active,
+      args:[nftInfo.data?.tokenOfOwnerByIndex]
+    })
   }
   return <FlexViewBetween>
     {nftInfo.isLoading ? <LoadingRow width='20%'/> : <FlexView style={{flex:1}}>
@@ -143,11 +153,16 @@ function NFTItem({index}:any){
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.nftPrice} USDT</Text>
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.viewReward} OMNI</Text>
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.claimedReward} OMNI</Text>
-    <FlexViewEnd style={{flex:2}}>
+    <FlexViewCenter style={{flex:1}}>
       <ReceiveButton disable={!nftInfo.data?.viewReward} onClick={onReceive}>
         <Text size={14} webSize={32} color='#000'>{t('Receive earnings')}</Text>
       </ReceiveButton>
-    </FlexViewEnd>
+    </FlexViewCenter>
+    {nftInfo.data?.activeStats ? <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{t('activated')}</Text> : <FlexViewCenter style={{flex:1}}>
+      <ReceiveButton disable={true} onClick={onActive}>
+        <Text size={14} webSize={32} color='#000'>{t('active')}</Text>
+      </ReceiveButton>
+    </FlexViewCenter>}
   </FlexViewBetween>
 }
 export default MyNFT

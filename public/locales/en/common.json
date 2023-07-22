@@ -35,7 +35,7 @@
   "The weight of nft":"The weight of nft",
   "Earnings to be collected":"Earnings to be collected",
   "Earnings issued":"Earnings issued",
-  "Receive earnings":"Receive earnings",
+  "Receive earnings":"Receive",
   "My NFTs":"My NFTs",
   "The NFT I purchased":"The NFT I purchased",
   "Receive nft dividend earnings":"Receive nft dividend earnings",
@@ -50,7 +50,7 @@
   "Tx deadline (mins)":"Tx deadline (mins)",
   "Today’s Node ranking":"Today’s Node ranking",
   "Your Current Rank--Keep Going!":"Your Current Rank--Keep Going!",
-  "Node ranking Content":"Today’s node ranking is based on the computing power N value of invite user nodes. the top 51 are super nodes and can get super node rewards, and the 52-561 are ordinary nodes and can get ordinary node rewards.",
+  "Node ranking Content":"The top 88 are super nodes and can get super node rewards, and the 89th to 888 are ordinary nodes and can get ordinary node rewards.",
   "Super Node Ranking":"Super Node Ranking",
   "Ranking":"Ranking",
   "Total Node Hash Rate N ":"Total Node Hash Rate N ",
@@ -92,5 +92,8 @@
   "Node performance":"Performance",
   "yes":"YES",
   "no":"NO",
-  "sold out":"sold out"
+  "sold out":"sold out",
+  "status":"Status",
+  "activated":"Activated",
+  "active":"Active"
 }
