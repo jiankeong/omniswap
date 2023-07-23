@@ -32,8 +32,8 @@ import { swapTokens } from '../components/SwapToken/TokenList'
 import { useModalContext } from '../provider/modalProvider'
 import Slippage from '../components/SwapToken/Slippage'
 import { useDeadline, useGasPrice, useSlippage } from '../state/setting'
-import { useOmniSwapRouterContract } from '../hooks/useContract'
-import { OmniSwapRouter_ADDRESSSES } from '../constants/addresses'
+import { useOmniStakePoolContract, useOmniSwapRouterContract } from '../hooks/useContract'
+import { OmniStakePool_ADDRESSSES, OmniSwapRouter_ADDRESSSES } from '../constants/addresses'
 import { NetworkId } from '../networkDetails'
 import { LoadingContext, LoadingType } from '../provider/loadingProvider'
 import { parseUnits } from 'ethers/lib/utils'
@@ -51,7 +51,7 @@ const Swap: NextPage = (props: any) => {
   const [fromToken,setFromToken] = useState<any>(swapTokens[0])
   const [toToken,setToToken] = useState<any>(swapTokens[1])
   const [swapAmount,setSwapAmount] = useState('')
-  const routerContract = useOmniSwapRouterContract(OmniSwapRouter_ADDRESSSES);
+  const routerContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES);
   const [swapPath,setSwapPath] = useState([""])
   const [reverse,setReverse] = useState(false)
   const [buttonDisable,setButtonDisable] = useState(false)
@@ -265,59 +265,3 @@ export async function getStaticProps() {
     // revalidate: 24*60*60,  //1天更新一次 (单位秒)
   }
 }
-
-/**
-  const [approval, approveCallback] = useApprove({[NetworkId.BSC]: fromInfo.address}, TalmudRouter_ADDRESSES)
-  const routerContract = useTalmudRouterContract(TalmudRouter_ADDRESSES)
-  const gasPrice = useGasPrice()
-  const outScale = useSlippage()
-  const deadLine = useDeadLine()
-
-  const [swapPath,setSwapPath] = useState([""])
-  const [swapPath,setSwapPath] = useState([""])
-  const [swapTokens,setSwapTokens] = useState([""])
-  const [reverse,setReverse] = useState(false)
-  const swapPrice = useSwapPrice(swapAmount,swapTokens,swapPath,reverse)
-  const swapPriceShow = useSwapPriceShow(swapTokens,swapPath)
-
-
-  path = await getBetterPath(routerContract,chain?.id,[fromInfo.address,data.address])
-
-
-  useSwapPrice  每次输入A都要计算出B的数量 防抖
-
-  contract.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-    balanceToBigNumber(formatBalance(swapPrice.data?.[fromInfo.symbol],8)),
-    balanceToBigNumber(formatBalance(swapPrice.data?.[fromInfo.symbol]*(1-outScale),8)),
-    swapPath,
-    address??'',
-    getDeadLine(deadLine),
-    {
-      gasPrice:parseUnits(String(gasPrice),"gwei"),
-      gasLimit:1500000
-    })
-  .then(async (response: TransactionResponse) => {
-    loading.show(LoadingType.pending, response.hash)
-    await response.wait();
-    loading.show(LoadingType.success, response.hash)
-    setSwapAmount('0')
-  })
-  .catch((err: any) => {
-    console.log('err',err);
-    loading.show(LoadingType.error, err.data?.message || err.message)
-  })
-
-
-
-
-
-
-
-
-*/
-
-
-
-
-
-

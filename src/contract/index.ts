@@ -1,4 +1,4 @@
-import { Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES, OmniStakePool_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES, OMNINFTPOOL_ADDRESSSES } from './../constants/addresses';
+import { OmniPool_ADDRESSSES, Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES, OmniStakePool_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES, OMNINFTPOOL_ADDRESSSES } from './../constants/addresses';
 import {
     useDynamic721Contract,
     useONFTContract,
@@ -8,6 +8,7 @@ import {
     useOmniStakePoolContract,
     useTokenContract,
     useOmniNFTPoolContract,
+    useOmniPoolContract,
 } from './../hooks/useContract';
 import {useMutation, useQuery} from 'react-query';
 import {useCallback, useContext, useEffect, useState} from 'react'
@@ -800,18 +801,19 @@ export function useEarnInfo() {
       if (!address || !stakePoolContract) {
           return
       }
-      let lpPower = '1'
-      let myLpPower = '2'
-      let lpMint = '3'
-      let waitReceive = '4'
-      let received = '5'
-      // const pauseStats = await stakePoolContract.mintPause(typeID)
+      let lpMint = '0'
+      const lpPower = await stakePoolContract.totalHashPower()
+      const myLpPower = await stakePoolContract.hashPower(address)
+      const waitReceive = await stakePoolContract.earned(address)
+      const received = await stakePoolContract.rewardClaimed(address)
+
+
       return {
-        lpPower,
-        myLpPower,
+        lpPower:formatBalance(bigNumberToBalance(lpPower)),
+        myLpPower:formatBalance(bigNumberToBalance(myLpPower)),
         lpMint,
-        waitReceive,
-        received
+        waitReceive:formatBalance(bigNumberToBalance(waitReceive)),
+        received:formatBalance(bigNumberToBalance(received))
       }
   }
 
@@ -828,6 +830,7 @@ export function useCommunityEarnInfo() {
   const {chain} = useNetwork()
   const networkId = chain?.id
 
+  // const poolContract = useOmniPoolContract(OmniPool_ADDRESSSES)
   const stakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
 
   async function fetchData() {
@@ -836,16 +839,16 @@ export function useCommunityEarnInfo() {
           return
       }
 
-      let waitReceive = '1'
-      let received = '2'
-      let lastMint = '3'
-      let myLastMint = '4'
-      let communityTotal = '5'
-      let lastDirect = '6'
-      let myPower = '7'
-      let myNodePower = '8'
+      let waitReceive = '0'
+      let received = '0'
+      let lastMint = '0'
+      let myLastMint = '0'
+      let communityTotal = '0'
+      let lastDirect = '0'
+      const dayId = await stakePoolContract.dayId()
+      const myPower = await stakePoolContract.TPower(address,dayId)
+      const myNodePower = await stakePoolContract.NPower(address,dayId)
 
-      // const pauseStats = await stakePoolContract.mintPause(typeID)
       return {
         waitReceive,
         received,
@@ -853,8 +856,8 @@ export function useCommunityEarnInfo() {
         myLastMint,
         communityTotal,
         lastDirect,
-        myPower,
-        myNodePower
+        myPower:formatBalance(bigNumberToBalance(myPower)),
+        myNodePower:formatBalance(bigNumberToBalance(myNodePower)),
       }
   }
 
@@ -889,3 +892,4 @@ export function useOMNIDestoryInfo() {
       refetchInterval: config.refreshInterval,
   })
 }
+

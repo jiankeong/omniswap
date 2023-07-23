@@ -31,8 +31,8 @@ import {useTab} from "@src/hooks";
 import {Tab} from "@src/views/earn/index";
 import { useRouter } from 'next/router'
 import { useCommunityEarnInfo, useSendTransaction } from '@/src/contract'
-import { OmniStakePool_ADDRESSSES } from '@/src/constants/addresses'
-import { useOmniStakePoolContract } from '@/src/hooks/useContract'
+import { OmniPool_ADDRESSSES, OmniStakePool_ADDRESSSES } from '@/src/constants/addresses'
+import { useOmniPoolContract, useOmniStakePoolContract } from '@/src/hooks/useContract'
 import { balanceToBigNumber } from '@/src/common/Common'
 
 export default function Community(){
@@ -42,20 +42,20 @@ export default function Community(){
   const router = useRouter()
   const communityEarnInfo = useCommunityEarnInfo()
   const sendTransaction = useSendTransaction()
-  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  const omniPoolContract = useOmniPoolContract(OmniPool_ADDRESSSES)
 
   function onReceive(){
-    if (!omniStakePoolContract){
+    if (!omniPoolContract){
       return
     }
-    sendTransaction.mutate({
-      title: 'Receive',
-      func: omniStakePoolContract?.claim,
-      args: [balanceToBigNumber(10000),1,1,''],
-      onSuccess:()=>{
-        communityEarnInfo.refetch()
-      }
-    })
+    // sendTransaction.mutate({
+    //   title: 'Claim',
+    //   func: omniPoolContract?.claim,
+    //   args: [balanceToBigNumber(10000),1,1,''],
+    //   onSuccess:()=>{
+    //     communityEarnInfo.refetch()
+    //   }
+    // })
   }
 
   return <Main>
@@ -87,18 +87,18 @@ export default function Community(){
     <Content>
       <FlexViewBetween>
         <FlexViewCenterColumn style={{width:'fit-content'}}>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Promotion')}</Text>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Benefits')}</Text>
+          <Text size={12} webSize={24} color='#D3DEFC'>{t('Promotion')}{t('Benefits')}</Text>
+          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
         </FlexViewCenterColumn>
         <Line/>
         <FlexViewCenterColumn style={{width:'fit-content'}}>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Super Node')}</Text>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Benefits')}</Text>
+          <Text size={12} webSize={24} color='#D3DEFC'>{t('Super Node')}{t('Benefits')}</Text>
+          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
         </FlexViewCenterColumn>
         <Line/>
-        <FlexViewCenterColumn style={{width:'fit-content',alignItems:'flex-end'}}>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Common Node')}</Text>
-          <Text size={12} webSize={24} color='#D3DEFC'>{t('Benefits')}</Text>
+        <FlexViewCenterColumn style={{width:'fit-content'}}>
+          <Text size={12} webSize={24} color='#D3DEFC'>{t('Common Node')}{t('Benefits')}</Text>
+          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
         </FlexViewCenterColumn>
       </FlexViewBetween>
     </Content>
@@ -124,7 +124,7 @@ export default function Community(){
           <Text size={12} webSize={24} color='#D3DEFC'>{t('Benefits Receipt')}</Text>
         </FlexViewCenterColumn>
       </FlexViewBetween>
-      <ReceiveButton style={{width:'100%'}} onClick={onReceive}>
+      <ReceiveButton style={{width:'100%',background:'#303030'}} onClick={onReceive}>
         <Text size={16} webSize={32} color='#000'>{t('Recevive Benefits')}</Text>
       </ReceiveButton>
       <InfoView>
@@ -165,7 +165,7 @@ export default function Community(){
         </FlexViewBetween>
       </InfoView>
     </Content>
-    <SpaceHeight height={30}/>
+    {/* <SpaceHeight height={30}/>
     <FlexViewCenter>
       <ReardIcon>
         <Image src={ImageCommon.p1} layout='fill'/>
@@ -173,7 +173,7 @@ export default function Community(){
       <Text size={14} webSize={28} color={'#FFA845'}>{t('View todays ranking')}</Text>
     </FlexViewCenter>
     <SpaceHeight height={24}/>
-    <TodayRanking/>
+    <TodayRanking/> */}
   </Main>
 }
 function TodayRanking(){
@@ -228,7 +228,7 @@ function Choose({currency,onSelect}:any){
 }
 function RankingList({currency}:any){
   const {t} = useTranslationLanguage()
-  const list:any = [1]
+  const list:any = []
   return <AddressView>
     <AddressTitle>
       <TextSemiBold size={10} webSize={24} color='#010101'>{t('Release Time')}</TextSemiBold>

@@ -54,7 +54,7 @@ const NodeRanking: NextPage = (props: any) => {
 }
 function SuperNode(){
   const {t} = useTranslationLanguage()
-  let list:any = [1]
+  let list:any = []
   return <Content>
     <FlexViewBetween>
       <FlexView>

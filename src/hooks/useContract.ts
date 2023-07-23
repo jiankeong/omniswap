@@ -15,7 +15,8 @@ import {
   OmniSwapFactory,
   OmniSwapPair,
   OmniSwapRouter,
-  OmniNFTPool
+  OmniNFTPool,
+  OmniPool
 } from "../typechain";
 import ONFT_ABI from "../abiJson/ONFT.json";
 import OMINT_ABI from "../abiJson/OMINT.json";
@@ -27,6 +28,7 @@ import OmniSwapFactory_ABI from "../abiJson/OmniSwapFactory.json"
 import OmniSwapPair_ABI from "../abiJson/OmniSwapPair.json"
 import OmniSwapRouter_ABI from "../abiJson/OmniSwapRouter.json"
 import OmniNFTPool_ABI from "../abiJson/OmniNFTPool.json"
+import OmniPool_ABI from "../abiJson/OmniPool.json"
 
 
 export function getContract(address: string, abi: any, other?: any) {
@@ -122,4 +124,5 @@ export const useOmniSwapFactoryContract = createDynamicContract<OmniSwapFactory>
 export const useOmniSwapPairContract = createDynamicContract<OmniSwapPair>(OmniSwapPair_ABI);
 export const useOmniSwapRouterContract = createDynamicContract<OmniSwapRouter>(OmniSwapRouter_ABI);
 export const useOmniNFTPoolContract = createDynamicContract<OmniNFTPool>(OmniNFTPool_ABI);
+export const useOmniPoolContract = createDynamicContract<OmniPool>(OmniPool_ABI);
 

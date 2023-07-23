@@ -48,7 +48,7 @@ export const ONFT_ADDRESSSES = {
 
 
 export const OmniStakePool_ADDRESSSES = {
-  [NetworkId.BSC]: "0x1f2d503eD9C8510359b513dA58Dda1C70a3Ce4dc",
+  [NetworkId.BSC]: "0xdB2Bc192E86BeDF189B22bA43820dF89D5472d79",
 };
 
 export const OmniSwapFactory_ADDRESSSES = {
@@ -65,4 +65,8 @@ export const OmniSwapRouter_ADDRESSSES = {
 
 export const OMNINFTPOOL_ADDRESSSES = {
   [NetworkId.BSC]: "0x064f3EfdAaDea26Cdb152beE39ec79B30e040C5c",
+};
+
+export const OmniPool_ADDRESSSES = {
+  [NetworkId.BSC]: "0x6f8A6C89d568bec61D02C8cD46029bDa490c9AEf",
 };

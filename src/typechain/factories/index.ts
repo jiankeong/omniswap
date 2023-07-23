@@ -7,6 +7,7 @@ export { OMINT__factory } from "./OMINT__factory";
 export { OMNIRelation__factory } from "./OMNIRelation__factory";
 export { ONFT__factory } from "./ONFT__factory";
 export { OmniNFTPool__factory } from "./OmniNFTPool__factory";
+export { OmniPool__factory } from "./OmniPool__factory";
 export { OmniStakePool__factory } from "./OmniStakePool__factory";
 export { OmniSwapFactory__factory } from "./OmniSwapFactory__factory";
 export { OmniSwapPair__factory } from "./OmniSwapPair__factory";

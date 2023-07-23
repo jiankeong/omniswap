@@ -34,10 +34,12 @@ import Community from "@src/views/earn/community";
 import { TextBold } from '../../components/Text'
 import { useEarnInfo, useSendTransaction } from '@/src/contract'
 import { useOmniStakePoolContract } from '@/src/hooks/useContract'
-import { OmniStakePool_ADDRESSSES } from '@/src/constants/addresses'
+import { OmniStakePool_ADDRESSSES, AddressMap } from '@/src/constants/addresses'
 import { balanceToBigNumber, bigNumberToBalance } from '@/src/common/Common'
 import PutUSDT from './PutUSDT'
 import { LoadingRow } from '@/src/components/Common'
+import { useNetwork } from 'wagmi'
+import { NetworkId } from '@/src/networkDetails'
 
 const Earn: NextPage = (props: any) => {
     const {t} = useTranslationLanguage()
@@ -47,6 +49,7 @@ const Earn: NextPage = (props: any) => {
     const sendTransaction = useSendTransaction()
     const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
     const earnInfo = useEarnInfo()
+    const {chain = {id: 56}} = useNetwork()
     useEffect(() => {
         getContent()
     }, [])
@@ -56,13 +59,16 @@ const Earn: NextPage = (props: any) => {
     }
 
     function onReceive(){
-      if (!omniStakePoolContract){
+      if (!omniStakePoolContract || earnInfo.isLoading){
+        return
+      }
+      if (parseInt(earnInfo.data?.waitReceive || '0') == 0){
         return
       }
       sendTransaction.mutate({
         title: 'Receive',
-        func: omniStakePoolContract?.claim,
-        args: [balanceToBigNumber(10000),1,1,''],
+        func: omniStakePoolContract?.getReward,
+        args: [],
         onSuccess:()=>{
           earnInfo.refetch()
         }
@@ -143,7 +149,7 @@ const Earn: NextPage = (props: any) => {
                         <div className={styles.name}>{t("Your Current LP")}</div>
                         {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.myLpPower}</div>}
                     </div>
-                    <div className={classNames(styles.lp_total_warp, styles.black)}>
+                    {/* <div className={classNames(styles.lp_total_warp, styles.black)}>
                         <div className={styles.left}>
                             <div className={styles.name}>{t("Your LP Mining")}</div>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.lpMint}</div>}
@@ -154,28 +160,30 @@ const Earn: NextPage = (props: any) => {
                                 <Image src={ImageCommon.icon_arrow_right_record} layout={"fill"}></Image>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className={styles.bottom_wrap}>
                         <div className={styles.left}>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.waitReceive}</div>}
                             <div className={styles.desc}>{t("Pending Receipt")}</div>
-                            <div className={styles.btn} onClick={onReceive}>{t("Extract")}</div>
+                            <div style={{
+                              background:parseInt(earnInfo.data?.waitReceive || '0') == 0?'#303030' : '#FFA845'
+                            }} className={styles.btn} onClick={onReceive}>{t("Extract")}</div>
                             <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={onExtractClick}>
-                                <div className={styles.txt_extract_record}>
+                                {/* <div className={styles.txt_extract_record}>
                                     {t("Extract Record")}
                                 </div>
                                 <div className={styles.icon_arrow_right_gray}>
                                     <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className={styles.line}></div>
                         <div className={styles.right}>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.received}</div>}
                             <div className={styles.desc}>{t("Benefits Receipt")}</div>
-                            <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
-                            <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
-                              window.open('https://bscscan.com/')
+                            {/* <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div> */}
+                            {/* <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                              window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
                             }}>
                                 <div className={styles.txt_extract_record}>
                                     {t("View Mining Pool Contract")}
@@ -184,7 +192,7 @@ const Earn: NextPage = (props: any) => {
                                     <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
                                 </div>
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -29,108 +29,198 @@ import type {
 
 export interface OmniStakePoolInterface extends utils.Interface {
   functions: {
+    "DURATION()": FunctionFragment;
     "FEE_RATE_BASE()": FunctionFragment;
+    "NPower(address,uint256)": FunctionFragment;
+    "TPower(address,uint256)": FunctionFragment;
+    "_getTokenPrice()": FunctionFragment;
+    "addAdmin(address)": FunctionFragment;
     "addLock(uint256)": FunctionFragment;
+    "allAdmins()": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
     "baseToken()": FunctionFragment;
-    "claim(uint256,uint256,uint256,bytes)": FunctionFragment;
+    "batchStakePower(address[],uint256[])": FunctionFragment;
+    "checkTime()": FunctionFragment;
     "commAddr2()": FunctionFragment;
     "commAddress()": FunctionFragment;
     "computeNextReleaseTime(uint256)": FunctionFragment;
-    "dailyRewardHour()": FunctionFragment;
+    "dailyPower(address,uint256)": FunctionFragment;
+    "dayId()": FunctionFragment;
+    "dayPower()": FunctionFragment;
+    "earned(address)": FunctionFragment;
     "factory()": FunctionFragment;
     "flag()": FunctionFragment;
     "fundAddr2()": FunctionFragment;
     "fundAddress()": FunctionFragment;
-    "initialize(address,address,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "getReward()": FunctionFragment;
+    "hashPower(address)": FunctionFragment;
+    "helpGetReward(address)": FunctionFragment;
+    "initialize(address,address,uint256,uint256,uint256,uint256,address)": FunctionFragment;
+    "initreward()": FunctionFragment;
+    "isAdmin(address)": FunctionFragment;
+    "lastTimeRewardApplicable()": FunctionFragment;
+    "lastUpdateTime()": FunctionFragment;
     "lpAddress()": FunctionFragment;
     "lpReleaseTime()": FunctionFragment;
     "nextReleaseTime()": FunctionFragment;
     "operAddr()": FunctionFragment;
     "otherToken()": FunctionFragment;
     "period()": FunctionFragment;
+    "periodFinish()": FunctionFragment;
+    "relation()": FunctionFragment;
+    "releaseBaseRatio()": FunctionFragment;
     "releaseCommRatio()": FunctionFragment;
     "releaseFundRatio()": FunctionFragment;
     "releaseOperRatio()": FunctionFragment;
     "releaseRatio()": FunctionFragment;
+    "removeAdmin(address)": FunctionFragment;
     "removeLiqRelease()": FunctionFragment;
+    "renounceAdmin()": FunctionFragment;
+    "rewardClaimed(address)": FunctionFragment;
+    "rewardPerToken()": FunctionFragment;
+    "rewardPerTokenStored()": FunctionFragment;
+    "rewardPeriod()": FunctionFragment;
+    "rewardRate()": FunctionFragment;
+    "rewards(address)": FunctionFragment;
     "router()": FunctionFragment;
-    "setDailyRewardHour(uint256)": FunctionFragment;
     "setFeeInfo(address,address,uint256,uint256,uint256)": FunctionFragment;
     "setFeeInfo2(address,address,address,uint256,uint256,uint256)": FunctionFragment;
+    "setReleasePeriod(uint256)": FunctionFragment;
+    "setRewardPeriod(uint256)": FunctionFragment;
     "setStartTime(uint256)": FunctionFragment;
     "stake(uint256)": FunctionFragment;
     "stakeCommRatio()": FunctionFragment;
     "stakeFactory()": FunctionFragment;
     "stakeFundRatio()": FunctionFragment;
     "stakeNodeRatio()": FunctionFragment;
+    "stakePower(address,uint256)": FunctionFragment;
     "starttime()": FunctionFragment;
+    "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)": FunctionFragment;
     "takeInitLp()": FunctionFragment;
     "takeToken(address,address,uint256)": FunctionFragment;
+    "totalHashPower()": FunctionFragment;
     "transferInitHolder(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "updatePeriodFinish(uint256)": FunctionFragment;
+    "updateStartTime(uint256)": FunctionFragment;
+    "userRewardPerTokenPaid(address)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "DURATION"
       | "FEE_RATE_BASE"
+      | "NPower"
+      | "TPower"
+      | "_getTokenPrice"
+      | "addAdmin"
       | "addLock"
+      | "allAdmins"
+      | "balanceOf"
       | "baseToken"
-      | "claim"
+      | "batchStakePower"
+      | "checkTime"
       | "commAddr2"
       | "commAddress"
       | "computeNextReleaseTime"
-      | "dailyRewardHour"
+      | "dailyPower"
+      | "dayId"
+      | "dayPower"
+      | "earned"
       | "factory"
       | "flag"
       | "fundAddr2"
       | "fundAddress"
+      | "getReward"
+      | "hashPower"
+      | "helpGetReward"
       | "initialize"
+      | "initreward"
+      | "isAdmin"
+      | "lastTimeRewardApplicable"
+      | "lastUpdateTime"
       | "lpAddress"
       | "lpReleaseTime"
       | "nextReleaseTime"
       | "operAddr"
       | "otherToken"
       | "period"
+      | "periodFinish"
+      | "relation"
+      | "releaseBaseRatio"
       | "releaseCommRatio"
       | "releaseFundRatio"
       | "releaseOperRatio"
       | "releaseRatio"
+      | "removeAdmin"
       | "removeLiqRelease"
+      | "renounceAdmin"
+      | "rewardClaimed"
+      | "rewardPerToken"
+      | "rewardPerTokenStored"
+      | "rewardPeriod"
+      | "rewardRate"
+      | "rewards"
       | "router"
-      | "setDailyRewardHour"
       | "setFeeInfo"
       | "setFeeInfo2"
+      | "setReleasePeriod"
+      | "setRewardPeriod"
       | "setStartTime"
       | "stake"
       | "stakeCommRatio"
       | "stakeFactory"
       | "stakeFundRatio"
       | "stakeNodeRatio"
+      | "stakePower"
       | "starttime"
+      | "swapExactTokensForTokensSupportingFeeOnTransferTokens"
       | "takeInitLp"
       | "takeToken"
+      | "totalHashPower"
       | "transferInitHolder"
       | "transferOwnership"
+      | "updatePeriodFinish"
+      | "updateStartTime"
+      | "userRewardPerTokenPaid"
   ): FunctionFragment;
 
+  encodeFunctionData(functionFragment: "DURATION", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "FEE_RATE_BASE",
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "NPower",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "TPower",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "_getTokenPrice",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addAdmin",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "addLock",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "allAdmins", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "balanceOf",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(functionFragment: "baseToken", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "claim",
-    values: [
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BytesLike>
-    ]
+    functionFragment: "batchStakePower",
+    values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
   ): string;
+  encodeFunctionData(functionFragment: "checkTime", values?: undefined): string;
   encodeFunctionData(functionFragment: "commAddr2", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "commAddress",
@@ -141,8 +231,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "dailyRewardHour",
-    values?: undefined
+    functionFragment: "dailyPower",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(functionFragment: "dayId", values?: undefined): string;
+  encodeFunctionData(functionFragment: "dayPower", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "earned",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
   encodeFunctionData(functionFragment: "flag", values?: undefined): string;
@@ -150,6 +246,15 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "fundAddress",
     values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "getReward", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "hashPower",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "helpGetReward",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "initialize",
@@ -159,8 +264,25 @@ export interface OmniStakePoolInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "initreward",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isAdmin",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastTimeRewardApplicable",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastUpdateTime",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "lpAddress", values?: undefined): string;
   encodeFunctionData(
@@ -178,6 +300,15 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "period", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "periodFinish",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "relation", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "releaseBaseRatio",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "releaseCommRatio",
     values?: undefined
   ): string;
@@ -194,14 +325,42 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "removeAdmin",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "removeLiqRelease",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "router", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "setDailyRewardHour",
-    values: [PromiseOrValue<BigNumberish>]
+    functionFragment: "renounceAdmin",
+    values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "rewardClaimed",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardPerToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardPerTokenStored",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardPeriod",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardRate",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewards",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(functionFragment: "router", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setFeeInfo",
     values: [
@@ -222,6 +381,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setReleasePeriod",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRewardPeriod",
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "setStartTime",
@@ -247,7 +414,21 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "stakeNodeRatio",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "stakePower",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(functionFragment: "starttime", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "takeInitLp",
     values?: undefined
@@ -261,6 +442,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "totalHashPower",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferInitHolder",
     values: [PromiseOrValue<string>]
   ): string;
@@ -268,14 +453,40 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updatePeriodFinish",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateStartTime",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "userRewardPerTokenPaid",
+    values: [PromiseOrValue<string>]
+  ): string;
 
+  decodeFunctionResult(functionFragment: "DURATION", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "FEE_RATE_BASE",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "NPower", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "TPower", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "_getTokenPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "addAdmin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "addLock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "allAdmins", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "baseToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "batchStakePower",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "checkTime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "commAddr2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "commAddress",
@@ -285,10 +496,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "computeNextReleaseTime",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "dailyRewardHour",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "dailyPower", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "dayId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "dayPower", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "earned", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "flag", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "fundAddr2", data: BytesLike): Result;
@@ -296,7 +507,23 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "fundAddress",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getReward", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hashPower", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "helpGetReward",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "initialize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "initreward", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lastTimeRewardApplicable",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lastUpdateTime",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lpAddress", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lpReleaseTime",
@@ -309,6 +536,15 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "operAddr", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "otherToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "period", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "periodFinish",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "relation", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "releaseBaseRatio",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "releaseCommRatio",
     data: BytesLike
@@ -326,17 +562,47 @@ export interface OmniStakePoolInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "removeAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "removeLiqRelease",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setDailyRewardHour",
+    functionFragment: "renounceAdmin",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardClaimed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardPerToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardPerTokenStored",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardPeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "rewardRate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rewards", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setFeeInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setFeeInfo2",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setReleasePeriod",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setRewardPeriod",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -360,9 +626,18 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "stakeNodeRatio",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "stakePower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "starttime", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "takeInitLp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "takeToken", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalHashPower",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "transferInitHolder",
     data: BytesLike
@@ -371,17 +646,55 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updatePeriodFinish",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateStartTime",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "userRewardPerTokenPaid",
+    data: BytesLike
+  ): Result;
 
   events: {
+    "AdminAdded(address)": EventFragment;
+    "AdminRemoved(address)": EventFragment;
     "Claim(address,address,uint256,uint256,uint256,uint256)": EventFragment;
     "Release(uint256,uint256)": EventFragment;
+    "RewardAdded(uint256)": EventFragment;
+    "RewardPaid(address,uint256)": EventFragment;
     "Stake(address,uint256,uint256)": EventFragment;
+    "Staked(address,uint256)": EventFragment;
+    "Withdrawn(address,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "AdminAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "AdminRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Release"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RewardAdded"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RewardPaid"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Stake"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Staked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Withdrawn"): EventFragment;
 }
+
+export interface AdminAddedEventObject {
+  account: string;
+}
+export type AdminAddedEvent = TypedEvent<[string], AdminAddedEventObject>;
+
+export type AdminAddedEventFilter = TypedEventFilter<AdminAddedEvent>;
+
+export interface AdminRemovedEventObject {
+  account: string;
+}
+export type AdminRemovedEvent = TypedEvent<[string], AdminRemovedEventObject>;
+
+export type AdminRemovedEventFilter = TypedEventFilter<AdminRemovedEvent>;
 
 export interface ClaimEventObject {
   user: string;
@@ -409,6 +722,24 @@ export type ReleaseEvent = TypedEvent<
 
 export type ReleaseEventFilter = TypedEventFilter<ReleaseEvent>;
 
+export interface RewardAddedEventObject {
+  reward: BigNumber;
+}
+export type RewardAddedEvent = TypedEvent<[BigNumber], RewardAddedEventObject>;
+
+export type RewardAddedEventFilter = TypedEventFilter<RewardAddedEvent>;
+
+export interface RewardPaidEventObject {
+  user: string;
+  reward: BigNumber;
+}
+export type RewardPaidEvent = TypedEvent<
+  [string, BigNumber],
+  RewardPaidEventObject
+>;
+
+export type RewardPaidEventFilter = TypedEventFilter<RewardPaidEvent>;
+
 export interface StakeEventObject {
   user: string;
   amount: BigNumber;
@@ -420,6 +751,25 @@ export type StakeEvent = TypedEvent<
 >;
 
 export type StakeEventFilter = TypedEventFilter<StakeEvent>;
+
+export interface StakedEventObject {
+  user: string;
+  amount: BigNumber;
+}
+export type StakedEvent = TypedEvent<[string, BigNumber], StakedEventObject>;
+
+export type StakedEventFilter = TypedEventFilter<StakedEvent>;
+
+export interface WithdrawnEventObject {
+  user: string;
+  amount: BigNumber;
+}
+export type WithdrawnEvent = TypedEvent<
+  [string, BigNumber],
+  WithdrawnEventObject
+>;
+
+export type WithdrawnEventFilter = TypedEventFilter<WithdrawnEvent>;
 
 export interface OmniStakePool extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -448,33 +798,76 @@ export interface OmniStakePool extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    DURATION(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    NPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    TPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    _getTokenPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    addAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     addLock(
       _time: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    allAdmins(
+      overrides?: CallOverrides
+    ): Promise<[string[]] & { admins: string[] }>;
+
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     baseToken(overrides?: CallOverrides): Promise<[string]>;
 
-    claim(
-      _amount: PromiseOrValue<BigNumberish>,
-      _rType: PromiseOrValue<BigNumberish>,
-      _timeout: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
+    batchStakePower(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    checkTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     commAddr2(overrides?: CallOverrides): Promise<[string]>;
 
     commAddress(overrides?: CallOverrides): Promise<[string]>;
 
     computeNextReleaseTime(
-      timestamp: PromiseOrValue<BigNumberish>,
+      _time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    dailyRewardHour(overrides?: CallOverrides): Promise<[BigNumber]>;
+    dailyPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    dayId(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    dayPower(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    earned(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     factory(overrides?: CallOverrides): Promise<[string]>;
 
@@ -484,6 +877,20 @@ export interface OmniStakePool extends BaseContract {
 
     fundAddress(overrides?: CallOverrides): Promise<[string]>;
 
+    getReward(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    hashPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    helpGetReward(
+      addr_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     initialize(
       _holder: PromiseOrValue<string>,
       _lpAddr: PromiseOrValue<string>,
@@ -491,8 +898,20 @@ export interface OmniStakePool extends BaseContract {
       _ref: PromiseOrValue<BigNumberish>,
       _limit: PromiseOrValue<BigNumberish>,
       _start: PromiseOrValue<BigNumberish>,
+      _router: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    initreward(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    isAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
+    lastTimeRewardApplicable(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    lastUpdateTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     lpAddress(overrides?: CallOverrides): Promise<[string]>;
 
@@ -506,6 +925,12 @@ export interface OmniStakePool extends BaseContract {
 
     period(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    periodFinish(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    relation(overrides?: CallOverrides): Promise<[string]>;
+
+    releaseBaseRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     releaseCommRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -514,16 +939,38 @@ export interface OmniStakePool extends BaseContract {
 
     releaseRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    removeAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     removeLiqRelease(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    router(overrides?: CallOverrides): Promise<[string]>;
-
-    setDailyRewardHour(
-      _hour: PromiseOrValue<BigNumberish>,
+    renounceAdmin(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    rewardClaimed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    rewardPerToken(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    rewardPerTokenStored(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    rewardPeriod(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    rewardRate(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    rewards(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    router(overrides?: CallOverrides): Promise<[string]>;
 
     setFeeInfo(
       _fund: PromiseOrValue<string>,
@@ -541,6 +988,16 @@ export interface OmniStakePool extends BaseContract {
       _fundFee: PromiseOrValue<BigNumberish>,
       _commFee: PromiseOrValue<BigNumberish>,
       _operateFee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setReleasePeriod(
+      _hour: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setRewardPeriod(
+      _hour: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -562,7 +1019,22 @@ export interface OmniStakePool extends BaseContract {
 
     stakeNodeRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    stakePower(
+      addr: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     starttime(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      amountIn: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      path: PromiseOrValue<string>[],
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -575,6 +1047,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    totalHashPower(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     transferInitHolder(
       _newHolder: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -584,35 +1058,91 @@ export interface OmniStakePool extends BaseContract {
       _newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    updatePeriodFinish(
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    updateStartTime(
+      starttime_: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    userRewardPerTokenPaid(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
   };
 
+  DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
   FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+
+  NPower(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  TPower(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+  addAdmin(
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   addLock(
     _time: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  allAdmins(overrides?: CallOverrides): Promise<string[]>;
+
+  balanceOf(
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   baseToken(overrides?: CallOverrides): Promise<string>;
 
-  claim(
-    _amount: PromiseOrValue<BigNumberish>,
-    _rType: PromiseOrValue<BigNumberish>,
-    _timeout: PromiseOrValue<BigNumberish>,
-    signature: PromiseOrValue<BytesLike>,
+  batchStakePower(
+    addrs: PromiseOrValue<string>[],
+    amounts: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
   commAddr2(overrides?: CallOverrides): Promise<string>;
 
   commAddress(overrides?: CallOverrides): Promise<string>;
 
   computeNextReleaseTime(
-    timestamp: PromiseOrValue<BigNumberish>,
+    _time: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  dailyRewardHour(overrides?: CallOverrides): Promise<BigNumber>;
+  dailyPower(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  dayId(overrides?: CallOverrides): Promise<BigNumber>;
+
+  dayPower(overrides?: CallOverrides): Promise<BigNumber>;
+
+  earned(
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   factory(overrides?: CallOverrides): Promise<string>;
 
@@ -622,6 +1152,20 @@ export interface OmniStakePool extends BaseContract {
 
   fundAddress(overrides?: CallOverrides): Promise<string>;
 
+  getReward(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  hashPower(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  helpGetReward(
+    addr_: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   initialize(
     _holder: PromiseOrValue<string>,
     _lpAddr: PromiseOrValue<string>,
@@ -629,8 +1173,20 @@ export interface OmniStakePool extends BaseContract {
     _ref: PromiseOrValue<BigNumberish>,
     _limit: PromiseOrValue<BigNumberish>,
     _start: PromiseOrValue<BigNumberish>,
+    _router: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  initreward(overrides?: CallOverrides): Promise<BigNumber>;
+
+  isAdmin(
+    account: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
+  lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
+
+  lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
 
   lpAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -644,6 +1200,12 @@ export interface OmniStakePool extends BaseContract {
 
   period(overrides?: CallOverrides): Promise<BigNumber>;
 
+  periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+  relation(overrides?: CallOverrides): Promise<string>;
+
+  releaseBaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
   releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
   releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
@@ -652,16 +1214,38 @@ export interface OmniStakePool extends BaseContract {
 
   releaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
+  removeAdmin(
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   removeLiqRelease(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  router(overrides?: CallOverrides): Promise<string>;
-
-  setDailyRewardHour(
-    _hour: PromiseOrValue<BigNumberish>,
+  renounceAdmin(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  rewardClaimed(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  rewardPerToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+  rewardPerTokenStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+  rewardPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+  rewardRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+  rewards(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  router(overrides?: CallOverrides): Promise<string>;
 
   setFeeInfo(
     _fund: PromiseOrValue<string>,
@@ -679,6 +1263,16 @@ export interface OmniStakePool extends BaseContract {
     _fundFee: PromiseOrValue<BigNumberish>,
     _commFee: PromiseOrValue<BigNumberish>,
     _operateFee: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setReleasePeriod(
+    _hour: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setRewardPeriod(
+    _hour: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -700,7 +1294,22 @@ export interface OmniStakePool extends BaseContract {
 
   stakeNodeRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
+  stakePower(
+    addr: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   starttime(overrides?: CallOverrides): Promise<BigNumber>;
+
+  swapExactTokensForTokensSupportingFeeOnTransferTokens(
+    amountIn: PromiseOrValue<BigNumberish>,
+    amountOutMin: PromiseOrValue<BigNumberish>,
+    path: PromiseOrValue<string>[],
+    to: PromiseOrValue<string>,
+    deadline: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   takeInitLp(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -713,6 +1322,8 @@ export interface OmniStakePool extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
+
   transferInitHolder(
     _newHolder: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -723,34 +1334,90 @@ export interface OmniStakePool extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  updatePeriodFinish(
+    time: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  updateStartTime(
+    starttime_: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  userRewardPerTokenPaid(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   callStatic: {
+    DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    NPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    TPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    addAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     addLock(
       _time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
+    allAdmins(overrides?: CallOverrides): Promise<string[]>;
+
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     baseToken(overrides?: CallOverrides): Promise<string>;
 
-    claim(
-      _amount: PromiseOrValue<BigNumberish>,
-      _rType: PromiseOrValue<BigNumberish>,
-      _timeout: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
+    batchStakePower(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
+
+    checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     commAddr2(overrides?: CallOverrides): Promise<string>;
 
     commAddress(overrides?: CallOverrides): Promise<string>;
 
     computeNextReleaseTime(
-      timestamp: PromiseOrValue<BigNumberish>,
+      _time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dailyRewardHour(overrides?: CallOverrides): Promise<BigNumber>;
+    dailyPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    dayId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    dayPower(overrides?: CallOverrides): Promise<BigNumber>;
+
+    earned(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     factory(overrides?: CallOverrides): Promise<string>;
 
@@ -760,6 +1427,18 @@ export interface OmniStakePool extends BaseContract {
 
     fundAddress(overrides?: CallOverrides): Promise<string>;
 
+    getReward(overrides?: CallOverrides): Promise<void>;
+
+    hashPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    helpGetReward(
+      addr_: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     initialize(
       _holder: PromiseOrValue<string>,
       _lpAddr: PromiseOrValue<string>,
@@ -767,8 +1446,20 @@ export interface OmniStakePool extends BaseContract {
       _ref: PromiseOrValue<BigNumberish>,
       _limit: PromiseOrValue<BigNumberish>,
       _start: PromiseOrValue<BigNumberish>,
+      _router: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    initreward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    isAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     lpAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -782,6 +1473,12 @@ export interface OmniStakePool extends BaseContract {
 
     period(overrides?: CallOverrides): Promise<BigNumber>;
 
+    periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+    relation(overrides?: CallOverrides): Promise<string>;
+
+    releaseBaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
     releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
@@ -790,14 +1487,34 @@ export interface OmniStakePool extends BaseContract {
 
     releaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
-    removeLiqRelease(overrides?: CallOverrides): Promise<void>;
-
-    router(overrides?: CallOverrides): Promise<string>;
-
-    setDailyRewardHour(
-      _hour: PromiseOrValue<BigNumberish>,
+    removeAdmin(
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    removeLiqRelease(overrides?: CallOverrides): Promise<void>;
+
+    renounceAdmin(overrides?: CallOverrides): Promise<void>;
+
+    rewardClaimed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    rewardPerToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardPerTokenStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewards(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    router(overrides?: CallOverrides): Promise<string>;
 
     setFeeInfo(
       _fund: PromiseOrValue<string>,
@@ -815,6 +1532,16 @@ export interface OmniStakePool extends BaseContract {
       _fundFee: PromiseOrValue<BigNumberish>,
       _commFee: PromiseOrValue<BigNumberish>,
       _operateFee: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setReleasePeriod(
+      _hour: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setRewardPeriod(
+      _hour: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -836,7 +1563,22 @@ export interface OmniStakePool extends BaseContract {
 
     stakeNodeRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
+    stakePower(
+      addr: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
+
+    swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      amountIn: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      path: PromiseOrValue<string>[],
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     takeInitLp(overrides?: CallOverrides): Promise<void>;
 
@@ -847,6 +1589,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferInitHolder(
       _newHolder: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -856,9 +1600,36 @@ export interface OmniStakePool extends BaseContract {
       _newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updatePeriodFinish(
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateStartTime(
+      starttime_: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    userRewardPerTokenPaid(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   filters: {
+    "AdminAdded(address)"(
+      account?: PromiseOrValue<string> | null
+    ): AdminAddedEventFilter;
+    AdminAdded(account?: PromiseOrValue<string> | null): AdminAddedEventFilter;
+
+    "AdminRemoved(address)"(
+      account?: PromiseOrValue<string> | null
+    ): AdminRemovedEventFilter;
+    AdminRemoved(
+      account?: PromiseOrValue<string> | null
+    ): AdminRemovedEventFilter;
+
     "Claim(address,address,uint256,uint256,uint256,uint256)"(
       user?: null,
       token?: null,
@@ -879,42 +1650,113 @@ export interface OmniStakePool extends BaseContract {
     "Release(uint256,uint256)"(amount?: null, time?: null): ReleaseEventFilter;
     Release(amount?: null, time?: null): ReleaseEventFilter;
 
+    "RewardAdded(uint256)"(reward?: null): RewardAddedEventFilter;
+    RewardAdded(reward?: null): RewardAddedEventFilter;
+
+    "RewardPaid(address,uint256)"(
+      user?: PromiseOrValue<string> | null,
+      reward?: null
+    ): RewardPaidEventFilter;
+    RewardPaid(
+      user?: PromiseOrValue<string> | null,
+      reward?: null
+    ): RewardPaidEventFilter;
+
     "Stake(address,uint256,uint256)"(
       user?: null,
       amount?: null,
       time?: null
     ): StakeEventFilter;
     Stake(user?: null, amount?: null, time?: null): StakeEventFilter;
+
+    "Staked(address,uint256)"(
+      user?: PromiseOrValue<string> | null,
+      amount?: null
+    ): StakedEventFilter;
+    Staked(
+      user?: PromiseOrValue<string> | null,
+      amount?: null
+    ): StakedEventFilter;
+
+    "Withdrawn(address,uint256)"(
+      user?: PromiseOrValue<string> | null,
+      amount?: null
+    ): WithdrawnEventFilter;
+    Withdrawn(
+      user?: PromiseOrValue<string> | null,
+      amount?: null
+    ): WithdrawnEventFilter;
   };
 
   estimateGas: {
+    DURATION(overrides?: CallOverrides): Promise<BigNumber>;
+
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
+
+    NPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    TPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    addAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     addLock(
       _time: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    allAdmins(overrides?: CallOverrides): Promise<BigNumber>;
+
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     baseToken(overrides?: CallOverrides): Promise<BigNumber>;
 
-    claim(
-      _amount: PromiseOrValue<BigNumberish>,
-      _rType: PromiseOrValue<BigNumberish>,
-      _timeout: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
+    batchStakePower(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     commAddr2(overrides?: CallOverrides): Promise<BigNumber>;
 
     commAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
     computeNextReleaseTime(
-      timestamp: PromiseOrValue<BigNumberish>,
+      _time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    dailyRewardHour(overrides?: CallOverrides): Promise<BigNumber>;
+    dailyPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    dayId(overrides?: CallOverrides): Promise<BigNumber>;
+
+    dayPower(overrides?: CallOverrides): Promise<BigNumber>;
+
+    earned(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -924,6 +1766,20 @@ export interface OmniStakePool extends BaseContract {
 
     fundAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getReward(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    hashPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    helpGetReward(
+      addr_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     initialize(
       _holder: PromiseOrValue<string>,
       _lpAddr: PromiseOrValue<string>,
@@ -931,8 +1787,20 @@ export interface OmniStakePool extends BaseContract {
       _ref: PromiseOrValue<BigNumberish>,
       _limit: PromiseOrValue<BigNumberish>,
       _start: PromiseOrValue<BigNumberish>,
+      _router: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    initreward(overrides?: CallOverrides): Promise<BigNumber>;
+
+    isAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
+
+    lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     lpAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -946,6 +1814,12 @@ export interface OmniStakePool extends BaseContract {
 
     period(overrides?: CallOverrides): Promise<BigNumber>;
 
+    periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+    relation(overrides?: CallOverrides): Promise<BigNumber>;
+
+    releaseBaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
     releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
@@ -954,16 +1828,38 @@ export interface OmniStakePool extends BaseContract {
 
     releaseRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
+    removeAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     removeLiqRelease(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    router(overrides?: CallOverrides): Promise<BigNumber>;
-
-    setDailyRewardHour(
-      _hour: PromiseOrValue<BigNumberish>,
+    renounceAdmin(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    rewardClaimed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    rewardPerToken(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardPerTokenStored(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardPeriod(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewardRate(overrides?: CallOverrides): Promise<BigNumber>;
+
+    rewards(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    router(overrides?: CallOverrides): Promise<BigNumber>;
 
     setFeeInfo(
       _fund: PromiseOrValue<string>,
@@ -981,6 +1877,16 @@ export interface OmniStakePool extends BaseContract {
       _fundFee: PromiseOrValue<BigNumberish>,
       _commFee: PromiseOrValue<BigNumberish>,
       _operateFee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setReleasePeriod(
+      _hour: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setRewardPeriod(
+      _hour: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1002,7 +1908,22 @@ export interface OmniStakePool extends BaseContract {
 
     stakeNodeRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
+    stakePower(
+      addr: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
+
+    swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      amountIn: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      path: PromiseOrValue<string>[],
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1015,6 +1936,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferInitHolder(
       _newHolder: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1024,36 +1947,92 @@ export interface OmniStakePool extends BaseContract {
       _newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    updatePeriodFinish(
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    updateStartTime(
+      starttime_: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    userRewardPerTokenPaid(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    DURATION(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    NPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    TPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    _getTokenPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    addAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     addLock(
       _time: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    allAdmins(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    balanceOf(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     baseToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    claim(
-      _amount: PromiseOrValue<BigNumberish>,
-      _rType: PromiseOrValue<BigNumberish>,
-      _timeout: PromiseOrValue<BigNumberish>,
-      signature: PromiseOrValue<BytesLike>,
+    batchStakePower(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    checkTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     commAddr2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     commAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     computeNextReleaseTime(
-      timestamp: PromiseOrValue<BigNumberish>,
+      _time: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    dailyRewardHour(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    dailyPower(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    dayId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    dayPower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    earned(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1063,6 +2042,20 @@ export interface OmniStakePool extends BaseContract {
 
     fundAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    getReward(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    hashPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    helpGetReward(
+      addr_: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     initialize(
       _holder: PromiseOrValue<string>,
       _lpAddr: PromiseOrValue<string>,
@@ -1070,8 +2063,22 @@ export interface OmniStakePool extends BaseContract {
       _ref: PromiseOrValue<BigNumberish>,
       _limit: PromiseOrValue<BigNumberish>,
       _start: PromiseOrValue<BigNumberish>,
+      _router: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    initreward(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    isAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    lastTimeRewardApplicable(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    lastUpdateTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     lpAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -1085,6 +2092,12 @@ export interface OmniStakePool extends BaseContract {
 
     period(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    periodFinish(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    relation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    releaseBaseRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     releaseCommRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1093,16 +2106,40 @@ export interface OmniStakePool extends BaseContract {
 
     releaseRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    removeAdmin(
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     removeLiqRelease(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    setDailyRewardHour(
-      _hour: PromiseOrValue<BigNumberish>,
+    renounceAdmin(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    rewardClaimed(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    rewardPerToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rewardPerTokenStored(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    rewardPeriod(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rewardRate(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    rewards(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    router(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     setFeeInfo(
       _fund: PromiseOrValue<string>,
@@ -1120,6 +2157,16 @@ export interface OmniStakePool extends BaseContract {
       _fundFee: PromiseOrValue<BigNumberish>,
       _commFee: PromiseOrValue<BigNumberish>,
       _operateFee: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setReleasePeriod(
+      _hour: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setRewardPeriod(
+      _hour: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1141,7 +2188,22 @@ export interface OmniStakePool extends BaseContract {
 
     stakeNodeRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    stakePower(
+      addr: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     starttime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      amountIn: PromiseOrValue<BigNumberish>,
+      amountOutMin: PromiseOrValue<BigNumberish>,
+      path: PromiseOrValue<string>[],
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1154,6 +2216,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    totalHashPower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     transferInitHolder(
       _newHolder: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1162,6 +2226,21 @@ export interface OmniStakePool extends BaseContract {
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updatePeriodFinish(
+      time: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateStartTime(
+      starttime_: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    userRewardPerTokenPaid(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
