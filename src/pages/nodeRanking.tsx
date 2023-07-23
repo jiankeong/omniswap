@@ -26,7 +26,7 @@ import { swapTokens } from '../components/SwapToken/TokenList'
 import { useModalContext } from '../provider/modalProvider'
 import Slippage from '../components/SwapToken/Slippage'
 import NotData from '../components/NotData'
-
+import {nodeAddress} from '../constants/nodeAddress'
 
 
 const NodeRanking: NextPage = (props: any) => {
@@ -54,7 +54,7 @@ const NodeRanking: NextPage = (props: any) => {
 }
 function SuperNode(){
   const {t} = useTranslationLanguage()
-  let list:any = []
+  let list:any = nodeAddress.slice(0,88)
   return <Content>
     <FlexViewBetween>
       <FlexView>
@@ -83,8 +83,8 @@ function SuperNode(){
                 <Image src={ImageCommon['p'+(index+1)]} layout='fill'/>
               </Picon> : <TextRegular size={14} webSize={24}>{index+1}</TextRegular>}
             </FlexView>
-            <TextRegular style={{flex:1,textAlign:'center'}} size={14} webSize={24}>{formatAccount('123123')}</TextRegular>
-            <TextRegular style={{flex:1,textAlign:'right'}} size={14} webSize={24}>1234 N</TextRegular>
+            <TextRegular style={{flex:1,textAlign:'center'}} size={14} webSize={24}>{formatAccount(item,8)}</TextRegular>
+            <TextRegular style={{flex:1,textAlign:'right'}} size={14} webSize={24}>0 N</TextRegular>
           </FlexViewBetween>
         </FlexViewColumn>
       })
@@ -93,7 +93,7 @@ function SuperNode(){
 }
 function OrdinaryNode(){
   const {t} = useTranslationLanguage()
-  let list:any = []
+  let list:any = nodeAddress.slice(88,188)
   return <Content>
     <FlexViewBetween>
       <FlexView>
@@ -118,8 +118,8 @@ function OrdinaryNode(){
           <SpaceHeight height={18}/>
           <FlexViewBetween>
             <TextRegular style={{flex:1}} size={14} webSize={24}>{index+1}</TextRegular>
-            <TextRegular style={{flex:1,textAlign:'center'}} size={14} webSize={24}>{formatAccount('123123')}</TextRegular>
-            <TextRegular style={{flex:1,textAlign:'right'}} size={14} webSize={24}>1234 N</TextRegular>
+            <TextRegular style={{flex:1,textAlign:'center'}} size={14} webSize={24}>{formatAccount(item,8)}</TextRegular>
+            <TextRegular style={{flex:1,textAlign:'right'}} size={14} webSize={24}>0 N</TextRegular>
           </FlexViewBetween>
         </FlexViewColumn>
       })
