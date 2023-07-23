@@ -33,8 +33,6 @@ import NotData from '../components/NotData'
 
 const MyNFT: NextPage = (props: any) => {
   const {t} = useTranslationLanguage()
-  const router = useRouter()
-  const a = useMyNftListInfo()
   return <Main>
     <TopBg>
       <Image src={isBrowser?ImageCommon.NFTPresale:ImageCommon.NFTPresalepmobile} layout='fill'/>
@@ -62,36 +60,82 @@ function NFTListMobile(){
   return <FlexViewCenterColumn style={{width:'100%'}}>
     {
       nfts.isLoading ? <LoadingRow/> : (nfts.data?.list.length == 0 ? <NotData/> : nfts.data?.list.map((item:any,index:number)=>{
-        return <FlexViewColumn style={{width:'100%'}} key={index+'mobilenft'}>
-          <FlexViewBetween>
-            <FlexView style={{alignItems:'flex-start'}}>
-              <NFTSmallIcon>
-                <Image src={ImageCommon[item.nftImg]} layout='fill'/>
-              </NFTSmallIcon>
-              <FlexViewColumn>
-                <Text size={14} webSize={32} color='#989DAA'>{t('The weight of nft')}:</Text>
-                <SpaceHeight height={5}/>
-                <Text size={14} webSize={32} color='#989DAA'>{t('Earnings to be collected')}:</Text>
-                <SpaceHeight height={5}/>
-                <Text size={14} webSize={32} color='#989DAA'>{t('Earnings issued')}:</Text>
-              </FlexViewColumn>
-            </FlexView>
-            <FlexViewColumn>
-              <TextSemiBold size={14} webSize={32}>{item.nftPrice}</TextSemiBold>
-              <SpaceHeight height={5}/>
-              <TextSemiBold size={14} webSize={32}>0</TextSemiBold>
-              <SpaceHeight height={5}/>
-              <TextSemiBold size={14} webSize={32}>0</TextSemiBold>
-            </FlexViewColumn>
-          </FlexViewBetween>
-          <Line/>
-          <ReceiveButton onClick={()=>onReceive(item)}>
-            <Text size={14} webSize={32} color='#fff'>{t('Receive earnings')}</Text>
-          </ReceiveButton>
-        </FlexViewColumn>
+        return <AddressViewItem key={index+'mobnft'}>
+          <MobileNftItem index={index}/>
+          {index != (nfts.data?.list.length || 0) - 1 && <Line/>}
+        </AddressViewItem>
       }))
     }
   </FlexViewCenterColumn>
+}
+
+function MobileNftItem({index}:any){
+  const {t} = useTranslationLanguage()
+  const nftInfo = useMyNftInfo(index)
+  const sendTransaction = useSendTransaction()
+  const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
+  function onReceive(){
+
+    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0){
+      return
+    }
+    sendTransaction.mutate({
+      title:'Claim',
+      func:OmniNFTPoolContract.getReward,
+      args:[nftInfo.data?.tokenOfOwnerByIndex]
+    })
+  }
+  function onActive(){
+    if (!OmniNFTPoolContract){
+      return
+    }
+    sendTransaction.mutate({
+      title:'Active',
+      func:OmniNFTPoolContract.active,
+      args:[nftInfo.data?.tokenOfOwnerByIndex]
+    })
+  }
+  return <FlexViewColumn style={{width:'100%'}}>
+    <FlexViewBetween>
+      <FlexView style={{alignItems:'flex-start'}}>
+        {nftInfo.isLoading ? <LoadingRow width='20%'/> : <FlexView style={{flex:1}}>
+          <NFTSmallIcon>
+            {nftInfo.data && <Image src={ImageCommon[nftInfo.data.nftImg]} layout='fill'/>}
+          </NFTSmallIcon>
+        </FlexView>}
+
+
+        <FlexViewColumn>
+          <Text size={14} webSize={32} color='#989DAA'>{t('The weight of nft')}:</Text>
+          <SpaceHeight height={5}/>
+          <Text size={14} webSize={32} color='#989DAA'>{t('Earnings to be collected')}:</Text>
+          <SpaceHeight height={5}/>
+          <Text size={14} webSize={32} color='#989DAA'>{t('Earnings issued')}:</Text>
+          <SpaceHeight height={5}/>
+          <Text size={14} webSize={24} color='#989DAA'>{t('status')}</Text>
+        </FlexViewColumn>
+      </FlexView>
+      <FlexViewColumn>
+        <TextSemiBold size={14} webSize={32}>{nftInfo.data?.nftPrice} USDT</TextSemiBold>
+        <SpaceHeight height={5}/>
+        <TextSemiBold size={14} webSize={32}>{nftInfo.data?.viewReward} OMNI</TextSemiBold>
+        <SpaceHeight height={5}/>
+        <TextSemiBold size={14} webSize={32}>{nftInfo.data?.claimedReward} OMNI</TextSemiBold>
+        <SpaceHeight height={5}/>
+        {nftInfo.data?.activeStats ? <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{t('activated')}</Text> : <FlexViewCenter style={{flex:1}}>
+          <ReceiveButton disable={true} onClick={onActive}>
+            <Text size={14} webSize={32} color='#000'>{t('active')}</Text>
+          </ReceiveButton>
+        </FlexViewCenter>}
+      </FlexViewColumn>
+    </FlexViewBetween>
+    <SpaceHeight height={20}/>
+    <ReceiveButton disable={nftInfo.data?.viewReward != 0} onClick={onReceive}>
+      <Text size={14} webSize={32} color='#fff'>{t('Receive earnings')}</Text>
+    </ReceiveButton>
+    <SpaceHeight height={40}/>
+
+  </FlexViewColumn>
 }
 
 function NFTList(){
@@ -154,7 +198,7 @@ function NFTItem({index}:any){
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.viewReward} OMNI</Text>
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.claimedReward} OMNI</Text>
     <FlexViewCenter style={{flex:1}}>
-      <ReceiveButton disable={!nftInfo.data?.viewReward} onClick={onReceive}>
+      <ReceiveButton disable={nftInfo.data?.viewReward != 0} onClick={onReceive}>
         <Text size={14} webSize={32} color='#000'>{t('Receive earnings')}</Text>
       </ReceiveButton>
     </FlexViewCenter>
