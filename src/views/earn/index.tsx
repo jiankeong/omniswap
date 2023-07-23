@@ -181,8 +181,8 @@ const Earn: NextPage = (props: any) => {
                         <div className={styles.right}>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.received}</div>}
                             <div className={styles.desc}>{t("Benefits Receipt")}</div>
-                            {/* <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div> */}
-                            {/* <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                            <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
+                            <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
                               window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
                             }}>
                                 <div className={styles.txt_extract_record}>
@@ -192,7 +192,7 @@ const Earn: NextPage = (props: any) => {
                                     <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
                                 </div>
 
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
