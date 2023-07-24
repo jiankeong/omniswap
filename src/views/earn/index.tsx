@@ -32,10 +32,10 @@ import getContent from "@src/common/languageLib";
 import {useTab} from "@src/hooks";
 import Community from "@src/views/earn/community";
 import { TextBold } from '../../components/Text'
-import { useEarnInfo, useSendTransaction } from '@/src/contract'
+import { useApprove, useEarnInfo, useSendTransaction } from '@/src/contract'
 import { useOmniStakePoolContract } from '@/src/hooks/useContract'
-import { OmniStakePool_ADDRESSSES, AddressMap } from '@/src/constants/addresses'
-import { balanceToBigNumber, bigNumberToBalance } from '@/src/common/Common'
+import { OmniStakePool_ADDRESSSES, AddressMap, USDT_ADDRESSSES } from '@/src/constants/addresses'
+import { ApprovalState, balanceToBigNumber, bigNumberToBalance } from '@/src/common/Common'
 import PutUSDT from './PutUSDT'
 import { LoadingRow } from '@/src/components/Common'
 import { useNetwork } from 'wagmi'

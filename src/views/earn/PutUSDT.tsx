@@ -5,17 +5,25 @@ import styled from "styled-components"
 import { TextBold } from "@/src/components/Text"
 import { BaseInput, FlexView, FlexViewBetween, FlexViewCenter, FlexViewColumn, SpaceHeight } from "@/src/components/Common"
 import ImageCommon from "@/public/images/ImageCommon"
-import { autoWidthVW } from "@/src/common/Common"
+import { ApprovalState, autoWidthVW } from "@/src/common/Common"
 import useTranslationLanguage from "@/src/hooks/useTranslationLanguage"
+import { OmniStakePool_ADDRESSSES, USDT_ADDRESSSES } from "@/src/constants/addresses"
+import { useApprove } from "@/src/contract"
 
 export default function PutUSDT({onClose,onPutIn}:any){
   const {t} = useTranslationLanguage()
   const [putIn,setPutIn] = useState('')
+  const [approve,approveCallBack] = useApprove(USDT_ADDRESSSES,OmniStakePool_ADDRESSSES)
+
   function onChange(e:any){
     setPutIn(e.target.value)
   }
   function onPut(){
     if (!putIn){
+      return
+    }
+    if (approve != ApprovalState.APPROVED){
+      approveCallBack()
       return
     }
     onPutIn && onPutIn(putIn)
@@ -36,7 +44,7 @@ export default function PutUSDT({onClose,onPutIn}:any){
     <SpaceHeight height={24}/>
     <FlexViewCenter>
       <SlippageItem select={true} onClick={onPut}>
-        <TextBold size={16} webSize={32}>{t("Put in USDT")}</TextBold>
+        <TextBold size={16} webSize={32}>{approve == ApprovalState.APPROVED ? t("Put in USDT") : t('approve')}</TextBold>
       </SlippageItem>
     </FlexViewCenter>
   </SlippageView>
