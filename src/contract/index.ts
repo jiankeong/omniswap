@@ -430,7 +430,7 @@ export function useMyNftInfo(index:number) {
       return {
         nftPrice,
         nftImg,
-        tokenOfOwnerByIndex:tokenOfOwnerByIndex.toString(),
+        tokenOfOwnerByIndex:tokenOfOwnerByIndex,
         viewReward:Number(formatBalance(bigNumberToBalance(viewReward))),
         claimedReward:Number(formatBalance(bigNumberToBalance(claimedReward))),
         activeStats
