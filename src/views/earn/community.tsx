@@ -45,9 +45,9 @@ export default function Community(){
   const omniPoolContract = useOmniPoolContract(OmniPool_ADDRESSSES)
 
   function onReceive(){
-    if (!omniPoolContract){
-      return
-    }
+    // if (!omniPoolContract){
+    //   return
+    // }
     // sendTransaction.mutate({
     //   title: 'Claim',
     //   func: omniPoolContract?.claim,

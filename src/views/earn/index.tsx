@@ -59,20 +59,21 @@ const Earn: NextPage = (props: any) => {
     }
 
     function onReceive(){
-      if (!omniStakePoolContract || earnInfo.isLoading){
-        return
-      }
-      if (parseInt(earnInfo.data?.waitReceive || '0') == 0){
-        return
-      }
-      sendTransaction.mutate({
-        title: 'Receive',
-        func: omniStakePoolContract?.getReward,
-        args: [],
-        onSuccess:()=>{
-          earnInfo.refetch()
-        }
-      })
+      return
+      // if (!omniStakePoolContract || earnInfo.isLoading){
+      //   return
+      // }
+      // if (parseInt(earnInfo.data?.waitReceive || '0') == 0){
+      //   return
+      // }
+      // sendTransaction.mutate({
+      //   title: 'Receive',
+      //   func: omniStakePoolContract?.getReward,
+      //   args: [],
+      //   onSuccess:()=>{
+      //     earnInfo.refetch()
+      //   }
+      // })
     }
 
     function onPutIn(){
