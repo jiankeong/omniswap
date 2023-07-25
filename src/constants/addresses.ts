@@ -73,5 +73,5 @@ export const OMNINFTPOOL_ADDRESSSES = {
 };
 
 export const OmniPool_ADDRESSSES = {
-  [NetworkId.BSC]: "0x6f8A6C89d568bec61D02C8cD46029bDa490c9AEf",
+  [NetworkId.BSC]: "0xf49E5F85285e5a5edEC3a991d6a8FcB401b44DBc",
 };
