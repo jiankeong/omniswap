@@ -31,27 +31,28 @@ export interface OmniStakePoolInterface extends utils.Interface {
   functions: {
     "DURATION()": FunctionFragment;
     "FEE_RATE_BASE()": FunctionFragment;
-    "NPower(address,uint256)": FunctionFragment;
-    "TPower(address,uint256)": FunctionFragment;
     "_getTokenPrice()": FunctionFragment;
     "addAdmin(address)": FunctionFragment;
     "addLock(uint256)": FunctionFragment;
     "allAdmins()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "baseToken()": FunctionFragment;
+    "batchDisReward(address[],uint256[],uint256)": FunctionFragment;
     "batchStakePower(address[],uint256[])": FunctionFragment;
-    "batchTeamUpdate(address[],uint256[])": FunctionFragment;
+    "batchTeamUpdate(address[])": FunctionFragment;
+    "batchUpdateNPower(address[])": FunctionFragment;
+    "batchUpdateTPower(address[])": FunctionFragment;
     "checkTime()": FunctionFragment;
-    "commAddr2()": FunctionFragment;
+    "claim()": FunctionFragment;
     "commAddress()": FunctionFragment;
     "computeNextReleaseTime(uint256)": FunctionFragment;
     "dailyPower(address,uint256)": FunctionFragment;
     "dayId()": FunctionFragment;
     "dayPower()": FunctionFragment;
+    "disReward(address,uint256)": FunctionFragment;
     "earned(address)": FunctionFragment;
     "factory()": FunctionFragment;
     "flag()": FunctionFragment;
-    "fundAddr2()": FunctionFragment;
     "fundAddress()": FunctionFragment;
     "getReward()": FunctionFragment;
     "hashPower(address)": FunctionFragment;
@@ -60,19 +61,24 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "initialize(address,address,uint256,uint256,uint256,uint256,address)": FunctionFragment;
     "initreward()": FunctionFragment;
     "isAdmin(address)": FunctionFragment;
+    "lastDisClaimed(address,uint256)": FunctionFragment;
     "lastTimeRewardApplicable()": FunctionFragment;
     "lastUpdateTime()": FunctionFragment;
     "lpAddress()": FunctionFragment;
     "lpReleaseTime()": FunctionFragment;
+    "nPower(address)": FunctionFragment;
     "nextReleaseTime()": FunctionFragment;
-    "operAddr()": FunctionFragment;
+    "nftAddress()": FunctionFragment;
+    "operAddress()": FunctionFragment;
     "otherToken()": FunctionFragment;
     "period()": FunctionFragment;
     "periodFinish()": FunctionFragment;
+    "poolStatus()": FunctionFragment;
     "relation()": FunctionFragment;
     "releaseBaseRatio()": FunctionFragment;
     "releaseCommRatio()": FunctionFragment;
     "releaseFundRatio()": FunctionFragment;
+    "releaseNftRatio()": FunctionFragment;
     "releaseOperRatio()": FunctionFragment;
     "releaseRatio()": FunctionFragment;
     "removeAdmin(address)": FunctionFragment;
@@ -86,7 +92,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "rewards(address)": FunctionFragment;
     "router()": FunctionFragment;
     "setFeeInfo(address,address,uint256,uint256,uint256)": FunctionFragment;
-    "setFeeInfo2(address,address,address,uint256,uint256,uint256)": FunctionFragment;
+    "setPoolStatus(bool)": FunctionFragment;
     "setReleasePeriod(uint256)": FunctionFragment;
     "setRewardPeriod(uint256)": FunctionFragment;
     "setStartTime(uint256)": FunctionFragment;
@@ -98,9 +104,11 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "stakePower(address,uint256)": FunctionFragment;
     "starttime()": FunctionFragment;
     "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)": FunctionFragment;
+    "tPower(address)": FunctionFragment;
     "takeInitLp()": FunctionFragment;
     "takeToken(address,address,uint256)": FunctionFragment;
     "teamPower(address)": FunctionFragment;
+    "totalDisClaimed(address)": FunctionFragment;
     "totalHashPower()": FunctionFragment;
     "transferInitHolder(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -116,27 +124,28 @@ export interface OmniStakePoolInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "DURATION"
       | "FEE_RATE_BASE"
-      | "NPower"
-      | "TPower"
       | "_getTokenPrice"
       | "addAdmin"
       | "addLock"
       | "allAdmins"
       | "balanceOf"
       | "baseToken"
+      | "batchDisReward"
       | "batchStakePower"
       | "batchTeamUpdate"
+      | "batchUpdateNPower"
+      | "batchUpdateTPower"
       | "checkTime"
-      | "commAddr2"
+      | "claim"
       | "commAddress"
       | "computeNextReleaseTime"
       | "dailyPower"
       | "dayId"
       | "dayPower"
+      | "disReward"
       | "earned"
       | "factory"
       | "flag"
-      | "fundAddr2"
       | "fundAddress"
       | "getReward"
       | "hashPower"
@@ -145,19 +154,24 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "initialize"
       | "initreward"
       | "isAdmin"
+      | "lastDisClaimed"
       | "lastTimeRewardApplicable"
       | "lastUpdateTime"
       | "lpAddress"
       | "lpReleaseTime"
+      | "nPower"
       | "nextReleaseTime"
-      | "operAddr"
+      | "nftAddress"
+      | "operAddress"
       | "otherToken"
       | "period"
       | "periodFinish"
+      | "poolStatus"
       | "relation"
       | "releaseBaseRatio"
       | "releaseCommRatio"
       | "releaseFundRatio"
+      | "releaseNftRatio"
       | "releaseOperRatio"
       | "releaseRatio"
       | "removeAdmin"
@@ -171,7 +185,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "rewards"
       | "router"
       | "setFeeInfo"
-      | "setFeeInfo2"
+      | "setPoolStatus"
       | "setReleasePeriod"
       | "setRewardPeriod"
       | "setStartTime"
@@ -183,9 +197,11 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "stakePower"
       | "starttime"
       | "swapExactTokensForTokensSupportingFeeOnTransferTokens"
+      | "tPower"
       | "takeInitLp"
       | "takeToken"
       | "teamPower"
+      | "totalDisClaimed"
       | "totalHashPower"
       | "transferInitHolder"
       | "transferOwnership"
@@ -201,14 +217,6 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "FEE_RATE_BASE",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "NPower",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "TPower",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "_getTokenPrice",
@@ -229,15 +237,31 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "baseToken", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "batchDisReward",
+    values: [
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "batchStakePower",
     values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "batchTeamUpdate",
-    values: [PromiseOrValue<string>[], PromiseOrValue<BigNumberish>[]]
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchUpdateNPower",
+    values: [PromiseOrValue<string>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchUpdateTPower",
+    values: [PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(functionFragment: "checkTime", values?: undefined): string;
-  encodeFunctionData(functionFragment: "commAddr2", values?: undefined): string;
+  encodeFunctionData(functionFragment: "claim", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "commAddress",
     values?: undefined
@@ -253,12 +277,15 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "dayId", values?: undefined): string;
   encodeFunctionData(functionFragment: "dayPower", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "disReward",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "earned",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "factory", values?: undefined): string;
   encodeFunctionData(functionFragment: "flag", values?: undefined): string;
-  encodeFunctionData(functionFragment: "fundAddr2", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "fundAddress",
     values?: undefined
@@ -297,6 +324,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "lastDisClaimed",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "lastTimeRewardApplicable",
     values?: undefined
   ): string;
@@ -310,10 +341,21 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "nPower",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "nextReleaseTime",
     values?: undefined
   ): string;
-  encodeFunctionData(functionFragment: "operAddr", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nftAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "operAddress",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "otherToken",
     values?: undefined
@@ -321,6 +363,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "period", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "periodFinish",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "poolStatus",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "relation", values?: undefined): string;
@@ -334,6 +380,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "releaseFundRatio",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "releaseNftRatio",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -392,15 +442,8 @@ export interface OmniStakePoolInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "setFeeInfo2",
-    values: [
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>
-    ]
+    functionFragment: "setPoolStatus",
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "setReleasePeriod",
@@ -450,6 +493,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "tPower",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "takeInitLp",
     values?: undefined
   ): string;
@@ -463,6 +510,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "teamPower",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalDisClaimed",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -507,8 +558,6 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "FEE_RATE_BASE",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "NPower", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "TPower", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "_getTokenPrice",
     data: BytesLike
@@ -519,6 +568,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "baseToken", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "batchDisReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "batchStakePower",
     data: BytesLike
   ): Result;
@@ -526,8 +579,16 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "batchTeamUpdate",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchUpdateNPower",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchUpdateTPower",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "checkTime", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "commAddr2", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "commAddress",
     data: BytesLike
@@ -539,10 +600,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "dailyPower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dayId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dayPower", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "disReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "earned", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "flag", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "fundAddr2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "fundAddress",
     data: BytesLike
@@ -561,6 +622,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "initreward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isAdmin", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "lastDisClaimed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "lastTimeRewardApplicable",
     data: BytesLike
   ): Result;
@@ -573,17 +638,23 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "lpReleaseTime",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "nPower", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "nextReleaseTime",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "operAddr", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "nftAddress", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "operAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "otherToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "period", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "periodFinish",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "poolStatus", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "relation", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "releaseBaseRatio",
@@ -595,6 +666,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "releaseFundRatio",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "releaseNftRatio",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -638,7 +713,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "router", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setFeeInfo", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "setFeeInfo2",
+    functionFragment: "setPoolStatus",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -676,9 +751,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
     functionFragment: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "tPower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "takeInitLp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "takeToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "teamPower", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "totalDisClaimed",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "totalHashPower",
     data: BytesLike
@@ -859,18 +939,6 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    NPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    TPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     _getTokenPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     addAdmin(
@@ -894,6 +962,13 @@ export interface OmniStakePool extends BaseContract {
 
     baseToken(overrides?: CallOverrides): Promise<[string]>;
 
+    batchDisReward(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
+      typeID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     batchStakePower(
       addrs: PromiseOrValue<string>[],
       amounts: PromiseOrValue<BigNumberish>[],
@@ -902,13 +977,24 @@ export interface OmniStakePool extends BaseContract {
 
     batchTeamUpdate(
       accounts: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    batchUpdateNPower(
+      accounts: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    batchUpdateTPower(
+      accounts: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     checkTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    commAddr2(overrides?: CallOverrides): Promise<[string]>;
+    claim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     commAddress(overrides?: CallOverrides): Promise<[string]>;
 
@@ -927,6 +1013,12 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    disReward(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     earned(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -935,8 +1027,6 @@ export interface OmniStakePool extends BaseContract {
     factory(overrides?: CallOverrides): Promise<[string]>;
 
     flag(overrides?: CallOverrides): Promise<[boolean]>;
-
-    fundAddr2(overrides?: CallOverrides): Promise<[string]>;
 
     fundAddress(overrides?: CallOverrides): Promise<[string]>;
 
@@ -974,6 +1064,12 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    lastDisClaimed(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -982,15 +1078,24 @@ export interface OmniStakePool extends BaseContract {
 
     lpReleaseTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    nPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     nextReleaseTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    operAddr(overrides?: CallOverrides): Promise<[string]>;
+    nftAddress(overrides?: CallOverrides): Promise<[string]>;
+
+    operAddress(overrides?: CallOverrides): Promise<[string]>;
 
     otherToken(overrides?: CallOverrides): Promise<[string]>;
 
     period(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     periodFinish(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    poolStatus(overrides?: CallOverrides): Promise<[boolean]>;
 
     relation(overrides?: CallOverrides): Promise<[string]>;
 
@@ -999,6 +1104,8 @@ export interface OmniStakePool extends BaseContract {
     releaseCommRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    releaseNftRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     releaseOperRatio(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1046,13 +1153,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setFeeInfo2(
-      _fund: PromiseOrValue<string>,
-      _comm: PromiseOrValue<string>,
-      _operate: PromiseOrValue<string>,
-      _fundFee: PromiseOrValue<BigNumberish>,
-      _commFee: PromiseOrValue<BigNumberish>,
-      _operateFee: PromiseOrValue<BigNumberish>,
+    setPoolStatus(
+      _value: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1101,6 +1203,11 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    tPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -1113,6 +1220,11 @@ export interface OmniStakePool extends BaseContract {
     ): Promise<ContractTransaction>;
 
     teamPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    totalDisClaimed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -1165,18 +1277,6 @@ export interface OmniStakePool extends BaseContract {
 
   FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
-  NPower(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  TPower(
-    arg0: PromiseOrValue<string>,
-    arg1: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   addAdmin(
@@ -1198,6 +1298,13 @@ export interface OmniStakePool extends BaseContract {
 
   baseToken(overrides?: CallOverrides): Promise<string>;
 
+  batchDisReward(
+    addrs: PromiseOrValue<string>[],
+    amounts: PromiseOrValue<BigNumberish>[],
+    typeID: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   batchStakePower(
     addrs: PromiseOrValue<string>[],
     amounts: PromiseOrValue<BigNumberish>[],
@@ -1206,13 +1313,24 @@ export interface OmniStakePool extends BaseContract {
 
   batchTeamUpdate(
     accounts: PromiseOrValue<string>[],
-    amounts: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  batchUpdateNPower(
+    accounts: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  batchUpdateTPower(
+    accounts: PromiseOrValue<string>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-  commAddr2(overrides?: CallOverrides): Promise<string>;
+  claim(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   commAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -1231,6 +1349,12 @@ export interface OmniStakePool extends BaseContract {
 
   dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+  disReward(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   earned(
     account: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -1239,8 +1363,6 @@ export interface OmniStakePool extends BaseContract {
   factory(overrides?: CallOverrides): Promise<string>;
 
   flag(overrides?: CallOverrides): Promise<boolean>;
-
-  fundAddr2(overrides?: CallOverrides): Promise<string>;
 
   fundAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -1278,6 +1400,12 @@ export interface OmniStakePool extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  lastDisClaimed(
+    arg0: PromiseOrValue<string>,
+    arg1: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
   lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1286,15 +1414,24 @@ export interface OmniStakePool extends BaseContract {
 
   lpReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
+  nPower(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   nextReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-  operAddr(overrides?: CallOverrides): Promise<string>;
+  nftAddress(overrides?: CallOverrides): Promise<string>;
+
+  operAddress(overrides?: CallOverrides): Promise<string>;
 
   otherToken(overrides?: CallOverrides): Promise<string>;
 
   period(overrides?: CallOverrides): Promise<BigNumber>;
 
   periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+  poolStatus(overrides?: CallOverrides): Promise<boolean>;
 
   relation(overrides?: CallOverrides): Promise<string>;
 
@@ -1303,6 +1440,8 @@ export interface OmniStakePool extends BaseContract {
   releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
   releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
+  releaseNftRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
   releaseOperRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1350,13 +1489,8 @@ export interface OmniStakePool extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setFeeInfo2(
-    _fund: PromiseOrValue<string>,
-    _comm: PromiseOrValue<string>,
-    _operate: PromiseOrValue<string>,
-    _fundFee: PromiseOrValue<BigNumberish>,
-    _commFee: PromiseOrValue<BigNumberish>,
-    _operateFee: PromiseOrValue<BigNumberish>,
+  setPoolStatus(
+    _value: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1405,6 +1539,11 @@ export interface OmniStakePool extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  tPower(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   takeInitLp(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -1417,6 +1556,11 @@ export interface OmniStakePool extends BaseContract {
   ): Promise<ContractTransaction>;
 
   teamPower(
+    arg0: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  totalDisClaimed(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -1469,18 +1613,6 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    NPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    TPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     addAdmin(
@@ -1502,6 +1634,13 @@ export interface OmniStakePool extends BaseContract {
 
     baseToken(overrides?: CallOverrides): Promise<string>;
 
+    batchDisReward(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
+      typeID: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     batchStakePower(
       addrs: PromiseOrValue<string>[],
       amounts: PromiseOrValue<BigNumberish>[],
@@ -1510,13 +1649,22 @@ export interface OmniStakePool extends BaseContract {
 
     batchTeamUpdate(
       accounts: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    batchUpdateNPower(
+      accounts: PromiseOrValue<string>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    batchUpdateTPower(
+      accounts: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-    commAddr2(overrides?: CallOverrides): Promise<string>;
+    claim(overrides?: CallOverrides): Promise<void>;
 
     commAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -1535,6 +1683,12 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+    disReward(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     earned(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1543,8 +1697,6 @@ export interface OmniStakePool extends BaseContract {
     factory(overrides?: CallOverrides): Promise<string>;
 
     flag(overrides?: CallOverrides): Promise<boolean>;
-
-    fundAddr2(overrides?: CallOverrides): Promise<string>;
 
     fundAddress(overrides?: CallOverrides): Promise<string>;
 
@@ -1580,6 +1732,12 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    lastDisClaimed(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1588,15 +1746,24 @@ export interface OmniStakePool extends BaseContract {
 
     lpReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
+    nPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     nextReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-    operAddr(overrides?: CallOverrides): Promise<string>;
+    nftAddress(overrides?: CallOverrides): Promise<string>;
+
+    operAddress(overrides?: CallOverrides): Promise<string>;
 
     otherToken(overrides?: CallOverrides): Promise<string>;
 
     period(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+    poolStatus(overrides?: CallOverrides): Promise<boolean>;
 
     relation(overrides?: CallOverrides): Promise<string>;
 
@@ -1605,6 +1772,8 @@ export interface OmniStakePool extends BaseContract {
     releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
+    releaseNftRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseOperRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1648,13 +1817,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setFeeInfo2(
-      _fund: PromiseOrValue<string>,
-      _comm: PromiseOrValue<string>,
-      _operate: PromiseOrValue<string>,
-      _fundFee: PromiseOrValue<BigNumberish>,
-      _commFee: PromiseOrValue<BigNumberish>,
-      _operateFee: PromiseOrValue<BigNumberish>,
+    setPoolStatus(
+      _value: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1703,6 +1867,11 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    tPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     takeInitLp(overrides?: CallOverrides): Promise<void>;
 
     takeToken(
@@ -1713,6 +1882,11 @@ export interface OmniStakePool extends BaseContract {
     ): Promise<void>;
 
     teamPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    totalDisClaimed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1837,18 +2011,6 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    NPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    TPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     addAdmin(
@@ -1870,6 +2032,13 @@ export interface OmniStakePool extends BaseContract {
 
     baseToken(overrides?: CallOverrides): Promise<BigNumber>;
 
+    batchDisReward(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
+      typeID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     batchStakePower(
       addrs: PromiseOrValue<string>[],
       amounts: PromiseOrValue<BigNumberish>[],
@@ -1878,13 +2047,24 @@ export interface OmniStakePool extends BaseContract {
 
     batchTeamUpdate(
       accounts: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    batchUpdateNPower(
+      accounts: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    batchUpdateTPower(
+      accounts: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     checkTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-    commAddr2(overrides?: CallOverrides): Promise<BigNumber>;
+    claim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
 
     commAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1903,6 +2083,12 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+    disReward(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     earned(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -1911,8 +2097,6 @@ export interface OmniStakePool extends BaseContract {
     factory(overrides?: CallOverrides): Promise<BigNumber>;
 
     flag(overrides?: CallOverrides): Promise<BigNumber>;
-
-    fundAddr2(overrides?: CallOverrides): Promise<BigNumber>;
 
     fundAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1950,6 +2134,12 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    lastDisClaimed(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastUpdateTime(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1958,15 +2148,24 @@ export interface OmniStakePool extends BaseContract {
 
     lpReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
+    nPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     nextReleaseTime(overrides?: CallOverrides): Promise<BigNumber>;
 
-    operAddr(overrides?: CallOverrides): Promise<BigNumber>;
+    nftAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
+    operAddress(overrides?: CallOverrides): Promise<BigNumber>;
 
     otherToken(overrides?: CallOverrides): Promise<BigNumber>;
 
     period(overrides?: CallOverrides): Promise<BigNumber>;
 
     periodFinish(overrides?: CallOverrides): Promise<BigNumber>;
+
+    poolStatus(overrides?: CallOverrides): Promise<BigNumber>;
 
     relation(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1975,6 +2174,8 @@ export interface OmniStakePool extends BaseContract {
     releaseCommRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<BigNumber>;
+
+    releaseNftRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
     releaseOperRatio(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2022,13 +2223,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setFeeInfo2(
-      _fund: PromiseOrValue<string>,
-      _comm: PromiseOrValue<string>,
-      _operate: PromiseOrValue<string>,
-      _fundFee: PromiseOrValue<BigNumberish>,
-      _commFee: PromiseOrValue<BigNumberish>,
-      _operateFee: PromiseOrValue<BigNumberish>,
+    setPoolStatus(
+      _value: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2077,6 +2273,11 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    tPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -2089,6 +2290,11 @@ export interface OmniStakePool extends BaseContract {
     ): Promise<BigNumber>;
 
     teamPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    totalDisClaimed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -2142,18 +2348,6 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    NPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    TPower(
-      arg0: PromiseOrValue<string>,
-      arg1: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     _getTokenPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     addAdmin(
@@ -2175,6 +2369,13 @@ export interface OmniStakePool extends BaseContract {
 
     baseToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    batchDisReward(
+      addrs: PromiseOrValue<string>[],
+      amounts: PromiseOrValue<BigNumberish>[],
+      typeID: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     batchStakePower(
       addrs: PromiseOrValue<string>[],
       amounts: PromiseOrValue<BigNumberish>[],
@@ -2183,13 +2384,24 @@ export interface OmniStakePool extends BaseContract {
 
     batchTeamUpdate(
       accounts: PromiseOrValue<string>[],
-      amounts: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    batchUpdateNPower(
+      accounts: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    batchUpdateTPower(
+      accounts: PromiseOrValue<string>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     checkTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    commAddr2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    claim(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     commAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2208,6 +2420,12 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    disReward(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     earned(
       account: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -2216,8 +2434,6 @@ export interface OmniStakePool extends BaseContract {
     factory(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     flag(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    fundAddr2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     fundAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2255,6 +2471,12 @@ export interface OmniStakePool extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    lastDisClaimed(
+      arg0: PromiseOrValue<string>,
+      arg1: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     lastTimeRewardApplicable(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -2265,15 +2487,24 @@ export interface OmniStakePool extends BaseContract {
 
     lpReleaseTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    nPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     nextReleaseTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    operAddr(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    nftAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    operAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     otherToken(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     period(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     periodFinish(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    poolStatus(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     relation(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2282,6 +2513,8 @@ export interface OmniStakePool extends BaseContract {
     releaseCommRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     releaseFundRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    releaseNftRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     releaseOperRatio(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -2331,13 +2564,8 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setFeeInfo2(
-      _fund: PromiseOrValue<string>,
-      _comm: PromiseOrValue<string>,
-      _operate: PromiseOrValue<string>,
-      _fundFee: PromiseOrValue<BigNumberish>,
-      _commFee: PromiseOrValue<BigNumberish>,
-      _operateFee: PromiseOrValue<BigNumberish>,
+    setPoolStatus(
+      _value: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2386,6 +2614,11 @@ export interface OmniStakePool extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    tPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     takeInitLp(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
@@ -2398,6 +2631,11 @@ export interface OmniStakePool extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     teamPower(
+      arg0: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    totalDisClaimed(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

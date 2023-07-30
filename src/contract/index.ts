@@ -834,25 +834,39 @@ export function useCommunityEarnInfo() {
           return
       }
 
-      let waitReceive = '0'
-      let received = '0'
-      let lastMint = '0'
-      let myLastMint = '0'
-      let communityTotal = '0'
-      let lastDirect = '0'
-      // const dayId = await stakePoolContract.dayId()
       const myPower = await stakePoolContract.viewTAmount(address)
       const myNodePower = await stakePoolContract.viewNAmount(address)
 
+      const dayId = await stakePoolContract.dayId()
+      let dayIdNumber = Number(bigNumberToBalance(dayId)) - 1
+      if (dayIdNumber < 0){
+        dayIdNumber = 0
+      }
+      const lastDisClaimed = await stakePoolContract.lastDisClaimed(address,dayIdNumber)
+      const totalDisClaimed = await stakePoolContract.totalDisClaimed(address)
+      const disReward_1 = await stakePoolContract.disReward(address,1)
+      const disReward_2 = await stakePoolContract.disReward(address,2)
+      const disReward_3 = await stakePoolContract.disReward(address,3)
+      const disReward_4 = await stakePoolContract.disReward(address,4)
+
+      const disReward_1_number = Number(formatBalance(bigNumberToBalance(disReward_1)))
+      const disReward_2_number = Number(formatBalance(bigNumberToBalance(disReward_2)))
+      const disReward_3_number = Number(formatBalance(bigNumberToBalance(disReward_3)))
+      const disReward_4_number = Number(formatBalance(bigNumberToBalance(disReward_4)))
+
       return {
-        waitReceive,
-        received,
-        lastMint,
-        myLastMint,
-        communityTotal,
-        lastDirect,
+        waitReceive:disReward_1_number + disReward_2_number + disReward_3_number + disReward_4_number,
+        received:formatBalance(bigNumberToBalance(totalDisClaimed)),
+        lastMint:formatBalance(bigNumberToBalance(lastDisClaimed)),
+        myLastMint:formatBalance(bigNumberToBalance(lastDisClaimed)),
+        communityTotal:formatBalance(bigNumberToBalance(totalDisClaimed)),
+        lastDirect:'-',
         myPower:formatBalance(bigNumberToBalance(myPower)),
         myNodePower:formatBalance(bigNumberToBalance(myNodePower)),
+        disReward_1:formatBalance(bigNumberToBalance(disReward_1)),
+        disReward_2:formatBalance(bigNumberToBalance(disReward_2)),
+        disReward_3:formatBalance(bigNumberToBalance(disReward_3)),
+        disReward_4:formatBalance(bigNumberToBalance(disReward_4)),
       }
   }
 
@@ -941,8 +955,6 @@ export function useNodeAddressAmount(callBack:any) {
           currentIndex = index + 1
         }
       })
-
-      console.log('nodePorwer===',nodePorwer,currentIndex)
 
       return {
         super:nodePorwer.slice(0,88),

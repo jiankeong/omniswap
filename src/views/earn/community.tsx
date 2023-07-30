@@ -42,20 +42,24 @@ export default function Community(){
   const router = useRouter()
   const communityEarnInfo = useCommunityEarnInfo()
   const sendTransaction = useSendTransaction()
-  const omniPoolContract = useOmniPoolContract(OmniPool_ADDRESSSES)
+
+  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
 
   function onReceive(){
-    // if (!omniPoolContract){
-    //   return
-    // }
-    // sendTransaction.mutate({
-    //   title: 'Claim',
-    //   func: omniPoolContract?.claim,
-    //   args: [balanceToBigNumber(10000),1,1,''],
-    //   onSuccess:()=>{
-    //     communityEarnInfo.refetch()
-    //   }
-    // })
+    if (!omniStakePoolContract || communityEarnInfo.isLoading){
+      return
+    }
+    if (!communityEarnInfo.data?.waitReceive || communityEarnInfo.data?.waitReceive == 0){
+      return
+    }
+    sendTransaction.mutate({
+      title: 'Claim',
+      func: omniStakePoolContract?.claim,
+      args: [],
+      onSuccess:()=>{
+        communityEarnInfo.refetch()
+      }
+    })
   }
 
   return <Main>
@@ -88,17 +92,22 @@ export default function Community(){
       <FlexViewBetween>
         <FlexViewCenterColumn style={{width:'fit-content'}}>
           <Text size={12} webSize={24} color='#D3DEFC'>{t('Promotion')}{t('Benefits')}</Text>
-          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
+          {communityEarnInfo.isLoading ? <LoadingRow/> : <Text size={18} webSize={36} color='#D3DEFC'>{communityEarnInfo.data?.disReward_1}</Text>}
         </FlexViewCenterColumn>
         <Line/>
         <FlexViewCenterColumn style={{width:'fit-content'}}>
           <Text size={12} webSize={24} color='#D3DEFC'>{t('Super Node')}{t('Benefits')}</Text>
-          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
+          {communityEarnInfo.isLoading ? <LoadingRow/> : <Text size={18} webSize={36} color='#D3DEFC'>{communityEarnInfo.data?.disReward_2}</Text>}
         </FlexViewCenterColumn>
         <Line/>
         <FlexViewCenterColumn style={{width:'fit-content'}}>
           <Text size={12} webSize={24} color='#D3DEFC'>{t('Common Node')}{t('Benefits')}</Text>
-          <Text size={18} webSize={36} color='#D3DEFC'>0</Text>
+          {communityEarnInfo.isLoading ? <LoadingRow/> : <Text size={18} webSize={36} color='#D3DEFC'>{communityEarnInfo.data?.disReward_3}</Text>}
+        </FlexViewCenterColumn>
+        <Line/>
+        <FlexViewCenterColumn style={{width:'fit-content'}}>
+          <Text size={12} webSize={24} color='#D3DEFC'>DAO{t('Benefits')}</Text>
+          {communityEarnInfo.isLoading ? <LoadingRow/> : <Text size={18} webSize={36} color='#D3DEFC'>{communityEarnInfo.data?.disReward_4}</Text>}
         </FlexViewCenterColumn>
       </FlexViewBetween>
     </Content>
@@ -124,7 +133,7 @@ export default function Community(){
           <Text size={12} webSize={24} color='#D3DEFC'>{t('Benefits Receipt')}</Text>
         </FlexViewCenterColumn>
       </FlexViewBetween>
-      <ReceiveButton style={{width:'100%',background:'#303030'}} onClick={onReceive}>
+      <ReceiveButton style={{width:'100%'}} onClick={onReceive}>
         <Text size={16} webSize={32} color='#000'>{t('Recevive Benefits')}</Text>
       </ReceiveButton>
       <InfoView>

@@ -228,54 +228,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "NPower",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "TPower",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "_getTokenPrice",
     outputs: [
@@ -371,6 +323,29 @@ const _abi = [
         name: "amounts",
         type: "uint256[]",
       },
+      {
+        internalType: "uint256",
+        name: "typeID",
+        type: "uint256",
+      },
+    ],
+    name: "batchDisReward",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "addrs",
+        type: "address[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
     ],
     name: "batchStakePower",
     outputs: [],
@@ -384,13 +359,34 @@ const _abi = [
         name: "accounts",
         type: "address[]",
       },
-      {
-        internalType: "uint256[]",
-        name: "amounts",
-        type: "uint256[]",
-      },
     ],
     name: "batchTeamUpdate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "accounts",
+        type: "address[]",
+      },
+    ],
+    name: "batchUpdateNPower",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "accounts",
+        type: "address[]",
+      },
+    ],
+    name: "batchUpdateTPower",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -410,15 +406,9 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "commAddr2",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
+    name: "claim",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -507,6 +497,30 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "disReward",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "account",
         type: "address",
       },
@@ -543,19 +557,6 @@ const _abi = [
         internalType: "bool",
         name: "",
         type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "fundAddr2",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
       },
     ],
     stateMutability: "view",
@@ -702,6 +703,30 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "lastDisClaimed",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "lastTimeRewardApplicable",
     outputs: [
@@ -754,6 +779,25 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "nPower",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "nextReleaseTime",
     outputs: [
@@ -768,7 +812,20 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "operAddr",
+    name: "nftAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "operAddress",
     outputs: [
       {
         internalType: "address",
@@ -820,6 +877,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "poolStatus",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "relation",
     outputs: [
       {
@@ -860,6 +930,19 @@ const _abi = [
   {
     inputs: [],
     name: "releaseFundRatio",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "releaseNftRatio",
     outputs: [
       {
         internalType: "uint256",
@@ -1062,37 +1145,12 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_fund",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_comm",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_operate",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_fundFee",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_commFee",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_operateFee",
-        type: "uint256",
+        internalType: "bool",
+        name: "_value",
+        type: "bool",
       },
     ],
-    name: "setFeeInfo2",
+    name: "setPoolStatus",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1266,6 +1324,25 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "tPower",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "takeInitLp",
     outputs: [],
@@ -1304,6 +1381,25 @@ const _abi = [
       },
     ],
     name: "teamPower",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "totalDisClaimed",
     outputs: [
       {
         internalType: "uint256",
