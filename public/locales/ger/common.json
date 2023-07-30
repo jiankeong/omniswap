@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Einstellungen für Gleitpunkte",
   "Tx deadline (mins)":"Frist für Transaktion (Minute)",
   "Today’s Node ranking":"Die heutige Knoten -Rangliste",
-  "Your Current Rank--Keep Going!":"Ihr aktuelles Ranking -kann vorwärts gehen!",
+  "Your Current Rank--Keep Going!":"Ihr aktuelles Ranking {current}, kann vorwärts gehen!",
   "Node ranking Content":"Der Top 88 ist ein Superknoten und kann Superknoten -Belohnungen erhalten. Der 89. bis 888. ist ein normaler Knoten, der gewöhnliche Knotenprämien erhalten werden kann.",
   "Super Node Ranking":"Superknotenranking",
   "Ranking":"Rang",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Mein Gesamteinkommen beim letzten Mal",
   "the Sum of community mining revenue":"Zusammenfassung des Community Mining Income",
   "the direct inviter’s income in the previous period":"Laden Sie das Einkommen der Menschen direkt das letzte Mal ein",
-  "own current promotion computing power":"Selbst die derzeitige Rechenleistung fördern",
-  "own current node computing power":"Knotenstrom -Rechenleistung haben",
+  "own current promotion computing power":"Selbst die derzeitige Rechenleistung fördern（T）",
+  "own current node computing power":"Knotenstrom -Rechenleistung haben（N）",
   "View todays ranking":"Sehen Sie sich die heutige Rangliste an",
   "Details of community mining income":"Einkommensdetails des Community Mining",
   "Release Time":"Veröffentlichkeitsdatum",
@@ -110,5 +110,8 @@
   "sold out":"ausverkauft",
   "status":"Zustand",
   "activated":"aktiviert",
-  "active":"Aktivierung"
+  "active":"Aktivierung",
+  "My current invitation total computing power":"Meine aktuelle Einladung ist totale Rechenleistung",
+  "Invite Total Computing Power":"Laden Sie die gesamte Rechenleistung ein",
+  "parsing data":"Daten analysieren"
 }

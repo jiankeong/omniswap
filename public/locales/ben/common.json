@@ -49,7 +49,7 @@
   "Slippage Tolerance":"স্লাইডিং পয়েন্ট সেটিংস",
   "Tx deadline (mins)":"লেনদেনের জন্য সময়সীমা (মিনিট)",
   "Today’s Node ranking":"আজকের নোড র‌্যাঙ্কিং",
-  "Your Current Rank--Keep Going!":"আপনার বর্তমান র‌্যাঙ্কিং -এগিয়ে যাওয়ার জন্য!",
+  "Your Current Rank--Keep Going!":"আপনার বর্তমান র‌্যাঙ্কিং {current}, এগিয়ে যাওয়ার জন্য!",
   "Node ranking Content":"শীর্ষস্থানীয় 88 একটি সুপার নোড এবং সুপার নোড পুরষ্কার পেতে পারে The 89 তম থেকে 888 তম একটি সাধারণ নোড, যা সাধারণ নোড পুরষ্কার প্রদান করা যেতে পারে।",
   "Super Node Ranking":"সুপার নোড র‌্যাঙ্কিং",
   "Ranking":"র‌্যাঙ্ক",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"আমার মোট আয় গতবার",
   "the Sum of community mining revenue":"সম্প্রদায় খনির আয়ের সংক্ষিপ্তসার",
   "the direct inviter’s income in the previous period":"গতবার সরাসরি মানুষের আয়ের আমন্ত্রণ জানান",
-  "own current promotion computing power":"নিজেই বর্তমানে কম্পিউটিং শক্তি প্রচার",
-  "own current node computing power":"নোড বর্তমান কম্পিউটিং শক্তি আছে",
+  "own current promotion computing power":"নিজেই বর্তমানে কম্পিউটিং শক্তি প্রচার（T）",
+  "own current node computing power":"নোড বর্তমান কম্পিউটিং শক্তি আছে（N）",
   "View todays ranking":"আজকের র‌্যাঙ্কিং দেখুন",
   "Details of community mining income":"সম্প্রদায় খনির আয়ের বিবরণ",
   "Release Time":"মুক্তির সময়",
@@ -110,5 +110,8 @@
   "sold out":"বিক্রি শেষ",
   "status":"অবস্থা",
   "activated":"সক্রিয়",
-  "active":"অ্যাক্টিভেশন"
+  "active":"অ্যাক্টিভেশন",
+  "My current invitation total computing power":"আমার বর্তমান আমন্ত্রণ মোট কম্পিউটিং ক্ষমতা",
+  "Invite Total Computing Power":"মোট কম্পিউটিং শক্তি আমন্ত্রণ",
+  "parsing data":"ডেটা পার্সিং"
 }

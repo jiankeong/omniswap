@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Configuración del punto deslizante",
   "Tx deadline (mins)":"Fecha límite para la transacción (minuto)",
   "Today’s Node ranking":"Ranking de nodo de hoy",
-  "Your Current Rank--Keep Going!":"¡Su ranking actual, continúa para avanzar!",
+  "Your Current Rank--Keep Going!":"¡Su ranking actual {current}, continúa para avanzar!",
   "Node ranking Content":"El Top 88 es un súper nodo y puede obtener recompensas de Super Node. El 89 al 888 es un nodo normal, que puede recibir recompensas de nodo ordinarias.",
   "Super Node Ranking":"Ranking de super nodo",
   "Ranking":"Rango",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Mi ingreso total la última vez",
   "the Sum of community mining revenue":"Resumen de ingresos mineros comunitarios",
   "the direct inviter’s income in the previous period":"Invitar directamente los ingresos de las personas la última vez",
-  "own current promotion computing power":"En sí mismo actualmente promoviendo el poder informático",
-  "own current node computing power":"Tener alimentación informática actual de nodo",
+  "own current promotion computing power":"En sí mismo actualmente promoviendo el poder informático（T）",
+  "own current node computing power":"Tener alimentación informática actual de nodo（N）",
   "View todays ranking":"Ver la clasificación de hoy",
   "Details of community mining income":"Detalles del ingreso minero comunitario",
   "Release Time":"tiempo de liberación",
@@ -110,5 +110,8 @@
   "sold out":"agotado",
   "status":"estado",
   "activated":"activado",
-  "active":"activación"
+  "active":"activación",
+  "My current invitation total computing power":"Mi invitación actual Potencia informática total",
+  "Invite Total Computing Power":"Invite a la potencia informática total",
+  "parsing data":"analizando datos"
 }

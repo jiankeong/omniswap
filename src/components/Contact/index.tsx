@@ -27,7 +27,7 @@ export default function Contact() {
         <Image src={ImageCommon.Discord} layout='fill'/>
       </ContactIcon>
       <ContactIcon onClick={()=>{
-        window.open('https://twitter.com/OMNI_SWAP')
+        window.open('https://twitter.com/OMNISWAP_')
       }}>
         <Image src={ImageCommon.twitter} layout='fill'/>
       </ContactIcon>

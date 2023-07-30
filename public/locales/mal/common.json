@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Tetapan titik gelongsor",
   "Tx deadline (mins)":"Tarikh akhir transaksi (minit)",
   "Today’s Node ranking":"Kedudukan nod hari ini",
-  "Your Current Rank--Keep Going!":"Kedudukan semasa anda -terus bergerak ke hadapan!",
+  "Your Current Rank--Keep Going!":"Kedudukan semasa anda {current}, terus bergerak ke hadapan!",
   "Node ranking Content":"Top 88 adalah nod super dan boleh mendapatkan ganjaran nod super. 89 hingga 888th adalah nod biasa, yang boleh diberikan ganjaran nod biasa.",
   "Super Node Ranking":"Kedudukan Super Node",
   "Ranking":"Pangkat",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Jumlah pendapatan saya kali terakhir",
   "the Sum of community mining revenue":"Ringkasan Pendapatan Perlombongan Komuniti",
   "the direct inviter’s income in the previous period":"Secara langsung menjemput pendapatan rakyat kali terakhir",
-  "own current promotion computing power":"Sendiri sedang mempromosikan kuasa pengkomputeran",
-  "own current node computing power":"Mempunyai kuasa pengkomputeran semasa nod",
+  "own current promotion computing power":"Sendiri sedang mempromosikan kuasa pengkomputeran（T）",
+  "own current node computing power":"Mempunyai kuasa pengkomputeran semasa nod（N）",
   "View todays ranking":"Lihat Kedudukan Hari Ini",
   "Details of community mining income":"Perincian Pendapatan Pertambangan Komuniti",
   "Release Time":"Masa pelepasan",
@@ -110,5 +110,8 @@
   "sold out":"habis dijual",
   "status":"Negeri",
   "activated":"diaktifkan",
-  "active":"Pengaktifan"
+  "active":"Pengaktifan",
+  "My current invitation total computing power":"Jumlah kuasa pengkomputeran jemputan semasa saya",
+  "Invite Total Computing Power":"Jemput Jumlah Kuasa Pengkomputeran",
+  "parsing data":"menghurai data"
 }

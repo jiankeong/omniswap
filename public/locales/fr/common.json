@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Paramètres de point de glissement",
   "Tx deadline (mins)":"Date limite de transaction (minute)",
   "Today’s Node ranking":"Classement des nœuds d'aujourd'hui",
-  "Your Current Rank--Keep Going!":"Votre classement actuel - Continuez à avancer!",
+  "Your Current Rank--Keep Going!":"Votre classement actuel {current}, Continuez à avancer!",
   "Node ranking Content":"Le 88 supérieur est un super nœud et peut obtenir des récompenses de nœud super. Le 89e à 888e est un nœud normal, qui peut se voir attribuer des récompenses de nœud ordinaires.",
   "Super Node Ranking":"Classement de super nœud",
   "Ranking":"Rang",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Mon revenu total la dernière fois",
   "the Sum of community mining revenue":"Résumé des revenus d'extraction communautaire",
   "the direct inviter’s income in the previous period":"Invitez directement les revenus des gens la dernière fois",
-  "own current promotion computing power":"Lui-même faisant la promotion de la puissance de calcul",
-  "own current node computing power":"Avoir une puissance de calcul actuel de nœud",
+  "own current promotion computing power":"Lui-même faisant la promotion de la puissance de calcul（T）",
+  "own current node computing power":"Avoir une puissance de calcul actuel de nœud（N）",
   "View todays ranking":"Voir le classement d'aujourd'hui",
   "Details of community mining income":"Détails des revenus d'extraction communautaire",
   "Release Time":"temps de libération",
@@ -110,5 +110,8 @@
   "sold out":"solder",
   "status":"État",
   "activated":"activé",
-  "active":"Activation"
+  "active":"Activation",
+  "My current invitation total computing power":"Puissance de calcul totale de mon invitation actuelle",
+  "Invite Total Computing Power":"Invitez la puissance de calcul totale",
+  "parsing data":"analyse des données"
 }

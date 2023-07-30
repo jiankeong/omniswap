@@ -49,7 +49,7 @@
   "Slippage Tolerance":"إعدادات نقطة الانزلاق",
   "Tx deadline (mins)":"الموعد النهائي للمعاملات (دقيقة)",
   "Today’s Node ranking":"تصنيفات العقدة اليوم",
-  "Your Current Rank--Keep Going!":"تصنيفك الحالي -استنشاق للمضي قدمًا!",
+  "Your Current Rank--Keep Going!":"تصنيفك الحالي {current}, استنشاق للمضي قدمًا!",
   "Node ranking Content":"أعلى 88 هو عقدة فائقة ويمكن الحصول على مكافآت العقدة الفائقة. من 89 إلى 888 هو عقدة عادية ، والتي يمكن منحها مكافآت عقدة عادية.",
   "Super Node Ranking":"تصنيف العقدة الفائقة",
   "Ranking":"رتبة",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"إجمالي دخلي آخر مرة",
   "the Sum of community mining revenue":"ملخص دخل تعدين المجتمع",
   "the direct inviter’s income in the previous period":"دعوة مباشرة دخل الناس آخر مرة",
-  "own current promotion computing power":"نفسها تعزز حاليا قوة الحوسبة",
-  "own current node computing power":"امتلاك قوة الحوسبة الحالية",
+  "own current promotion computing power":"نفسها تعزز حاليا قوة الحوسبة（T）",
+  "own current node computing power":"امتلاك قوة الحوسبة الحالية（N）",
   "View todays ranking":"عرض تصنيف اليوم",
   "Details of community mining income":"تفاصيل دخل التعدين المجتمع",
   "Release Time":"وقت الافراج",
@@ -110,5 +110,8 @@
   "sold out":"نفذ",
   "status":"ولاية",
   "activated":"مفعل",
-  "active":"التنشيط"
+  "active":"التنشيط",
+  "My current invitation total computing power":"دعوتي الحالية مجموع قوة الحوسبة",
+  "Invite Total Computing Power":"قم بدعوة إجمالي قوة الحوسبة",
+  "parsing data":"تحليل البيانات"
 }

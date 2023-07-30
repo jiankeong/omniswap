@@ -49,7 +49,7 @@
   "Slippage Tolerance":"การตั้งค่าจุดเลื่อน",
   "Tx deadline (mins)":"กำหนดเวลาสำหรับการทำธุรกรรม (นาที)",
   "Today’s Node ranking":"การจัดอันดับโหนดวันนี้",
-  "Your Current Rank--Keep Going!":"การจัดอันดับปัจจุบันของคุณ -ต่อไปเพื่อก้าวไปข้างหน้า!",
+  "Your Current Rank--Keep Going!":"การจัดอันดับปัจจุบันของคุณ {current}, ต่อไปเพื่อก้าวไปข้างหน้า!",
   "Node ranking Content":"Top 88 เป็นโหนดสุดยอดและสามารถรับรางวัล Super Node ได้ 89 ถึง 888th เป็นโหนดปกติซึ่งสามารถได้รับรางวัลโหนดธรรมดา",
   "Super Node Ranking":"การจัดอันดับโหนดซุปเปอร์",
   "Ranking":"จัดอันดับ",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"รายได้ทั้งหมดของฉันครั้งสุดท้าย",
   "the Sum of community mining revenue":"สรุปรายได้จากการขุดชุมชน",
   "the direct inviter’s income in the previous period":"เชิญรายได้ของผู้คนโดยตรงครั้งสุดท้าย",
-  "own current promotion computing power":"ขณะนี้ตัวเองส่งเสริมพลังการคำนวณ",
-  "own current node computing power":"มีกำลังการคำนวณปัจจุบันโหนด",
+  "own current promotion computing power":"ขณะนี้ตัวเองส่งเสริมพลังการคำนวณ（T）",
+  "own current node computing power":"มีกำลังการคำนวณปัจจุบันโหนด（N）",
   "View todays ranking":"ดูการจัดอันดับของวันนี้",
   "Details of community mining income":"รายละเอียดรายได้จากการขุดชุมชน",
   "Release Time":"เวลาปล่อยเวลา",
@@ -110,5 +110,8 @@
   "sold out":"ขายหมดแล้ว",
   "status":"สถานะ",
   "activated":"เปิดใช้งาน",
-  "active":"การเปิดใช้งาน"
+  "active":"การเปิดใช้งาน",
+  "My current invitation total computing power":"กำลังการประมวลผลทั้งหมดของคำเชิญปัจจุบันของฉัน",
+  "Invite Total Computing Power":"เชิญรวมพลังคอมพิวเตอร์",
+  "parsing data":"การแยกวิเคราะห์ข้อมูล"
 }

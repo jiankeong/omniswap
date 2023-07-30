@@ -49,7 +49,7 @@
   "Slippage Tolerance":"स्लाइडिंग पॉइंट सेटिंग्स",
   "Tx deadline (mins)":"लेनदेन के लिए समय सीमा (मिनट)",
   "Today’s Node ranking":"आज की नोड रैंकिंग",
-  "Your Current Rank--Keep Going!":"आपकी वर्तमान रैंकिंग -आगे बढ़ने के लिए!",
+  "Your Current Rank--Keep Going!":"आपकी वर्तमान रैंकिंग {current}, आगे बढ़ने के लिए!",
   "Node ranking Content":"शीर्ष 88 एक सुपर नोड है और सुपर नोड पुरस्कार प्राप्त कर सकता है। 89 वां से 888 वां एक सामान्य नोड है, जिसे साधारण नोड पुरस्कार से सम्मानित किया जा सकता है।",
   "Super Node Ranking":"सुपर नोड रैंकिंग",
   "Ranking":"पद",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"पिछली बार मेरी कुल आय",
   "the Sum of community mining revenue":"सामुदायिक खनन आय सारांश",
   "the direct inviter’s income in the previous period":"पिछली बार सीधे लोगों की आय को आमंत्रित करें",
-  "own current promotion computing power":"वर्तमान में कम्प्यूटिंग पावर को बढ़ावा दे रहा है",
-  "own current node computing power":"नोड करंट कंप्यूटिंग पावर होना",
+  "own current promotion computing power":"वर्तमान में कम्प्यूटिंग पावर को बढ़ावा दे रहा है（T）",
+  "own current node computing power":"नोड करंट कंप्यूटिंग पावर होना（N）",
   "View todays ranking":"आज की रैंकिंग देखें",
   "Details of community mining income":"सामुदायिक खनन आय विवरण",
   "Release Time":"जारी करने का समय",
@@ -110,5 +110,8 @@
   "sold out":"बिक गया",
   "status":"राज्य",
   "activated":"सक्रिय",
-  "active":"सक्रियण"
+  "active":"सक्रियण",
+  "My current invitation total computing power":"मेरा वर्तमान आमंत्रण कुल कंप्यूटिंग शक्ति",
+  "Invite Total Computing Power":"कुल कंप्यूटिंग शक्ति को आमंत्रित करें",
+  "parsing data":"डेटा पार्स करना"
 }

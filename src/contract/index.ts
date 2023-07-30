@@ -38,6 +38,7 @@ import {} from '../hooks/useContract'
 import WalletTokens from "../constants/walletTokens";
 import dayjs from 'dayjs';
 import { NetworkId } from '../networkDetails';
+import { nodeAddress } from '../constants/nodeAddress';
 
 // 授权方法
 export function useApprove(tokenAddressMap: AddressMap, spenderAddressMap: AddressMap,cost?:string): [ApprovalState, () => Promise<void>] {
@@ -266,18 +267,20 @@ export function useInviteInfo() {
     const networkId = chain?.id
 
     const intoRelationContract = useOMNIRelationontract(Relation_ADDRESSSES)
+    const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
 
     async function fetchData() {
 
-        if (!address || !intoRelationContract) {
+        if (!address || !intoRelationContract || !omniStakePoolContract) {
             return
         }
 
-        // 我的推荐人ID
+
+        const teamPower = await omniStakePoolContract.teamPower(address)
         const inviter = await intoRelationContract.Inviter(address)
-        console.log('inviter===',inviter)
         return {
             inviter,
+            teamPower:formatBalance(bigNumberToBalance(teamPower))
         }
     }
 
@@ -342,9 +345,7 @@ export function useMyNftListInfo() {
             return
         }
 
-        console.log('useMyNftListInfo')
         const account = await ONFTContract.balanceOf(address)
-        console.log('account',Number(account.toString()))
         const total = Number(account.toString())
 
         let list:any[] = []
@@ -535,7 +536,6 @@ export function useStudioList() {
           return
       }
       const getStudioList = await OMINTContract.getStudioList()
-      console.log('getStudioList=',getStudioList)
       let isNode = false
       if (getStudioList.indexOf(address) > -1){
         isNode = true
@@ -583,6 +583,7 @@ export function useStudioReward(studioAddress:string) {
 export function useInvList() {
 
   const {address} = useAccount()
+  // const address = '0x1fabba9dffb82673f70db78359c04fd655d31c1e'
   const {chain} = useNetwork()
   const networkId = chain?.id
 
@@ -660,9 +661,7 @@ export function useSwapPrice(amount:number|string,tokenNames:string[],path:strin
       loading: true,
       data: {}
   });
-  // console.log(amount,tokens,path)
   useEffect(() => {
-      // console.log(tokens,path)
       const getResult = async () => {
           if (!amount || tokenNames.includes("") || path.includes("")) {
               setInfo({
@@ -713,9 +712,7 @@ export function useSwapPriceShow(tokens:string[],path:string[]) {
       data: {}
   });
   const amount = 1
-  // console.log(amount,tokens,path)
   useEffect(() => {
-      // console.log(tokens,path)
       const getResult = async () => {
           if (tokens.includes("") || path.includes("")) {
               setInfo({
@@ -730,10 +727,8 @@ export function useSwapPriceShow(tokens:string[],path:string[]) {
           if (!address || !routerContract) {
               return;
           }
-          // console.log(amount)
           const outRes:any = await routerContract.getAmountsOut(balanceToBigNumber(amount),path)
           const inRes:any = await routerContract.getAmountsIn(balanceToBigNumber(amount),path)
-          // console.log(res)
           const amountOut = bigNumberToBalance(outRes[outRes.length-1])
           const amountIn = bigNumberToBalance(outRes[0])
           setInfo({
@@ -845,9 +840,9 @@ export function useCommunityEarnInfo() {
       let myLastMint = '0'
       let communityTotal = '0'
       let lastDirect = '0'
-      const dayId = await stakePoolContract.dayId()
-      const myPower = await stakePoolContract.TPower(address,dayId)
-      const myNodePower = await stakePoolContract.NPower(address,dayId)
+      // const dayId = await stakePoolContract.dayId()
+      const myPower = await stakePoolContract.viewTAmount(address)
+      const myNodePower = await stakePoolContract.viewNAmount(address)
 
       return {
         waitReceive,
@@ -890,6 +885,75 @@ export function useOMNIDestoryInfo() {
   return useQuery(["useOMNIDestoryInfo"], fetchData, {
       // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
       refetchInterval: config.refreshInterval,
+  })
+}
+
+
+export function useUserPower(userAddress:string) {
+
+  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  async function fetchData() {
+
+      if (!userAddress || !omniStakePoolContract) {
+          return
+      }
+      const teamPower = await omniStakePoolContract.teamPower(userAddress)
+      return {
+        teamPower:formatBalance(bigNumberToBalance(teamPower))
+      }
+  }
+
+  return useQuery(["useUserPower" + userAddress], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: config.refreshInterval,
+  })
+}
+
+
+export function useNodeAddressAmount(callBack:any) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+
+  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  async function fetchData() {
+
+      if (!address || !omniStakePoolContract) {
+          return
+      }
+
+      let nodePorwer:any[] = []
+      for (let index = 0; index < nodeAddress.length; index++) {
+        const element = nodeAddress[index];
+        const viewNAmount = await omniStakePoolContract.viewNAmount(element)
+        const viewNAmountNumber = bigNumberToBalance(viewNAmount)
+        nodePorwer.push({
+          address:element,
+          amount:viewNAmountNumber
+        })
+        callBack && callBack(index)
+      }
+
+      nodePorwer.sort((pre:any,next:any)=>Number(next.amount) - Number(pre.amount))
+
+      let currentIndex = 0
+      nodePorwer.map((it:any,index:number)=>{
+        if (String(it.address).toUpperCase() == String(address).toUpperCase()){
+          currentIndex = index + 1
+        }
+      })
+
+      console.log('nodePorwer===',nodePorwer,currentIndex)
+
+      return {
+        super:nodePorwer.slice(0,88),
+        normal:nodePorwer.slice(88),
+        currentIndex
+      }
+  }
+
+  return useQuery(["useNodeAddressAmount"], fetchData, {
+      // enabled:!!networkId && !!address && !!MRelationContract && !!MRelationContract.signer ,
+      refetchInterval: 1000 * 60 * 60 * 12,
   })
 }
 

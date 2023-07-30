@@ -49,7 +49,7 @@
   "Slippage Tolerance":"滑点设置",
   "Tx deadline (mins)":"交易截止期限（分钟）",
   "Today’s Node ranking":"今日节点排行榜",
-  "Your Current Rank--Keep Going!":"您当前的排名——继续前进！",
+  "Your Current Rank--Keep Going!":"您当前的排名{current}, 继续前进！",
   "Node ranking Content":"前88名为超级节点，可获得超级节点奖励，第89～888名为普通节点，可获得普通节点奖励。",
   "Super Node Ranking":"超级节点排行榜",
   "Ranking":"排名",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"我上期总收入",
   "the Sum of community mining revenue":"社区挖矿收益总和",
   "the direct inviter’s income in the previous period":"直邀人上期收入",
-  "own current promotion computing power":"自身当前推广算力",
-  "own current node computing power":"自有节点当前算力",
+  "own current promotion computing power":"自身当前推广算力（T值）",
+  "own current node computing power":"自有节点当前算力（N值）",
   "View todays ranking":"查看今日排名",
   "Details of community mining income":"社区挖矿收益明细",
   "Release Time":"发布时间",
@@ -110,5 +110,8 @@
   "sold out":"已售完",
   "status":"状态",
   "activated":"已激活",
-  "active":"激活"
+  "active":"激活",
+  "My current invitation total computing power":"我的当前邀请总算力",
+  "Invite Total Computing Power":"邀请总算力",
+  "parsing data":"正在解析数据"
 }

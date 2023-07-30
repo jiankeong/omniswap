@@ -49,7 +49,7 @@
   "Slippage Tolerance":"スライドポイント設定",
   "Tx deadline (mins)":"トランザクションの締め切り（分）",
   "Today’s Node ranking":"今日のノードランキング",
-  "Your Current Rank--Keep Going!":"あなたの現在のランキングは、前進するために継続します！",
+  "Your Current Rank--Keep Going!":"あなたの現在のランキングは {current},前進するために継続します！",
   "Node ranking Content":"上位88はスーパーノードであり、スーパーノードの報酬を得ることができます。89番目から888番目は通常のノードであり、通常のノードの報酬を授与できます。",
   "Super Node Ranking":"スーパーノードのランキング",
   "Ranking":"ランク",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"前回の私の総収入",
   "the Sum of community mining revenue":"コミュニティ採掘収入の概要",
   "the direct inviter’s income in the previous period":"前回は人々の収入を直接招待します",
-  "own current promotion computing power":"現在、コンピューティングパワーを促進しています",
-  "own current node computing power":"ノード電流コンピューティングパワーがあります",
+  "own current promotion computing power":"現在、コンピューティングパワーを促進しています（T）",
+  "own current node computing power":"ノード電流コンピューティングパワーがあります（N）",
   "View todays ranking":"今日のランキングを表示します",
   "Details of community mining income":"コミュニティ採掘収入の詳細",
   "Release Time":"リリース時間",
@@ -110,5 +110,11 @@
   "sold out":"完売",
   "status":"州",
   "activated":"アクティブ化",
-  "active":"活性化"
+  "active":"活性化",
+  "My current invitation total computing power":"私の現在の招待状の総計算能力",
+  "Invite Total Computing Power":"総コンピューティング能力を招待",
+  "parsing data":"データの解析"
 }
+
+
+

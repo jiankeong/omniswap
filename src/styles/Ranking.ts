@@ -50,6 +50,15 @@ export const TitleView = styled(FlexViewColumn)`
     width:90%
   }
 `
+export const ContentList = styled(FlexViewCenterColumn)`
+  width:100%;
+  justify-content: flex-start;
+  max-height: ${autoWidthVW(1440)};
+  overflow-y:scroll;
+  @media (max-width: 768px) {
+    max-height: ${autoWidthVW(750)};
+  }
+`
 export const Content = styled(FlexViewCenterColumn)`
   width:${autoWidthVW(1440)};
   /* align-items:flex-start; */
@@ -58,7 +67,7 @@ export const Content = styled(FlexViewCenterColumn)`
   padding:${autoWidthVW(50)} ${autoWidthVW(48)};
   border:1px solid #444E68;
   @media (max-width: 768px) {
-    width:90%;
+    width:100%;
     margin-top:${autoWidthVW(40)};
     padding:${autoWidthVW(24)} ${autoWidthVW(22)};
   }

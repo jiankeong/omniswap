@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Sliding point settings",
   "Tx deadline (mins)":"Deadline for transaction (minute)",
   "Today’s Node ranking":"Today's node rankings",
-  "Your Current Rank--Keep Going!":"Your current ranking -continue to move forward!",
+  "Your Current Rank--Keep Going!":"Your current ranking {current}, continue to move forward!",
   "Node ranking Content":"The top 88 is a super node and can get super node rewards. The 89th to 888th is a normal node, which can be awarded ordinary node rewards.",
   "Super Node Ranking":"Super node ranking",
   "Ranking":"Rank",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"My total income last time",
   "the Sum of community mining revenue":"Community mining income summary",
   "the direct inviter’s income in the previous period":"Directly invite people's income last time",
-  "own current promotion computing power":"Itself currently promoting computing power",
-  "own current node computing power":"Having node current computing power",
+  "own current promotion computing power":"Itself currently promoting computing power（T）",
+  "own current node computing power":"Having node current computing power（N）",
   "View todays ranking":"View today's ranking",
   "Details of community mining income":"Community mining income details",
   "Release Time":"release time",
@@ -110,5 +110,8 @@
   "sold out":"sold out",
   "status":"state",
   "activated":"activated",
-  "active":"activation"
+  "active":"activation",
+  "My current invitation total computing power":"My current invitation total computing power",
+  "Invite Total Computing Power":"Invite Total Computing Power",
+  "parsing data":"Parsing data"
 }

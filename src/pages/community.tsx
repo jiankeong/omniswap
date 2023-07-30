@@ -32,7 +32,7 @@ import { useAccount } from 'wagmi'
 import copy from 'copy-to-clipboard';
 import { autoWidthVW, formatAccount, ZERO_ADDRESS } from '../common/Common'
 import { useEffect, useState } from 'react'
-import { useInviteInfo, useInvList, useSendTransaction } from '../contract'
+import { useInviteInfo, useInvList, useSendTransaction, useUserPower } from '../contract'
 import { isBrowser } from 'react-device-detect'
 import { useNFTContract, useOMNIRelationontract } from '../hooks/useContract'
 import { Relation_ADDRESSSES } from '../constants/addresses'
@@ -48,7 +48,7 @@ const Community: NextPage = (props: any) => {
   const [inviteCode,setInviteCode] = useState('')
   const inviteInfo = useInviteInfo()
   const sendTransaction = useSendTransaction()
-  const [currency,setCurrency] = useState('')
+  const [currency,setCurrency] = useState('OMNI')
   const OMNIRelationontract = useOMNIRelationontract(Relation_ADDRESSSES)
 
   useEffect(()=>{
@@ -113,6 +113,21 @@ const Community: NextPage = (props: any) => {
     })
   }
 
+  const myinvitationpower =  <FlexViewColumn style={{width:'100%'}}>
+    <FlexView>
+      <TitleIcon>
+        <Image src={ImageCommon.overview} layout='fill'/>
+      </TitleIcon>
+      <Text size={16} webSize={24}>{t('My current invitation total computing power')}</Text>
+    </FlexView>
+    <SpaceHeight height={20} webHeight={20}/>
+    <BGView style={{justifyContent:'center'}}>
+      {
+        inviteInfo.isLoading ? <LoadingRow/> : <Text color='#868AAE' size={14} webSize={24}>{inviteInfo.data?.teamPower}</Text>
+      }
+    </BGView>
+    <SpaceHeight height={20} webHeight={0}/>
+  </FlexViewColumn>
 
   return <Main>
     <TopBg>
@@ -146,7 +161,14 @@ const Community: NextPage = (props: any) => {
               <Text color='#000' size={16} webSize={32}>{t('To Bind')}</Text>
             </ConfirButton>
           </FlexViewEnd>}
-          <SpaceHeight height={40}/>
+          <SpaceHeight height={20}/>
+          {isBrowser && myinvitationpower}
+
+
+
+
+
+
         </FlexViewColumn>
         <InviteView>
           <FlexViewColumn style={{width:'100%'}}>
@@ -177,6 +199,8 @@ const Community: NextPage = (props: any) => {
           </FlexViewColumn>
         </InviteView>
       </TopView>
+      <SpaceHeight height={20} webHeight={0}/>
+      {!isBrowser && myinvitationpower}
       <AddressList currency={currency}/>
     </Content>
   </Main>
@@ -185,7 +209,7 @@ function Choose({currency,onSelect}:any){
   const [show,setShow] = useState(false)
   const {t} = useTranslationLanguage()
   function onChoose(){
-    setShow(!show)
+    // setShow(!show)
   }
   return <FlexViewColumn style={{width:'100%'}}>
     <BGView style={{cursor:'pointer',zIndex:6}} onClick={onChoose}>
@@ -196,9 +220,9 @@ function Choose({currency,onSelect}:any){
     </BGView>
     {show && <CoinListView className='animate__animated animate__fadeInDown animate__faster'>
       <Text style={{width:'100%',cursor:'pointer'}} color='#868AAE' size={14} webSize={24} onClick={()=>{
-        onSelect && onSelect('USDT')
+        onSelect && onSelect('OMNI')
         setShow(false)
-      }}>USDT</Text>
+      }}>OMNI</Text>
     </CoinListView>}
   </FlexViewColumn>
 }
@@ -206,25 +230,33 @@ function Choose({currency,onSelect}:any){
 function AddressList({currency}:any){
   const {t} = useTranslationLanguage()
   const inviteinfo = useInvList()
-  console.log('===',inviteinfo.data?.list)
   return <AddressView>
     <AddressTitle>
       <TextSemiBold size={12} webSize={24} color='#010101'>{t('Address')}</TextSemiBold>
-      <TextSemiBold style={{lineHeight:autoWidthVW(20),width:'60%',textAlign:'right'}} size={12} webSize={24} color='#010101'>{t('Total Income For The Previous Period')}</TextSemiBold>
+      <TextSemiBold style={{lineHeight:autoWidthVW(20),width:'60%',textAlign:'right'}} size={12} webSize={24} color='#010101'>{t('Invite Total Computing Power')}</TextSemiBold>
     </AddressTitle>
     {
-      inviteinfo.isLoading?<LoadingRow/> : (inviteinfo.data?.list?.length == 0 ? <NotData/> : inviteinfo.data?.list.map((item:any,index:number)=>{
-        return <AddressViewItem key={index+'Address'}>
-          <FlexViewBetween>
-            <Text size={12} webSize={24}>{formatAccount(item)}</Text>
-            <Text size={12} webSize={24}>0 USDT</Text>
-          </FlexViewBetween>
+      inviteinfo.isLoading?<LoadingRow width='100%'/> : (inviteinfo.data?.list?.length == 0 ? <NotData/> : inviteinfo.data?.list.map((item:any,index:number)=>{
+        return <FlexViewColumn key={index+'Address'} style={{width:'100%'}}>
+          <ListItem item={item}/>
           {index != (inviteinfo.data?.list.length || 1) - 1 && <Line/>}
-        </AddressViewItem>
+        </FlexViewColumn>
       }))
     }
   </AddressView>
 }
+
+function ListItem({item}:any){
+  const powerInfo = useUserPower(item)
+  return <AddressViewItem>
+    <FlexViewBetween>
+      <Text size={12} webSize={24}>{formatAccount(item)}</Text>
+      {powerInfo.isLoading ? <LoadingRow width='30%'/> : <Text size={12} webSize={24}>{powerInfo.data?.teamPower} USDT</Text>}
+    </FlexViewBetween>
+  </AddressViewItem>
+}
+
+
 export default Community
 export async function getStaticProps() {
   return {

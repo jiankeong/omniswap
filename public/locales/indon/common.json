@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Pengaturan titik geser",
   "Tx deadline (mins)":"Batas waktu transaksi (menit)",
   "Today’s Node ranking":"Peringkat Node Hari Ini",
-  "Your Current Rank--Keep Going!":"Peringkat Anda saat ini -terus maju untuk maju!",
+  "Your Current Rank--Keep Going!":"Peringkat Anda saat ini {current}, terus maju untuk maju!",
   "Node ranking Content":"Top 88 adalah node super dan bisa mendapatkan super node imbalan. Yang ke -89 hingga 888 adalah simpul normal, yang dapat diberikan hadiah simpul biasa.",
   "Super Node Ranking":"Peringkat Super Node",
   "Ranking":"Pangkat",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Total penghasilan saya terakhir kali",
   "the Sum of community mining revenue":"Ringkasan Penghasilan Penambangan Komunitas",
   "the direct inviter’s income in the previous period":"Langsung mengundang pendapatan orang terakhir kali",
-  "own current promotion computing power":"Sendiri saat ini mempromosikan daya komputasi",
-  "own current node computing power":"Memiliki daya komputasi saat ini",
+  "own current promotion computing power":"Sendiri saat ini mempromosikan daya komputasi（T）",
+  "own current node computing power":"Memiliki daya komputasi saat ini（N）",
   "View todays ranking":"Lihat peringkat hari ini",
   "Details of community mining income":"Detail pendapatan penambangan komunitas",
   "Release Time":"Waktu rilis",
@@ -110,5 +110,8 @@
   "sold out":"terjual habis",
   "status":"negara",
   "activated":"diaktifkan",
-  "active":"pengaktifan"
+  "active":"pengaktifan",
+  "My current invitation total computing power":"Daya komputasi total undangan saya saat ini",
+  "Invite Total Computing Power":"Undang Kekuatan Komputasi Total",
+  "parsing data":"mengurai data"
 }

@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Cài đặt điểm trượt",
   "Tx deadline (mins)":"Hạn chót cho giao dịch (phút)",
   "Today’s Node ranking":"Xếp hạng nút hôm nay",
-  "Your Current Rank--Keep Going!":"Xếp hạng hiện tại của bạn -Continue để tiến về phía trước!",
+  "Your Current Rank--Keep Going!":"Xếp hạng hiện tại của bạn {current}, Continue để tiến về phía trước!",
   "Node ranking Content":"Top 88 là một nút siêu và có thể nhận phần thưởng siêu nút. 89 đến 888 là một nút bình thường, có thể được trao phần thưởng nút thông thường.",
   "Super Node Ranking":"Xếp hạng siêu nút",
   "Ranking":"Thứ hạng",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Tổng thu nhập của tôi lần trước",
   "the Sum of community mining revenue":"Tóm tắt thu nhập khai thác cộng đồng",
   "the direct inviter’s income in the previous period":"Trực tiếp mời thu nhập của mọi người lần trước",
-  "own current promotion computing power":"Bản thân nó hiện đang thúc đẩy sức mạnh máy tính",
-  "own current node computing power":"Có nguồn điện tính hiện tại của nút",
+  "own current promotion computing power":"Bản thân nó hiện đang thúc đẩy sức mạnh máy tính（T）",
+  "own current node computing power":"Có nguồn điện tính hiện tại của nút（N）",
   "View todays ranking":"Xem thứ hạng hôm nay",
   "Details of community mining income":"Chi tiết thu nhập khai thác cộng đồng",
   "Release Time":"Thời gian phát hành",
@@ -110,5 +110,8 @@
   "sold out":"bán hết",
   "status":"tình trạng",
   "activated":"kích hoạt",
-  "active":"kích hoạt"
+  "active":"kích hoạt",
+  "My current invitation total computing power":"Lời mời hiện tại của tôi tổng sức mạnh tính toán",
+  "Invite Total Computing Power":"Mời Tổng Điện Toán",
+  "parsing data":"phân tích dữ liệu"
 }

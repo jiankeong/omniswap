@@ -49,7 +49,7 @@
   "Slippage Tolerance":"Настройки скольжения",
   "Tx deadline (mins)":"Крайний срок транзакции (минута)",
   "Today’s Node ranking":"Сегодняшний рейтинг узлов",
-  "Your Current Rank--Keep Going!":"Ваш текущий рейтинг -Согласно двигаться вперед!",
+  "Your Current Rank--Keep Going!":"Ваш текущий рейтинг {current}, Согласно двигаться вперед!",
   "Node ranking Content":"Top 88 - это супер -узел и может получить супер -узловые награды. 89 -й по 888 -й - это обычный узел, который может быть присужден обычным узлом.",
   "Super Node Ranking":"Super Node Ranking",
   "Ranking":"Классифицировать",
@@ -70,8 +70,8 @@
   "my total income for the previous period":"Мой общий доход в прошлый раз",
   "the Sum of community mining revenue":"Сводка доходов сообщества",
   "the direct inviter’s income in the previous period":"Прямо приглашать доходы людей в прошлый раз",
-  "own current promotion computing power":"Сам в настоящее время продвигает вычислительную мощность",
-  "own current node computing power":"Наличие вычислительной мощности узела",
+  "own current promotion computing power":"Сам в настоящее время продвигает вычислительную мощность（T）",
+  "own current node computing power":"Наличие вычислительной мощности узела（N）",
   "View todays ranking":"Посмотреть сегодняшний рейтинг",
   "Details of community mining income":"Детали дохода сообщества",
   "Release Time":"время выпуска",
@@ -110,5 +110,8 @@
   "sold out":"распроданный",
   "status":"состояние",
   "activated":"активирован",
-  "active":"активация"
+  "active":"активация",
+  "My current invitation total computing power":"Суммарная вычислительная мощность моего текущего приглашения",
+  "Invite Total Computing Power":"Пригласите Total Computing Power",
+  "parsing data":"парсинг данных"
 }

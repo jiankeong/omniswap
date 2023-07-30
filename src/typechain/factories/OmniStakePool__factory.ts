@@ -378,6 +378,24 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "accounts",
+        type: "address[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "amounts",
+        type: "uint256[]",
+      },
+    ],
+    name: "batchTeamUpdate",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "checkTime",
     outputs: [
@@ -593,6 +611,19 @@ const _abi = [
     name: "helpGetReward",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "initAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1265,6 +1296,25 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "teamPower",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "totalHashPower",
     outputs: [
@@ -1306,6 +1356,24 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "addr",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "unstakePower",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "time",
         type: "uint256",
@@ -1338,6 +1406,44 @@ const _abi = [
       },
     ],
     name: "userRewardPerTokenPaid",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "viewNAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "viewTAmount",
     outputs: [
       {
         internalType: "uint256",
