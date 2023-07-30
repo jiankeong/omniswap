@@ -57,7 +57,7 @@ export const OmniStakePool_ADDRESSSES = {
 
 
 export const OmniSwapFactory_ADDRESSSES = {
-  [NetworkId.BSC]: "0xb62d1b6AB8cA85bc4B5BAE20D33443F7b510C17d",
+  [NetworkId.BSC]: "0x6F9311125595C33B416a48B10BD7392B96bABa4D",
 };
 
 export const OmniSwapPair_ADDRESSSES = {
@@ -65,7 +65,7 @@ export const OmniSwapPair_ADDRESSSES = {
 };
 
 export const OmniSwapRouter_ADDRESSSES = {
-  [NetworkId.BSC]: "0x78E676290FEbb586C9BA793E3b390CC155980c52",
+  [NetworkId.BSC]: "0x3339f814717910e1bC3949091C09b15CDbfbA59a",
 };
 
 export const OMNINFTPOOL_ADDRESSSES = {
