@@ -58,7 +58,7 @@ const Swap: NextPage = (props: any) => {
   const [swapTokensName,setSwapTokensName] = useState([""])
   const swapPrice = useSwapPrice(swapAmount,swapTokensName,swapPath,reverse)
   // const swapPriceShow = useSwapPriceShow(swapTokens,swapPath)
-  const [approval, approveCallback] = useApprove({[NetworkId.BSC]: fromToken.value[chain.id]}, OmniSwapRouter_ADDRESSSES)
+  const [approval, approveCallback] = useApprove({[NetworkId.BSC]: fromToken.value[chain.id]}, OmniStakePool_ADDRESSSES)
   const gasPrice = useGasPrice()
   const outScale = useSlippage()
   const deadLine = useDeadline()
