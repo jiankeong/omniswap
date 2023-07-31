@@ -69,9 +69,9 @@ export const OmniSwapRouter_ADDRESSSES = {
 };
 
 export const OMNINFTPOOL_ADDRESSSES = {
-  [NetworkId.BSC]: "0x4493CFd44f603bF85570302326dd417120bE6251",
+  [NetworkId.BSC]: "0xC5BbB9315e2E9ba8EB88fd3c442559aE6942B9A2",
 };
 
 export const OmniPool_ADDRESSSES = {
-  [NetworkId.BSC]: "0xC5BbB9315e2E9ba8EB88fd3c442559aE6942B9A2",
+  [NetworkId.BSC]: "0xf49E5F85285e5a5edEC3a991d6a8FcB401b44DBc",
 };
