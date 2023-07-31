@@ -103,40 +103,39 @@ const Swap: NextPage = (props: any) => {
   }
 
   function onSwap(){
-    return
-    // if (approval != ApprovalState.APPROVED){
-    //   approveCallback()
-    //   return
-    // }
-    // if (!routerContract || !swapAmount || buttonDisable){
-    //   return
-    // }
+    if (approval != ApprovalState.APPROVED){
+      approveCallback()
+      return
+    }
+    if (!routerContract || !swapAmount || buttonDisable){
+      return
+    }
 
 
-    // loading.show(LoadingType.confirm, "swap")
-    // routerContract.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-    //   balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name],8)),
-    //   balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name]*(1-outScale),8)),
-    //   swapPath,
-    //   address??'',
-    //   getDeadLine(deadLine),
-    //   {
-    //     gasPrice:parseUnits(String(gasPrice),"gwei"),
-    //     gasLimit:1500000
-    //   })
-    // .then(async (response: TransactionResponse) => {
-    //   loading.show(LoadingType.pending, response.hash)
-    //   await response.wait();
-    //   loading.show(LoadingType.success, response.hash)
-    //   setSwapAmount('')
-    // })
-    // .catch((err: any) => {
-    //   console.log('err',err);
-    //   console.log('keys',Object.keys(err));
-    //   console.log('values',Object.values(err));
+    loading.show(LoadingType.confirm, "swap")
+    routerContract.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+      balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name],8)),
+      balanceToBigNumber(formatBalance(swapPrice.data?.[fromToken.name]*(1-outScale),8)),
+      swapPath,
+      address??'',
+      getDeadLine(deadLine),
+      {
+        gasPrice:parseUnits(String(gasPrice),"gwei"),
+        gasLimit:1500000
+      })
+    .then(async (response: TransactionResponse) => {
+      loading.show(LoadingType.pending, response.hash)
+      await response.wait();
+      loading.show(LoadingType.success, response.hash)
+      setSwapAmount('')
+    })
+    .catch((err: any) => {
+      console.log('err',err);
+      console.log('keys',Object.keys(err));
+      console.log('values',Object.values(err));
 
-    //   loading.show(LoadingType.error,err.transactionHash, err.reason || err.message)
-    // })
+      loading.show(LoadingType.error,err.transactionHash, err.reason || err.message)
+    })
   }
 
 
@@ -175,7 +174,7 @@ const Swap: NextPage = (props: any) => {
       </FlexViewBetween>
       <Line/>
       <SwapView>
-        <SwapToken editable={false} value={swapPrice.data[fromToken.name]} showToken={false} coin={fromToken.name} onChoose={onFromToken} onValueChange={onFromValueChange}/>
+        <SwapToken value={swapPrice.data[fromToken.name]} showToken={false} coin={fromToken.name} onChoose={onFromToken} onValueChange={onFromValueChange}/>
         <FlexViewColumn>
           <SpaceHeight height={0} webHeight={50}/>
           <EchangeIcon onClick={onExchange}>
@@ -187,8 +186,7 @@ const Swap: NextPage = (props: any) => {
       <FlexViewEnd>
         <TextSemiBold size={14} webSize={24} color='#FFA845'>1 {fromToken.name} ≈ {(swapPrice.data[toToken.name] / swapPrice.data[fromToken.name]) || "-"} {toToken.name}</TextSemiBold>
       </FlexViewEnd>
-      {/* <SwapButton disable={buttonDisable} onClick={onSwap}> */}
-      <SwapButton disable={true} onClick={onSwap}>
+      <SwapButton disable={buttonDisable} onClick={onSwap}>
         <TextExtraBold size={16} webSize={32} color={buttonDisable?'#fff':'#000'}>
           {approval != ApprovalState.APPROVED ? t('approve') : t('Swap')}
         </TextExtraBold>
@@ -255,9 +253,7 @@ const Swap: NextPage = (props: any) => {
         <Text size={16} webSize={30}>{t('Cumulative Total Burned Tokens')}</Text>
       </FlexView>
       <Line/>
-      {/* <SwapToken showToken={false} showBalance={false} coin={'OMNI'} editable={false} max={false} value={OMNIDestoryInfo.data?.destory}/> */}
-      <SwapToken showToken={false} showBalance={false} coin={'OMNI'} editable={false} max={false} value={'0'}/>
-
+      <SwapToken showToken={false} showBalance={false} coin={'OMNI'} editable={false} max={false} value={OMNIDestoryInfo.data?.destory}/>
     </Content>
   </Main>
 }

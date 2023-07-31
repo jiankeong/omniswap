@@ -163,7 +163,7 @@ const Earn: NextPage = (props: any) => {
                     </div> */}
                     <div className={styles.bottom_wrap}>
                         <div className={styles.left}>
-                            {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>0</div>}
+                            {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.waitReceive}</div>}
                             <div className={styles.desc}>{t("Pending Receipt")}</div>
                             <div style={{
                               background:parseInt(earnInfo.data?.waitReceive || '0') == 0?'#303030' : '#FFA845'

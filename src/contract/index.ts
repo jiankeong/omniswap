@@ -333,7 +333,7 @@ export function useNfInfo(id:number,index:number) {
 export function useMyNftListInfo() {
 
     const {address} = useAccount()
-    // const address = '0x1fabba9dffb82673f70db78359c04fd655d31c1e'
+    // const address = '0xeF1AC2BE61F8e7496F51B80663f5e3089f7988BC'
     const {chain} = useNetwork()
     const networkId = chain?.id
 
@@ -368,7 +368,7 @@ export function useMyNftListInfo() {
 export function useMyNftInfo(index:number) {
 
   const {address} = useAccount()
-  // const address = '0x1fabba9dffb82673f70db78359c04fd655d31c1e'
+  // const address = '0xeF1AC2BE61F8e7496F51B80663f5e3089f7988BC'
   const {chain} = useNetwork()
   const networkId = chain?.id
 
@@ -393,7 +393,6 @@ export function useMyNftInfo(index:number) {
 
       const activeStats = await OmniNFTPoolContract.activeStats(tokenOfOwnerByIndex)
 
-      
 
       let showID = Number(getType.toString())
       let nftPrice = 100
@@ -677,7 +676,9 @@ export function useSwapPrice(amount:number|string,tokenNames:string[],path:strin
               return;
           }
           try {
+            console.log('111')
             const res:any = await routerContract["getAmountsOut"](balanceToBigNumber(amount),path)
+            console.log('res===',res)
             // 左边输入调用out  右边输入调用in
             // const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
             const amountA = bigNumberToBalance(res[0])
@@ -690,7 +691,7 @@ export function useSwapPrice(amount:number|string,tokenNames:string[],path:strin
                 }
             })
           } catch (e:any) {
-            console.log('===',e)
+            console.log('useSwapPrice===',e)
           }
       };
       getResult()
@@ -801,7 +802,6 @@ export function useEarnInfo() {
       const myLpPower = await stakePoolContract.hashPower(address)
       const waitReceive = await stakePoolContract.earned(address)
       const received = await stakePoolContract.rewardClaimed(address)
-
 
       return {
         lpPower:formatBalance(bigNumberToBalance(lpPower)),

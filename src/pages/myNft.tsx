@@ -76,7 +76,7 @@ function MobileNftItem({index}:any){
   const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
   function onReceive(){
 
-    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0){
+    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0 || !nftInfo.data?.activeStats){
       return
     }
     sendTransaction.mutate({
@@ -118,7 +118,7 @@ function MobileNftItem({index}:any){
       <FlexViewColumn>
         <TextSemiBold size={14} webSize={32}>{nftInfo.data?.nftPrice} USDT</TextSemiBold>
         <SpaceHeight height={5}/>
-        <TextSemiBold size={14} webSize={32}>{nftInfo.data?.viewReward} OMNI</TextSemiBold>
+        <TextSemiBold size={14} webSize={32}>{nftInfo.data?.activeStats ? nftInfo.data?.viewReward : 0} OMNI</TextSemiBold>
         <SpaceHeight height={5}/>
         <TextSemiBold size={14} webSize={32}>{nftInfo.data?.claimedReward} OMNI</TextSemiBold>
         <SpaceHeight height={5}/>
@@ -130,7 +130,7 @@ function MobileNftItem({index}:any){
       </FlexViewColumn>
     </FlexViewBetween>
     <SpaceHeight height={20}/>
-    <ReceiveButton disable={nftInfo.data?.viewReward != 0} onClick={onReceive}>
+    <ReceiveButton disable={nftInfo.data?.viewReward != 0 && nftInfo.data?.activeStats} onClick={onReceive}>
       <Text size={14} webSize={32} color='#fff'>{t('Receive earnings')}</Text>
     </ReceiveButton>
     <SpaceHeight height={40}/>
@@ -169,7 +169,7 @@ function NFTItem({index}:any){
   const OmniNFTPoolContract = useOmniNFTPoolContract(OMNINFTPOOL_ADDRESSSES)
   function onReceive(){
 
-    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0){
+    if (!OmniNFTPoolContract || nftInfo.data?.viewReward == 0 || !nftInfo.data?.activeStats){
       return
     }
     sendTransaction.mutate({
@@ -195,10 +195,10 @@ function NFTItem({index}:any){
       </NFTSmallIcon>
     </FlexView>}
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.nftPrice} USDT</Text>
-    <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.viewReward} OMNI</Text>
+    <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.activeStats ? nftInfo.data?.viewReward : 0} OMNI</Text>
     <Text style={{flex:1,textAlign:'center'}} size={12} webSize={24}>{nftInfo.data?.claimedReward} OMNI</Text>
     <FlexViewCenter style={{flex:1}}>
-      <ReceiveButton disable={nftInfo.data?.viewReward != 0} onClick={onReceive}>
+      <ReceiveButton disable={nftInfo.data?.viewReward != 0 && nftInfo.data?.activeStats} onClick={onReceive}>
         <Text size={14} webSize={32} color='#000'>{t('Receive earnings')}</Text>
       </ReceiveButton>
     </FlexViewCenter>
