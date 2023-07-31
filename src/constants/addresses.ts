@@ -24,7 +24,7 @@ export const USDT_ADDRESSSES = {
 };
 
 export const OMNI_ADDRESSSES = {
-  [NetworkId.BSC]: "0xa68C1c2fAEdD8E2701A0326C07a9019aB7BCb944",
+  [NetworkId.BSC]: "0x0aA839B262AbC6399Fea5FB1478cdcb7e398c384",
 };
 // 0xa68C1c2fAEdD8E2701A0326C07a9019aB7BCb944  omni test
 // 0x8ce12f697088746a260ec8990dbde7a40a0a9b7c  omni pro
