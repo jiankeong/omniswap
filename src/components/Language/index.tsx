@@ -45,7 +45,7 @@ export default function Language() {
   }
   return(
     <LanIconView onClick={onChangeLan}>
-      <Text>{currentLan.toUpperCase()}</Text>
+      <Text>{(currentLan || 'en').toUpperCase()}</Text>
     </LanIconView>
   )
 }

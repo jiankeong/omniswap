@@ -103,11 +103,12 @@ const Swap: NextPage = (props: any) => {
   }
 
   function onSwap(){
-    if (approval != ApprovalState.APPROVED){
-      approveCallback()
+    if (!routerContract || !swapAmount || buttonDisable){
       return
     }
-    if (!routerContract || !swapAmount || buttonDisable){
+
+    if (approval != ApprovalState.APPROVED){
+      approveCallback()
       return
     }
 
