@@ -1,4 +1,4 @@
-import { OmniPool_ADDRESSSES, Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES, OmniStakePool_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES, OMNINFTPOOL_ADDRESSSES } from './../constants/addresses';
+import { OmniPool_ADDRESSSES, Relation_ADDRESSSES, OMINT_ADDRESSSES, ONFT_ADDRESSSES, OmniSwapRouter_ADDRESSSES, OmniStakePool_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES, OMNINFTPOOL_ADDRESSSES, OMINT3_ADDRESSSES } from './../constants/addresses';
 import {
     useDynamic721Contract,
     useONFTContract,
@@ -9,6 +9,7 @@ import {
     useTokenContract,
     useOmniNFTPoolContract,
     useOmniPoolContract,
+    useOMINT3Contract,
 } from './../hooks/useContract';
 import {useMutation, useQuery} from 'react-query';
 import {useCallback, useContext, useEffect, useState} from 'react'
@@ -454,7 +455,8 @@ export function usePauseStats() {
   const {chain} = useNetwork()
   const networkId = chain?.id
 
-  const nftContract = useOMINTContract(OMINT_ADDRESSSES)
+  // const nftContract = useOMINTContract(OMINT_ADDRESSSES)
+  const nftContract = useOMINT3Contract(OMINT3_ADDRESSSES)
 
   async function fetchData() {
 
@@ -498,14 +500,15 @@ export function useNFTOpenStatus(typeID:string,index:number) {
 
   const OMINTContract = useOMINTContract(OMINT_ADDRESSSES)
   const ONFTContract = useONFTContract(ONFT_ADDRESSSES)
+  const OMINT3Contract = useOMINT3Contract(OMINT3_ADDRESSSES)
 
   async function fetchData() {
 
-      if (!address || !OMINTContract || !ONFTContract) {
+      if (!address || !OMINTContract || !ONFTContract || !OMINT3Contract) {
           return
       }
       let open = false
-      const pauseStats = await OMINTContract.mintPause(typeID)
+      const pauseStats = await OMINT3Contract.mintPause(typeID)
       if (!pauseStats){
         const amountForType = await OMINTContract.amountForType(typeID)
         const totalSupplyOfType = await ONFTContract.totalSupplyOfType(typeID)
