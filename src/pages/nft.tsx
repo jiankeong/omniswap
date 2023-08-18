@@ -28,7 +28,7 @@ import { useSpring } from '@react-spring/web'
 import { isBrowser } from 'react-device-detect'
 import { useApprove, useInviteInfo, useNfInfo, useNFTOpenStatus, useSendTransaction } from '../contract'
 import { useOMINT3Contract } from '../hooks/useContract'
-import { OMINT3_ADDRESSSES, USDT_ADDRESSSES } from '../constants/addresses'
+import { OMINT3_ADDRESSSES, OMNI_ADDRESSSES, USDT_ADDRESSSES } from '../constants/addresses'
 import { ApprovalState, ZERO_ADDRESS } from '../common/Common'
 import { useModalContext } from '../provider/modalProvider'
 import GotoInviteModal from '../pagesComponents/GotoInviteModal'
@@ -207,7 +207,7 @@ function NFTItem({item,index,space}:any){
   const OMINT3Contract = useOMINT3Contract(OMINT3_ADDRESSSES)
 
   const sendTransaction = useSendTransaction()
-  const [approveStatus,approved] = useApprove(USDT_ADDRESSSES,OMINT3_ADDRESSSES,item.price)
+  const [approveStatus,approved] = useApprove(item.isOmni ? OMNI_ADDRESSSES : USDT_ADDRESSSES,OMINT3_ADDRESSSES,item.price)
 
   const inviteInfo = useInviteInfo()
   const modalContext = useModalContext()
@@ -241,7 +241,7 @@ function NFTItem({item,index,space}:any){
       approved()
       return
     }
-    if (nftInfo.data?.has){
+    if (nftInfo.data?.has && !item.isOmni){
       message.warning('has mint')
       return
     }
@@ -272,8 +272,12 @@ function NFTItem({item,index,space}:any){
 
   const Confirm = <ConfirButton able={NFTOpenStatus.data?.open} bgColor={item.shadow} onClick={onMint}>
     <Text size={16} webSize={32} color={NFTOpenStatus.data?.open?'#000':"#fff"}>
-      {nftInfo.data?.amount == 0 ? t('sold out') :
-      (approveStatus != ApprovalState.APPROVED ? t('buy') : (NFTOpenStatus.data?.open ? (nftInfo.data?.has ? t('has mint') : t('Confirm')) : t('not open')))
+      {
+        item.isOmni ? (nftInfo.data?.amount == 0 ? t('sold out') :
+        (approveStatus != ApprovalState.APPROVED ? t('buy') : (NFTOpenStatus.data?.open ? t('Confirm') : t('not open')))
+          ) : (nftInfo.data?.amount == 0 ? t('sold out') :
+          (approveStatus != ApprovalState.APPROVED ? t('buy') : (NFTOpenStatus.data?.open ? (nftInfo.data?.has ? t('has mint') : t('Confirm')) : t('not open')))
+        )
       }
       </Text>
   </ConfirButton>
