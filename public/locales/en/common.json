@@ -112,6 +112,12 @@
   "activated":"activated",
   "active":"activation",
   "My current invitation total computing power":"My current invitation total computing power",
-  "Invite Total Computing Power":"Invite Total Computing Power",
-  "parsing data":"Parsing data"
+  "Invite Total Computing Power":"Invite Power",
+  "parsing data":"Parsing data",
+  "Liquidity":"Liquidity",
+  "add Liquidity":"Add Liquidity",
+  "Estimated power":"Estimated increase in computing power",
+  "power":"power",
+  "At least 100U":"At least 100U",
+  "Mint Power":"Mining computing"
 }

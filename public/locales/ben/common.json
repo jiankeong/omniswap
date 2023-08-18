@@ -113,5 +113,11 @@
   "active":"অ্যাক্টিভেশন",
   "My current invitation total computing power":"আমার বর্তমান আমন্ত্রণ মোট কম্পিউটিং ক্ষমতা",
   "Invite Total Computing Power":"মোট কম্পিউটিং শক্তি আমন্ত্রণ",
-  "parsing data":"ডেটা পার্সিং"
+  "parsing data":"ডেটা পার্সিং",
+  "Liquidity":"তরলতা",
+  "add Liquidity":"তরলতা বৃদ্ধি করুন",
+  "Estimated power":"আনুমানিক বৃদ্ধি রচনা",
+  "power":"কম্পিউটিং",
+  "At least 100U":"কমপক্ষে 100u",
+  "Mint Power":"খনির কম্পিউটিং"
 }

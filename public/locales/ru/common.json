@@ -113,5 +113,11 @@
   "active":"активация",
   "My current invitation total computing power":"Суммарная вычислительная мощность моего текущего приглашения",
   "Invite Total Computing Power":"Пригласите Total Computing Power",
-  "parsing data":"парсинг данных"
+  "parsing data":"парсинг данных",
+  "Liquidity":"текучесть",
+  "add Liquidity":"Увеличить ликвидность",
+  "Estimated power":"Расчетное увеличение композиции",
+  "power":"Вычисление",
+  "At least 100U":"Не менее 100u",
+  "Mint Power":"Горнодобывающие вычисления"
 }

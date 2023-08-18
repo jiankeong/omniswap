@@ -32,14 +32,18 @@ import getContent from "@src/common/languageLib";
 import {useTab} from "@src/hooks";
 import Community from "@src/views/earn/community";
 import { TextBold } from '../../components/Text'
-import { useApprove, useEarnInfo, useSendTransaction } from '@/src/contract'
+import { useInviteInfo, useApprove, useEarnInfo, useSendTransaction } from '@/src/contract'
 import { useOmniStakePoolContract } from '@/src/hooks/useContract'
 import { OmniStakePool_ADDRESSSES, AddressMap, USDT_ADDRESSSES } from '@/src/constants/addresses'
-import { ApprovalState, balanceToBigNumber, bigNumberToBalance } from '@/src/common/Common'
+import { ApprovalState, balanceToBigNumber, bigNumberToBalance, ZERO_ADDRESS } from '@/src/common/Common'
 import PutUSDT from './PutUSDT'
-import { LoadingRow } from '@/src/components/Common'
+import { FlexViewCenterColumn, FlexViewEnd, LoadingRow } from '@/src/components/Common'
 import { useNetwork } from 'wagmi'
 import { NetworkId } from '@/src/networkDetails'
+import { LiquidityComponent } from '@/src/pages/swap'
+import {
+  ReceivepUTButton
+} from '../../styles/Earn'
 
 const Earn: NextPage = (props: any) => {
     const {t} = useTranslationLanguage()
@@ -50,6 +54,9 @@ const Earn: NextPage = (props: any) => {
     const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
     const earnInfo = useEarnInfo()
     const {chain = {id: 56}} = useNetwork()
+    const [showLiquidity,setShowLiquidity] = useState(false)
+    const inviteInfo = useInviteInfo()
+    const router = useRouter()
     useEffect(() => {
         getContent()
     }, [])
@@ -76,19 +83,22 @@ const Earn: NextPage = (props: any) => {
     }
 
     function onPutIn(){
-      modalContext.show(<PutUSDT onClose={modalContext.hidden} onPutIn={(amount:string)=>{
-        if (!omniStakePoolContract){
-          return
-        }
-        sendTransaction.mutate({
-          title: 'Put In USDT',
-          func: omniStakePoolContract?.stake,
-          args: [balanceToBigNumber(amount)],
-          onSuccess:()=>{
-            earnInfo.refetch()
-          }
-        })
-      }}/>)
+      // modalContext.show(<PutUSDT onClose={modalContext.hidden} onPutIn={(amount:string)=>{
+      //   if (!omniStakePoolContract){
+      //     return
+      //   }
+      //   sendTransaction.mutate({
+      //     title: 'Put In USDT',
+      //     func: omniStakePoolContract?.stake,
+      //     args: [balanceToBigNumber(amount)],
+      //     onSuccess:()=>{
+      //       earnInfo.refetch()
+      //     }
+      //   })
+      // }}/>)
+    }
+    function onShowLiqtu(){
+      modalContext.show(<LiquidityComponent/>)
     }
 
     if (tab.tabIndex === 1) {
@@ -181,8 +191,37 @@ const Earn: NextPage = (props: any) => {
                         <div className={styles.right}>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.received}</div>}
                             <div className={styles.desc}>{t("Benefits Receipt")}</div>
-                            <div className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
-                            <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                            <div style={{
+                              background:'#303030'
+                            }}  className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
+                            {/* <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                              window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
+                            }}>
+                                <div className={styles.txt_extract_record}>
+                                    {t("View Mining Pool Contract")}
+                                </div>
+                                <div className={styles.icon_arrow_right_gray}>
+                                    <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
+                                </div>
+
+                            </div> */}
+                        </div>
+                    </div>
+                    <ReceivepUTButton  onClick={()=>{
+                      if (inviteInfo.data?.inviter == ZERO_ADDRESS){
+                        router.push('community')
+                        return
+                      }
+                      // onShowLiqtu()
+                      setShowLiquidity(!showLiquidity)
+                      setTimeout(() => {
+                        scrollToBottom()
+                      }, 500);
+                    }}>
+                      <TextBold size={18} webSize={24}>{inviteInfo.data?.inviter == ZERO_ADDRESS ? t('To Bind') : t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}</TextBold>
+                    </ReceivepUTButton>
+                    <FlexViewEnd>
+                    <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
                               window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
                             }}>
                                 <div className={styles.txt_extract_record}>
@@ -193,13 +232,26 @@ const Earn: NextPage = (props: any) => {
                                 </div>
 
                             </div>
-                        </div>
-                    </div>
+                    </FlexViewEnd>
                 </div>
             </div>
+            {showLiquidity && 
+        <LiquidityComponent title={t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}/>
+        }
         </div>
     </Main>
 }
+const scrollToBottom = () => {
+  (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // 已经被卷掉的高度
+  const clientHeight = document.documentElement.clientHeight; // 浏览器高度
+  const scrollHeight = document.documentElement.scrollHeight; // 总高度
+  if (scrollHeight - 10 > currentScroll + clientHeight) {
+        window.requestAnimationFrame(smoothscroll);
+  window.scrollTo(0, currentScroll + (scrollHeight - currentScroll - clientHeight) / 2);
+  }
+  })();
+};
 export default Earn;
 {/*import Community from './community'*/
 }

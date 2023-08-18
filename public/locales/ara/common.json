@@ -113,5 +113,11 @@
   "active":"التنشيط",
   "My current invitation total computing power":"دعوتي الحالية مجموع قوة الحوسبة",
   "Invite Total Computing Power":"قم بدعوة إجمالي قوة الحوسبة",
-  "parsing data":"تحليل البيانات"
+  "parsing data":"تحليل البيانات",
+  "Liquidity":"سيولة",
+  "add Liquidity":"زيادة السيولة",
+  "Estimated power":"زيادة التكوين المقدرة",
+  "power":"الحوسبة",
+  "At least 100U":"ما لا يقل عن 100U",
+  "Mint Power":"الحوسبة التعدين"
 }

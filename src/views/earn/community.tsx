@@ -49,7 +49,7 @@ export default function Community(){
     if (!omniStakePoolContract || communityEarnInfo.isLoading){
       return
     }
-    if (!communityEarnInfo.data?.waitReceive || communityEarnInfo.data?.waitReceive == 0){
+    if (!communityEarnInfo.data?.waitReceive || Number(communityEarnInfo.data?.waitReceive) == 0){
       return
     }
     sendTransaction.mutate({

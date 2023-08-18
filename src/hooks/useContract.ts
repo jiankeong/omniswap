@@ -16,10 +16,12 @@ import {
   OmniSwapPair,
   OmniSwapRouter,
   OmniNFTPool,
-  OmniPool
+  OmniPool,
+  OMINT3
 } from "../typechain";
 import ONFT_ABI from "../abiJson/ONFT.json";
 import OMINT_ABI from "../abiJson/OMINT.json";
+import OMINT3_ABI from "../abiJson/OMINT3.json";
 
 import OMNIRelation_ABI from "../abiJson/OMNIRelation.json";
 
@@ -117,6 +119,7 @@ export const useDynamic721Contract = createDynamicContract<ERC721>(ERC721_ABI);
 export const useOMNIRelationontract = createDynamicContract<OMNIRelation>(OMNIRelation_ABI);
 export const useONFTContract = createDynamicContract<ONFT>(ONFT_ABI);
 export const useOMINTContract = createDynamicContract<OMINT>(OMINT_ABI);
+export const useOMINT3Contract = createDynamicContract<OMINT3>(OMINT3_ABI);
 
 
 export const useOmniStakePoolContract = createDynamicContract<OmniStakePool>(OmniStakePool_ABI);

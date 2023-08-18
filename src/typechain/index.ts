@@ -4,6 +4,7 @@
 export type { ERC20 } from "./ERC20";
 export type { ERC721 } from "./ERC721";
 export type { OMINT } from "./OMINT";
+export type { OMINT3 } from "./OMINT3";
 export type { OMNIRelation } from "./OMNIRelation";
 export type { ONFT } from "./ONFT";
 export type { OmniNFTPool } from "./OmniNFTPool";
@@ -16,6 +17,7 @@ export * as factories from "./factories";
 export { ERC20__factory } from "./factories/ERC20__factory";
 export { ERC721__factory } from "./factories/ERC721__factory";
 export { OMINT__factory } from "./factories/OMINT__factory";
+export { OMINT3__factory } from "./factories/OMINT3__factory";
 export { OMNIRelation__factory } from "./factories/OMNIRelation__factory";
 export { ONFT__factory } from "./factories/ONFT__factory";
 export { OmniNFTPool__factory } from "./factories/OmniNFTPool__factory";

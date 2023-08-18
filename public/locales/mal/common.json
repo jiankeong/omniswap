@@ -113,5 +113,11 @@
   "active":"Pengaktifan",
   "My current invitation total computing power":"Jumlah kuasa pengkomputeran jemputan semasa saya",
   "Invite Total Computing Power":"Jemput Jumlah Kuasa Pengkomputeran",
-  "parsing data":"menghurai data"
+  "parsing data":"menghurai data",
+  "Liquidity":"ketidakstabilan",
+  "add Liquidity":"Meningkatkan kecairan",
+  "Estimated power":"Anggaran peningkatan komposisi",
+  "power":"Pengkomputeran",
+  "At least 100U":"Sekurang -kurangnya 100U",
+  "Mint Power":"Pengkomputeran Perlombongan"
 }

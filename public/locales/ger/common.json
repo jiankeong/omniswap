@@ -113,5 +113,11 @@
   "active":"Aktivierung",
   "My current invitation total computing power":"Meine aktuelle Einladung ist totale Rechenleistung",
   "Invite Total Computing Power":"Laden Sie die gesamte Rechenleistung ein",
-  "parsing data":"Daten analysieren"
+  "parsing data":"Daten analysieren",
+  "Liquidity":"Flüssigkeit",
+  "add Liquidity":"Erhöhen Sie die Liquidität",
+  "Estimated power":"Geschätzte Zunahmezusammensetzung",
+  "power":"Computer",
+  "At least 100U":"Mindestens 100u",
+  "Mint Power":"Bergbaus Computing"
 }

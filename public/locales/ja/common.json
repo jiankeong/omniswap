@@ -113,7 +113,13 @@
   "active":"活性化",
   "My current invitation total computing power":"私の現在の招待状の総計算能力",
   "Invite Total Computing Power":"総コンピューティング能力を招待",
-  "parsing data":"データの解析"
+  "parsing data":"データの解析",
+  "Liquidity":"流動性",
+  "add Liquidity":"流動性を高めます",
+  "Estimated power":"推定された増加組成",
+  "power":"コンピューティング",
+  "At least 100U":"少なくとも100U",
+  "Mint Power":"マイニングコンピューティング"
 }
 
 

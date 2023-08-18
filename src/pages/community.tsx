@@ -150,24 +150,21 @@ const Community: NextPage = (props: any) => {
             <Text size={16} webSize={24}>{t('My Inviters Address')}</Text>
           </FlexView>
           <SpaceHeight height={20} webHeight={20}/>
+
           <BGView style={{justifyContent:'center'}}>
             {
               inviteInfo.isLoading ? <LoadingRow/> : (inviteInfo.data?.inviter != ZERO_ADDRESS ? <Text color='#868AAE' size={14} webSize={24}>{formatAccount(inviteInfo.data?.inviter || '')}</Text> :
               <AddressInput placeholder={t('your Inviters Address')} value={inviteCode} onChange={onInviteCode}/>)
             }
-          </BGView>
-          {(inviteInfo.data?.inviter == ZERO_ADDRESS || !inviteInfo.data?.inviter) && <FlexViewEnd>
+            {(inviteInfo.data?.inviter == ZERO_ADDRESS || !inviteInfo.data?.inviter) && <FlexViewEnd>
             <ConfirButton onClick={onBind}>
               <Text color='#000' size={16} webSize={32}>{t('To Bind')}</Text>
             </ConfirButton>
           </FlexViewEnd>}
+          </BGView>
+
           <SpaceHeight height={20}/>
           {isBrowser && myinvitationpower}
-
-
-
-
-
 
         </FlexViewColumn>
         <InviteView>
@@ -232,8 +229,10 @@ function AddressList({currency}:any){
   const inviteinfo = useInvList()
   return <AddressView>
     <AddressTitle>
-      <TextSemiBold size={12} webSize={24} color='#010101'>{t('Address')}</TextSemiBold>
-      <TextSemiBold style={{lineHeight:autoWidthVW(20),width:'60%',textAlign:'right'}} size={12} webSize={24} color='#010101'>{t('Invite Total Computing Power')}</TextSemiBold>
+      <TextSemiBold style={{flex:1}} size={12} webSize={24} color='#010101'>{t('Address')}</TextSemiBold>
+      <TextSemiBold style={{flex:1,lineHeight:autoWidthVW(20),textAlign:'center'}} size={12} webSize={24} color='#010101'>{t('Mint Power')}</TextSemiBold>
+      <TextSemiBold style={{flex:1,lineHeight:autoWidthVW(20),textAlign:'center'}} size={12} webSize={24} color='#010101'>T{t('power')}</TextSemiBold>
+      <TextSemiBold style={{flex:1,lineHeight:autoWidthVW(20),textAlign:'right'}} size={12} webSize={24} color='#010101'>{t('Invite Total Computing Power')}</TextSemiBold>
     </AddressTitle>
     {
       inviteinfo.isLoading?<LoadingRow width='100%'/> : (inviteinfo.data?.list?.length == 0 ? <NotData/> : inviteinfo.data?.list.map((item:any,index:number)=>{
@@ -250,8 +249,17 @@ function ListItem({item}:any){
   const powerInfo = useUserPower(item)
   return <AddressViewItem>
     <FlexViewBetween>
-      <Text size={12} webSize={24}>{formatAccount(item)}</Text>
-      {powerInfo.isLoading ? <LoadingRow width='30%'/> : <Text size={12} webSize={24}>{powerInfo.data?.teamPower} USDT</Text>}
+      <Text style={{flex:1}} size={12} webSize={24}>{formatAccount(item,2)}</Text>
+      <FlexViewCenter style={{flex:1}}>
+        {powerInfo.isLoading ? <LoadingRow width='10%'/> : <Text size={12} webSize={24}>{powerInfo.data?.hashPower} U</Text>}
+      </FlexViewCenter>
+      <FlexViewCenter style={{flex:1}}>
+        {powerInfo.isLoading ? <LoadingRow width='10%'/> : <Text size={12} webSize={24}>{powerInfo.data?.tPower} U</Text>}
+      </FlexViewCenter>
+      <FlexViewEnd style={{flex:1,textAlign:'center'}}>
+        {powerInfo.isLoading ? <LoadingRow width='10%'/> : <Text size={12} webSize={24}>{powerInfo.data?.teamPower} U</Text>}
+      </FlexViewEnd>
+
     </FlexViewBetween>
   </AddressViewItem>
 }

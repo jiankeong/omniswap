@@ -8,13 +8,7 @@ import type { OmniStakePool, OmniStakePoolInterface } from "../OmniStakePool";
 
 const _abi = [
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "starttime_",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
   },
@@ -229,6 +223,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "_getSwapPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "_getTokenPrice",
     outputs: [
       {
@@ -249,6 +256,54 @@ const _abi = [
       },
     ],
     name: "addAdmin",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "tokenA",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "tokenB",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amountADesired",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBDesired",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountAMin",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amountBMin",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "deadline",
+        type: "uint256",
+      },
+    ],
+    name: "addLiquidity",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -494,6 +549,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "deadAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -716,6 +784,19 @@ const _abi = [
       },
     ],
     name: "lastDisClaimed",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastReleaseAmount",
     outputs: [
       {
         internalType: "uint256",
@@ -1291,6 +1372,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "swapAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -1340,13 +1434,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "takeInitLp",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -1427,42 +1514,11 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "_newHolder",
-        type: "address",
-      },
-    ],
-    name: "transferInitHolder",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "_newOwner",
         type: "address",
       },
     ],
     name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "addr",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "unstakePower",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

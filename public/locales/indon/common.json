@@ -113,5 +113,11 @@
   "active":"pengaktifan",
   "My current invitation total computing power":"Daya komputasi total undangan saya saat ini",
   "Invite Total Computing Power":"Undang Kekuatan Komputasi Total",
-  "parsing data":"mengurai data"
+  "parsing data":"mengurai data",
+  "Liquidity":"ketidakstabilan",
+  "add Liquidity":"Tingkatkan likuiditas",
+  "Estimated power":"Perkiraan peningkatan komposisi",
+  "power":"Komputasi",
+  "At least 100U":"Setidaknya 100U",
+  "Mint Power":"Komputasi Pertambangan"
 }

@@ -82,13 +82,23 @@ export const ReceiveButton = styled(FlexViewCenter)`
   @media (max-width: 768px) {
     width:100%;
     padding:0;
-    height:${autoWidthVW(32)};
+    height:${autoWidthVW(44)};
     margin-left:0
   };
   :hover {
     opacity:0.8
   }
 `
+export const ReceivepUTButton = styled(ReceiveButton)`
+  width:100%;
+  height: ${autoWidthVW(80)};
+  @media (max-width: 768px) {
+    height:44px
+  }
+`
+
+
+
 export const InviteButton = styled(ReceiveButton)`
   width:fit-content;
   padding:0 ${autoWidthVW(48)};

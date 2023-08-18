@@ -60,7 +60,7 @@ export const Content = styled(FlexViewCenterColumn)`
   border:1px solid #444E68;
   @media (max-width: 768px) {
     width:90%;
-    margin-top:${autoWidthVW(200)};
+    /* margin-top:${autoWidthVW(200)}; */
     padding:${autoWidthVW(24)} ${autoWidthVW(22)};
   }
 `
@@ -104,7 +104,8 @@ export const EchangeIcon = styled(FlexView)`
   };
   :hover {
     opacity:0.8
-  }
+  };
+  cursor: pointer;
 `
 export const SwapButton = styled(FlexViewCenter)<{
   disable:Boolean
@@ -160,4 +161,34 @@ export const SwapView = styled(FlexViewBetween)`
   @media (max-width: 768px) {
     flex-direction:column;
   };
+`
+export const SegmentView = styled(FlexView)`
+  width:${autoWidthVW(1400)};
+  @media (max-width: 768px) {
+    width:90%;
+    margin-top: ${autoWidthVW(200)};
+  };
+`
+export const Segment = styled(FlexView)`
+  height:${autoWidthVW(50)};
+  border: 1px solid #FFA845;
+  margin-bottom: ${autoWidthVW(40)};
+  border-radius: ${autoWidthVW(10)};
+  @media (max-width: 768px) {
+    height:${autoWidthVW(44)};
+    margin-bottom: ${autoWidthVW(20)};
+    border-radius: ${autoWidthVW(6)};
+  }
+`
+export const SegmentItem = styled(FlexViewCenter)<{
+  select:boolean
+}>`
+  width:fit-content;
+  height:100%;
+  padding: 0 ${autoWidthVW(50)};
+  background-color: ${({select})=>select ? '#FFA845' : 'transparent'};
+  cursor: pointer;
+  @media (max-width: 768px) {
+    padding: 0 ${autoWidthVW(20)};
+  }
 `

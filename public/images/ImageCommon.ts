@@ -29,6 +29,7 @@ const Rank = '/images/Rank.png';
 const Rankbg = '/images/Rankbg.png';
 const Refresh = '/images/Refresh.png';
 const SWAP = '/images/SWAP.png';
+const add = '/images/add.png';
 const arrowdown = '/images/arrowdown.png';
 const arrowdownblack = '/images/arrowdownblack.png';
 const arrowright = '/images/arrowright.png';
@@ -107,6 +108,7 @@ const ImageCommon:any = {
   Rankbg,
   Refresh,
   SWAP,
+  add,
   arrowdown,
   arrowdownblack,
   arrowright,

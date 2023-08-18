@@ -99,18 +99,20 @@ export const Line = styled.div`
 `
 export const ConfirButton = styled(FlexViewCenter)`
   height:${autoWidthVW(64)};
-  width:${autoWidthVW(240)};
+  width:fit-content;
+  padding:0 ${autoWidthVW(40)};
   border-radius: ${autoWidthVW(10)};
   background:#FFA845;
-  margin-top:${autoWidthVW(30)};
+  /* margin-top:${autoWidthVW(30)}; */
   :hover {
     opacity:0.8
   };
   @media (max-width: 768px) {
-    height:${autoWidthVW(40)};
+    height:${autoWidthVW(34)};
     border-radius: ${autoWidthVW(8)};
-    width:100%;
-    margin-top:${autoWidthVW(24)};
+    width:fit-content;
+    padding:0 ${autoWidthVW(10)};
+    /* margin-top:${autoWidthVW(24)}; */
   };
   cursor:pointer
 `

@@ -24,11 +24,11 @@ import {
 } from '../styles/NFT'
 import { useRouter } from 'next/router'
 import { message } from 'antd'
-import { useSpring, animated } from '@react-spring/web'
+import { useSpring } from '@react-spring/web'
 import { isBrowser } from 'react-device-detect'
-import { useApprove, useInviteInfo, useMyNftListInfo, useNfInfo, useNFTOpenStatus, usePauseStats, useSendTransaction } from '../contract'
-import { useNFTContract, useOMINTContract } from '../hooks/useContract'
-import { OMINT_ADDRESSSES, USDT_ADDRESSSES } from '../constants/addresses'
+import { useApprove, useInviteInfo, useNfInfo, useNFTOpenStatus, useSendTransaction } from '../contract'
+import { useOMINT3Contract } from '../hooks/useContract'
+import { OMINT3_ADDRESSSES, USDT_ADDRESSSES } from '../constants/addresses'
 import { ApprovalState, ZERO_ADDRESS } from '../common/Common'
 import { useModalContext } from '../provider/modalProvider'
 import GotoInviteModal from '../pagesComponents/GotoInviteModal'
@@ -44,12 +44,30 @@ const nfts = [
     levelIcon:ImageCommon.NFT_lev_1
   },
   {
+    id:1,
+    limit:'Limit one purchase per address',
+    shadow:'#8187F5',
+    space:100,
+    icon:ImageCommon.NFT_1,
+    levelIcon:ImageCommon.NFT_lev_1,
+    isOmni:true
+  },
+  {
     id:2,
     limit:'Limit one purchase per address',
     shadow:'#80FB73',
     space:-100,
     icon:ImageCommon.NFT_2,
     levelIcon:ImageCommon.NFT_lev_2
+  },
+  {
+    id:2,
+    limit:'Limit one purchase per address',
+    shadow:'#80FB73',
+    space:-100,
+    icon:ImageCommon.NFT_2,
+    levelIcon:ImageCommon.NFT_lev_2,
+    isOmni:true
   },
   {
     id:3,
@@ -60,12 +78,30 @@ const nfts = [
     levelIcon:ImageCommon.NFT_lev_3
   },
   {
+    id:3,
+    limit:'Limit one purchase per address',
+    shadow:'#FFA845',
+    space:100,
+    icon:ImageCommon.NFT_3,
+    levelIcon:ImageCommon.NFT_lev_3,
+    isOmni:true
+  },
+  {
     id:4,
     limit:'Limit one purchase per address',
     shadow:"#00FF3880",
     space:-100,
     icon:ImageCommon.NFT_4,
     levelIcon:ImageCommon.NFT_lev_4
+  },
+  {
+    id:4,
+    limit:'Limit one purchase per address',
+    shadow:"#00FF3880",
+    space:-100,
+    icon:ImageCommon.NFT_4,
+    levelIcon:ImageCommon.NFT_lev_4,
+    isOmni:true
   },
   {
     id:5,
@@ -76,6 +112,15 @@ const nfts = [
     levelIcon:ImageCommon.NFT_lev_5
   },
   {
+    id:5,
+    limit:'Limit one purchase per address',
+    shadow:"#B9CCFF",
+    space:100,
+    icon:ImageCommon.NFT_5,
+    levelIcon:ImageCommon.NFT_lev_5,
+    isOmni:true
+  },
+  {
     id:6,
     limit:'Limit one purchase per address',
     shadow:"#DF5EFF80",
@@ -84,12 +129,30 @@ const nfts = [
     levelIcon:ImageCommon.NFT_lev_6
   },
   {
+    id:6,
+    limit:'Limit one purchase per address',
+    shadow:"#DF5EFF80",
+    space:-100,
+    icon:ImageCommon.NFT_6,
+    levelIcon:ImageCommon.NFT_lev_6,
+    isOmni:true
+  },
+  {
     id:7,
     limit:'Limit one purchase per address',
     shadow:"#37FFDB",
     space:100,
     icon:ImageCommon.NFT_7,
     levelIcon:ImageCommon.NFT_lev_7
+  },
+  {
+    id:7,
+    limit:'Limit one purchase per address',
+    shadow:"#37FFDB",
+    space:100,
+    icon:ImageCommon.NFT_7,
+    levelIcon:ImageCommon.NFT_lev_7,
+    isOmni:true
   }
 ]
 
@@ -141,10 +204,10 @@ function NFTItem({item,index,space}:any){
     to: { marginLeft: 0 }
   })
   const {t} = useTranslationLanguage()
-  const OMNITContract = useOMINTContract(OMINT_ADDRESSSES)
+  const OMINT3Contract = useOMINT3Contract(OMINT3_ADDRESSSES)
 
   const sendTransaction = useSendTransaction()
-  const [approveStatus,approved] = useApprove(USDT_ADDRESSSES,OMINT_ADDRESSSES,item.price)
+  const [approveStatus,approved] = useApprove(USDT_ADDRESSSES,OMINT3_ADDRESSSES,item.price)
 
   const inviteInfo = useInviteInfo()
   const modalContext = useModalContext()
@@ -171,11 +234,11 @@ function NFTItem({item,index,space}:any){
       })
       return
     }
-    if (!OMNITContract){
+    if (!OMINT3Contract){
       return
     }
     if (approveStatus != ApprovalState.APPROVED){
-      approved() 
+      approved()
       return
     }
     if (nftInfo.data?.has){
@@ -185,7 +248,7 @@ function NFTItem({item,index,space}:any){
 
     sendTransaction.mutate({
       title:'Mint',
-      func:OMNITContract.Mint,
+      func:OMINT3Contract.OMNIMint,
       args:[item.id],
       onSuccess: () =>{
         nftInfo.refetch()
@@ -199,7 +262,7 @@ function NFTItem({item,index,space}:any){
     <Image src={item.icon} layout='fill'/>
   </NFTIcon>
   const Info = <FlexViewColumn>
-    {nftInfo.isLoading ? <LoadingRow width='100px'/> : <Text size={16} webSize={36}>Price:{nftInfo.data?.price} USDT</Text>}
+    {nftInfo.isLoading ? <LoadingRow width='100px'/> : <Text size={16} webSize={36}>Price:{item.isOmni ? nftInfo.data?.omniPrice : nftInfo.data?.price} {item.isOmni ? 'OMNI' : 'USDT'}</Text>}
     <SpaceHeight height={5}/>
     {nftInfo.isLoading ? <LoadingRow width='100px'/> : <TextExtraLight color='#989DAA' size={14} webSize={24}>Amount:{nftInfo.data?.amount}</TextExtraLight>}
   </FlexViewColumn>
@@ -207,7 +270,6 @@ function NFTItem({item,index,space}:any){
     <Image src={item.levelIcon} layout='fill'/>
   </NFTLevelIcon>
 
-  console.log('NFTOpenStatus.data?.open==',NFTOpenStatus.data?.open)
   const Confirm = <ConfirButton able={NFTOpenStatus.data?.open} bgColor={item.shadow} onClick={onMint}>
     <Text size={16} webSize={32} color={NFTOpenStatus.data?.open?'#000':"#fff"}>
       {nftInfo.data?.amount == 0 ? t('sold out') :

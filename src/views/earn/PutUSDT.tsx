@@ -13,7 +13,7 @@ import { useApprove } from "@/src/contract"
 export default function PutUSDT({onClose,onPutIn}:any){
   const {t} = useTranslationLanguage()
   const [putIn,setPutIn] = useState('')
-  const [approve,approveCallBack] = useApprove(USDT_ADDRESSSES,OmniStakePool_ADDRESSSES)
+  const [approve,approveCallBack] = useApprove(USDT_ADDRESSSES,OmniStakePool_ADDRESSSES,putIn)
 
   function onChange(e:any){
     setPutIn(e.target.value)

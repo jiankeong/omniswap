@@ -113,5 +113,11 @@
   "active":"활성화",
   "My current invitation total computing power":"나의 현재 초대 총 컴퓨팅 파워",
   "Invite Total Computing Power":"초대 총 컴퓨팅 파워",
-  "parsing data":"데이터 분석"
+  "parsing data":"데이터 분석",
+  "Liquidity":"유동성",
+  "add Liquidity":"유동성 증가",
+  "Estimated power":"추정 된 증가 조성",
+  "power":"컴퓨팅",
+  "At least 100U":"최소 100U",
+  "Mint Power":"채굴 컴퓨팅"
 }

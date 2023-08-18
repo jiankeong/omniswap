@@ -21,6 +21,29 @@
             display: none;
         }
 }
+.txt_extract_record {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: resize(24);
+  line-height: resize(30);
+
+  color: #D3DEFC;
+    @media (max-width: 768px) {
+      font-size: 12px;
+      line-height: 15px;
+
+    }
+}
+.icon_arrow_right_gray {
+  width: resize(32);
+  height: resize(32);
+  position: relative;
+    @media (max-width: 768px) {
+            width: 16px;
+      height: 16px;
+        }
+}
 .container {
   margin-top:resize(96);
   position: relative;
@@ -327,15 +350,15 @@
         border-radius: resize(16);
         display: flex;
         align-items: center;
+        flex-direction: column;
         justify-content: center;
         font-family: 'Outfit';
         font-style: normal;
         font-weight: 500;
-        font-size: resize(32);
-        line-height: resize(48);
+        font-size: resize(26);
+        line-height: resize(80);
         /* identical to box height, or 150% */
 
-        text-align: right;
 
         color: #010101;
         margin-top: resize(43);
@@ -343,8 +366,8 @@
         cursor: pointer;
           @media (max-width: 768px) {
             height: 44px;
-            font-size: 16px;
-            line-height: 20px;
+            font-size: 12px;
+            line-height: 44px;
             border-radius: 8px;
               }
       }
@@ -497,6 +520,32 @@
       @media (max-width: 768px) {
         font-size: 16px;
         line-height: 28px;
+          }
+  }
+  .putInButton {
+    height: resize(80);
+    background: linear-gradient(180deg, #BDCFFF 0%, #859FE3 100%);
+    border-radius: resize(16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 500;
+    font-size: resize(26);
+    line-height: resize(80);
+    /* identical to box height, or 150% */
+
+    width: 100%;
+    color: #010101;
+    margin-top: resize(43);
+    margin-bottom: resize(28);
+    cursor: pointer;
+      @media (max-width: 768px) {
+        height: 44px;
+        font-size: 12px;
+        line-height: 44px;
+        border-radius: 8px;
           }
   }
 }

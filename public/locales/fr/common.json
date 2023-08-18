@@ -113,5 +113,10 @@
   "active":"Activation",
   "My current invitation total computing power":"Puissance de calcul totale de mon invitation actuelle",
   "Invite Total Computing Power":"Invitez la puissance de calcul totale",
-  "parsing data":"analyse des données"
+  "parsing data":"analyse des données",
+  "Liquidity":"fluidité",
+  "add Liquidity":"augmenter la liquidité",
+  "Estimated power":"Augmentation estimée de la puissance de calcul",
+  "Mint Power":"Informatique minière",
+  "Power":"L'informatique"
 }

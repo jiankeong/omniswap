@@ -48,7 +48,6 @@ export function useApprove(tokenAddressMap: AddressMap, spenderAddressMap: Addre
     const token = useDynamicTokenContract(tokenAddressMap, true);
     const {data: allowance} = useContractAllowance(tokenAddressMap, spenderAddressMap);
     const costBigNumber = balanceToBigNumber(cost || '1')
-
     const [approvalState, setApproveState] = useState(ApprovalState.UNKNOWN);
     useEffect(() => {
         if (!allowance) {
@@ -60,7 +59,7 @@ export function useApprove(tokenAddressMap: AddressMap, spenderAddressMap: Addre
             // console.log(currentAllowance,"currentAllowance")
             setApproveState(ApprovalState.APPROVED);
         }
-    }, [allowance])
+    }, [allowance,cost])
     const approve = useCallback(async (): Promise<void> => {
         const contractAddress = spenderAddressMap[chain.id as keyof typeof spenderAddressMap];
         if (approvalState !== ApprovalState.NOT_APPROVED) {
@@ -317,7 +316,8 @@ export function useNfInfo(id:number,index:number) {
 
 
       return {
-        price:bigNumberToBalance(price),
+        price:Number(bigNumberToBalance(price)),
+        omniPrice:Number(bigNumberToBalance(price)) / 2,
         amount:leftAmount,
         has
       }
@@ -396,6 +396,7 @@ export function useMyNftInfo(index:number) {
 
       let showID = Number(getType.toString())
       let nftPrice = 100
+      let omniPrice = 50
       let nftImg = 'NFT_1'
 
       if (showID == 1){
@@ -427,13 +428,16 @@ export function useMyNftInfo(index:number) {
         nftImg = 'NFT_7'
       }
 
+      omniPrice = nftPrice / 2
+
       return {
         nftPrice,
         nftImg,
         tokenOfOwnerByIndex:tokenOfOwnerByIndex,
         viewReward:Number(formatBalance(bigNumberToBalance(viewReward))),
         claimedReward:Number(formatBalance(bigNumberToBalance(claimedReward))),
-        activeStats
+        activeStats,
+        omniPrice
       }
   }
 
@@ -676,11 +680,9 @@ export function useSwapPrice(amount:number|string,tokenNames:string[],path:strin
               return;
           }
           try {
-            console.log('111')
-            const res:any = await routerContract["getAmountsOut"](balanceToBigNumber(amount),path)
-            console.log('res===',res)
+            // const res:any = await routerContract["getAmountsOut"](balanceToBigNumber(amount),path)
             // 左边输入调用out  右边输入调用in
-            // const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
+            const res:any = await routerContract[!reverse?"getAmountsOut":"getAmountsIn"](balanceToBigNumber(amount),path)
             const amountA = bigNumberToBalance(res[0])
             const amountB = bigNumberToBalance(res[res.length-1])
             setInfo({
@@ -822,6 +824,7 @@ export function useEarnInfo() {
 
 export function useCommunityEarnInfo() {
   const {address} = useAccount()
+  // const address = '0xeF1AC2BE61F8e7496F51B80663f5e3089f7988BC'
   const {chain} = useNetwork()
   const networkId = chain?.id
 
@@ -853,20 +856,24 @@ export function useCommunityEarnInfo() {
       const disReward_2_number = Number(formatBalance(bigNumberToBalance(disReward_2)))
       const disReward_3_number = Number(formatBalance(bigNumberToBalance(disReward_3)))
       const disReward_4_number = Number(formatBalance(bigNumberToBalance(disReward_4)))
+      console.log('==disReward_1_number====',disReward_1_number)
+      console.log('==disReward_2_number====',disReward_2_number)
+      console.log('==disReward_3_number====',disReward_3_number)
+      console.log('==disReward_4_number====',disReward_4_number)
 
       return {
-        waitReceive:disReward_1_number + disReward_2_number + disReward_3_number + disReward_4_number,
-        received:formatBalance(bigNumberToBalance(totalDisClaimed)),
-        lastMint:formatBalance(bigNumberToBalance(lastDisClaimed)),
-        myLastMint:formatBalance(bigNumberToBalance(lastDisClaimed)),
-        communityTotal:formatBalance(bigNumberToBalance(totalDisClaimed)),
+        waitReceive:formatBalance(disReward_1_number + disReward_2_number + disReward_3_number + disReward_4_number,2),
+        received:formatBalance(bigNumberToBalance(totalDisClaimed),2),
+        lastMint:formatBalance(bigNumberToBalance(lastDisClaimed),2),
+        myLastMint:formatBalance(bigNumberToBalance(lastDisClaimed),2),
+        communityTotal:formatBalance(bigNumberToBalance(totalDisClaimed),2),
         lastDirect:'-',
-        myPower:formatBalance(bigNumberToBalance(myPower)),
-        myNodePower:formatBalance(bigNumberToBalance(myNodePower)),
-        disReward_1:formatBalance(bigNumberToBalance(disReward_1)),
-        disReward_2:formatBalance(bigNumberToBalance(disReward_2)),
-        disReward_3:formatBalance(bigNumberToBalance(disReward_3)),
-        disReward_4:formatBalance(bigNumberToBalance(disReward_4)),
+        myPower:formatBalance(bigNumberToBalance(myPower),2),
+        myNodePower:formatBalance(bigNumberToBalance(myNodePower),2),
+        disReward_1:formatBalance(bigNumberToBalance(disReward_1),2),
+        disReward_2:formatBalance(bigNumberToBalance(disReward_2),2),
+        disReward_3:formatBalance(bigNumberToBalance(disReward_3),2),
+        disReward_4:formatBalance(bigNumberToBalance(disReward_4),2),
       }
   }
 
@@ -912,8 +919,14 @@ export function useUserPower(userAddress:string) {
           return
       }
       const teamPower = await omniStakePoolContract.teamPower(userAddress)
+      const hashPower = await omniStakePoolContract.hashPower(userAddress)
+      const tPower = await omniStakePoolContract.tPower(userAddress)
+
       return {
-        teamPower:formatBalance(bigNumberToBalance(teamPower))
+        teamPower:formatBalance(bigNumberToBalance(teamPower),2),
+        hashPower:formatBalance(bigNumberToBalance(hashPower),2),
+        tPower:formatBalance(bigNumberToBalance(tPower),2),
+
       }
   }
 
@@ -936,6 +949,8 @@ export function useNodeAddressAmount(callBack:any) {
       }
 
       let nodePorwer:any[] = []
+      let temp:any[] = []
+
       for (let index = 0; index < nodeAddress.length; index++) {
         const element = nodeAddress[index];
         const viewNAmount = await omniStakePoolContract.viewNAmount(element)
@@ -944,10 +959,24 @@ export function useNodeAddressAmount(callBack:any) {
           address:element,
           amount:viewNAmountNumber
         })
+
+        // if (Number(viewNAmountNumber) > 0){
+        //   temp.push({
+        //     address:element,
+        //     amount:viewNAmountNumber
+        //   })
+        // }
+
         callBack && callBack(index)
       }
 
+
+
       nodePorwer.sort((pre:any,next:any)=>Number(next.amount) - Number(pre.amount))
+
+      // temp.sort((pre:any,next:any)=>Number(next.amount) - Number(pre.amount))
+
+      // console.log('tem===',temp)
 
       let currentIndex = 0
       nodePorwer.map((it:any,index:number)=>{
@@ -969,3 +998,65 @@ export function useNodeAddressAmount(callBack:any) {
   })
 }
 
+
+
+
+export function useMayAddPower(usdt:number,omni:number) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+
+  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  async function fetchData() {
+
+      if (!address || !omniStakePoolContract) {
+          return
+      }
+      const dayPower = await omniStakePoolContract.dayPower()
+      const dayPowerNumber = Number(bigNumberToBalance(dayPower))
+      const price = await omniStakePoolContract._getSwapPrice()
+      const priceNumber = Number(bigNumberToBalance(price))
+
+      const power = (Number(usdt) + Number(omni)*priceNumber)*1.05 * dayPowerNumber;
+
+      return {
+        power:formatBalance(power)
+      }
+  }
+
+  return useQuery(["useMayAddPower" + usdt + '' + omni], fetchData, {
+      enabled:!!usdt && !!omni,
+      // refetchInterval: 1000 * 60 * 60 * 12,
+  })
+}
+
+export function useGetOMNI(amount:number|string) {
+  const {address} = useAccount()
+  const {chain} = useNetwork()
+  const [data,setData] = useState<any>({
+    isLoading:true,
+    data:{}
+  })
+  const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  useEffect(()=>{
+    async function getData(){
+      if (!address || !omniStakePoolContract) {
+        return {
+          isLoading:false,
+          data:{}
+        }
+    }
+      const price = await omniStakePoolContract._getSwapPrice()
+      const priceNumber = Number(bigNumberToBalance(price))
+      console.log('priceNumber==',priceNumber)
+      setData({
+        isLoading:false,
+        data:{
+          USDT: amount,
+          OMNI: formatBalance(Number(amount) / priceNumber)
+        }
+      })
+    }
+    getData()
+  },[amount])
+  return data
+}

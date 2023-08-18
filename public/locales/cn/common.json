@@ -113,5 +113,11 @@
   "active":"激活",
   "My current invitation total computing power":"我的当前邀请总算力",
   "Invite Total Computing Power":"邀请总算力",
-  "parsing data":"正在解析数据"
+  "parsing data":"正在解析数据",
+  "Liquidity":"流动性",
+  "add Liquidity":"增加流动性",
+  "Estimated power":"预估增加算力",
+  "power":"算力",
+  "At least 100U":"至少 100U",
+  "Mint Power":"挖矿算力"
 }

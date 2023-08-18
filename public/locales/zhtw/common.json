@@ -110,5 +110,8 @@
   "sold out":"已售完",
   "status":"狀態",
   "activated":"已激活",
-  "active":"激活"
+  "active":"激活",
+  "Liquidity":"流動性",
+  "add Liquidity":"增加流動性",
+  "Estimated power":"預估增加算力"
 }

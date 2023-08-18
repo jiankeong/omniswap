@@ -113,5 +113,11 @@
   "active":"kích hoạt",
   "My current invitation total computing power":"Lời mời hiện tại của tôi tổng sức mạnh tính toán",
   "Invite Total Computing Power":"Mời Tổng Điện Toán",
-  "parsing data":"phân tích dữ liệu"
+  "parsing data":"phân tích dữ liệu",
+  "Liquidity":"lưu động",
+  "add Liquidity":"Tăng thanh khoản",
+  "Estimated power":"Ước tính thành phần tăng",
+  "power":"Tin học",
+  "At least 100U":"Ít nhất 100U",
+  "Mint Power":"Khai thác điện toán"
 }

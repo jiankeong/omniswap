@@ -37,7 +37,6 @@ const NodeRanking: NextPage = (props: any) => {
   const {address} = useAccount()
   const nodeInfo = useNodeAddressAmount(nodeAmountProgress)
   const [currentIndex,setCurrentIndex] = useState(0)
-
   function nodeAmountProgress(index:number){
     setCurrentIndex(index)
   }
@@ -57,7 +56,7 @@ const NodeRanking: NextPage = (props: any) => {
       <Text size={12} webSize={18} color='#868AAE'>{t('Node ranking Content')}</Text>
     </TitleView>
     {
-      currentIndex == nodeAddress.length - 1 ? <TitleView style={{padding:0}}>
+      !nodeInfo.isLoading ? <TitleView style={{padding:0}}>
         <SuperNode nodeInfo={nodeInfo}/>
         <SpaceHeight height={24}/>
         <OrdinaryNode nodeInfo={nodeInfo}/>

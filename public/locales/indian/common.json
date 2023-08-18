@@ -113,5 +113,11 @@
   "active":"सक्रियण",
   "My current invitation total computing power":"मेरा वर्तमान आमंत्रण कुल कंप्यूटिंग शक्ति",
   "Invite Total Computing Power":"कुल कंप्यूटिंग शक्ति को आमंत्रित करें",
-  "parsing data":"डेटा पार्स करना"
+  "parsing data":"डेटा पार्स करना",
+  "Liquidity":"द्रवता",
+  "add Liquidity":"तरलता बढ़ाएं",
+  "Estimated power":"अनुमानित वृद्धि रचना",
+  "power":"कम्प्यूटिंग",
+  "At least 100U":"कम से कम 100U",
+  "Mint Power":"खनन अभिकलन"
 }

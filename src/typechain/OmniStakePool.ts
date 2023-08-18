@@ -31,8 +31,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   functions: {
     "DURATION()": FunctionFragment;
     "FEE_RATE_BASE()": FunctionFragment;
+    "_getSwapPrice()": FunctionFragment;
     "_getTokenPrice()": FunctionFragment;
     "addAdmin(address)": FunctionFragment;
+    "addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256)": FunctionFragment;
     "addLock(uint256)": FunctionFragment;
     "allAdmins()": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -49,6 +51,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "dailyPower(address,uint256)": FunctionFragment;
     "dayId()": FunctionFragment;
     "dayPower()": FunctionFragment;
+    "deadAddress()": FunctionFragment;
     "disReward(address,uint256)": FunctionFragment;
     "earned(address)": FunctionFragment;
     "factory()": FunctionFragment;
@@ -62,6 +65,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "initreward()": FunctionFragment;
     "isAdmin(address)": FunctionFragment;
     "lastDisClaimed(address,uint256)": FunctionFragment;
+    "lastReleaseAmount()": FunctionFragment;
     "lastTimeRewardApplicable()": FunctionFragment;
     "lastUpdateTime()": FunctionFragment;
     "lpAddress()": FunctionFragment;
@@ -103,16 +107,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
     "stakeNodeRatio()": FunctionFragment;
     "stakePower(address,uint256)": FunctionFragment;
     "starttime()": FunctionFragment;
+    "swapAddress()": FunctionFragment;
     "swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)": FunctionFragment;
     "tPower(address)": FunctionFragment;
-    "takeInitLp()": FunctionFragment;
     "takeToken(address,address,uint256)": FunctionFragment;
     "teamPower(address)": FunctionFragment;
     "totalDisClaimed(address)": FunctionFragment;
     "totalHashPower()": FunctionFragment;
-    "transferInitHolder(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "unstakePower(address,uint256)": FunctionFragment;
     "updatePeriodFinish(uint256)": FunctionFragment;
     "updateStartTime(uint256)": FunctionFragment;
     "userRewardPerTokenPaid(address)": FunctionFragment;
@@ -124,8 +126,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "DURATION"
       | "FEE_RATE_BASE"
+      | "_getSwapPrice"
       | "_getTokenPrice"
       | "addAdmin"
+      | "addLiquidity"
       | "addLock"
       | "allAdmins"
       | "balanceOf"
@@ -142,6 +146,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "dailyPower"
       | "dayId"
       | "dayPower"
+      | "deadAddress"
       | "disReward"
       | "earned"
       | "factory"
@@ -155,6 +160,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "initreward"
       | "isAdmin"
       | "lastDisClaimed"
+      | "lastReleaseAmount"
       | "lastTimeRewardApplicable"
       | "lastUpdateTime"
       | "lpAddress"
@@ -196,16 +202,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
       | "stakeNodeRatio"
       | "stakePower"
       | "starttime"
+      | "swapAddress"
       | "swapExactTokensForTokensSupportingFeeOnTransferTokens"
       | "tPower"
-      | "takeInitLp"
       | "takeToken"
       | "teamPower"
       | "totalDisClaimed"
       | "totalHashPower"
-      | "transferInitHolder"
       | "transferOwnership"
-      | "unstakePower"
       | "updatePeriodFinish"
       | "updateStartTime"
       | "userRewardPerTokenPaid"
@@ -219,12 +223,29 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "_getSwapPrice",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "_getTokenPrice",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "addAdmin",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addLiquidity",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "addLock",
@@ -277,6 +298,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "dayId", values?: undefined): string;
   encodeFunctionData(functionFragment: "dayPower", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "deadAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "disReward",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
@@ -326,6 +351,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "lastDisClaimed",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lastReleaseAmount",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "lastTimeRewardApplicable",
@@ -483,6 +512,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "starttime", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "swapAddress",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -495,10 +528,6 @@ export interface OmniStakePoolInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "tPower",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "takeInitLp",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "takeToken",
@@ -521,16 +550,8 @@ export interface OmniStakePoolInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "transferInitHolder",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "unstakePower",
-    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "updatePeriodFinish",
@@ -559,10 +580,18 @@ export interface OmniStakePoolInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "_getSwapPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "_getTokenPrice",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "addAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addLiquidity",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "addLock", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allAdmins", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -600,6 +629,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "dailyPower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dayId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dayPower", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "deadAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "disReward", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "earned", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "factory", data: BytesLike): Result;
@@ -623,6 +656,10 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "isAdmin", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "lastDisClaimed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "lastReleaseAmount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -748,11 +785,14 @@ export interface OmniStakePoolInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "stakePower", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "starttime", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "swapAddress",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "swapExactTokensForTokensSupportingFeeOnTransferTokens",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "tPower", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "takeInitLp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "takeToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "teamPower", data: BytesLike): Result;
   decodeFunctionResult(
@@ -764,15 +804,7 @@ export interface OmniStakePoolInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "transferInitHolder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "unstakePower",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -939,10 +971,24 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    _getSwapPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     _getTokenPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     addAdmin(
       account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    addLiquidity(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      amountADesired: PromiseOrValue<BigNumberish>,
+      amountBDesired: PromiseOrValue<BigNumberish>,
+      amountAMin: PromiseOrValue<BigNumberish>,
+      amountBMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1013,6 +1059,8 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    deadAddress(overrides?: CallOverrides): Promise<[string]>;
+
     disReward(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -1069,6 +1117,8 @@ export interface OmniStakePool extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    lastReleaseAmount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -1194,6 +1244,8 @@ export interface OmniStakePool extends BaseContract {
 
     starttime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    swapAddress(overrides?: CallOverrides): Promise<[string]>;
+
     swapExactTokensForTokensSupportingFeeOnTransferTokens(
       amountIn: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -1207,10 +1259,6 @@ export interface OmniStakePool extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    takeInitLp(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
 
     takeToken(
       token: PromiseOrValue<string>,
@@ -1231,19 +1279,8 @@ export interface OmniStakePool extends BaseContract {
 
     totalHashPower(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    transferInitHolder(
-      _newHolder: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    unstakePower(
-      addr: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1277,10 +1314,24 @@ export interface OmniStakePool extends BaseContract {
 
   FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
+  _getSwapPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
   _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   addAdmin(
     account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  addLiquidity(
+    tokenA: PromiseOrValue<string>,
+    tokenB: PromiseOrValue<string>,
+    amountADesired: PromiseOrValue<BigNumberish>,
+    amountBDesired: PromiseOrValue<BigNumberish>,
+    amountAMin: PromiseOrValue<BigNumberish>,
+    amountBMin: PromiseOrValue<BigNumberish>,
+    to: PromiseOrValue<string>,
+    deadline: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1349,6 +1400,8 @@ export interface OmniStakePool extends BaseContract {
 
   dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+  deadAddress(overrides?: CallOverrides): Promise<string>;
+
   disReward(
     arg0: PromiseOrValue<string>,
     arg1: PromiseOrValue<BigNumberish>,
@@ -1405,6 +1458,8 @@ export interface OmniStakePool extends BaseContract {
     arg1: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
+
+  lastReleaseAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
   lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1530,6 +1585,8 @@ export interface OmniStakePool extends BaseContract {
 
   starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
+  swapAddress(overrides?: CallOverrides): Promise<string>;
+
   swapExactTokensForTokensSupportingFeeOnTransferTokens(
     amountIn: PromiseOrValue<BigNumberish>,
     amountOutMin: PromiseOrValue<BigNumberish>,
@@ -1543,10 +1600,6 @@ export interface OmniStakePool extends BaseContract {
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  takeInitLp(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   takeToken(
     token: PromiseOrValue<string>,
@@ -1567,19 +1620,8 @@ export interface OmniStakePool extends BaseContract {
 
   totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
 
-  transferInitHolder(
-    _newHolder: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
   transferOwnership(
     _newOwner: PromiseOrValue<string>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  unstakePower(
-    addr: PromiseOrValue<string>,
-    amount: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1613,10 +1655,24 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
+    _getSwapPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
     _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     addAdmin(
       account: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    addLiquidity(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      amountADesired: PromiseOrValue<BigNumberish>,
+      amountBDesired: PromiseOrValue<BigNumberish>,
+      amountAMin: PromiseOrValue<BigNumberish>,
+      amountBMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1683,6 +1739,8 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+    deadAddress(overrides?: CallOverrides): Promise<string>;
+
     disReward(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -1737,6 +1795,8 @@ export interface OmniStakePool extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    lastReleaseAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1858,6 +1918,8 @@ export interface OmniStakePool extends BaseContract {
 
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
+    swapAddress(overrides?: CallOverrides): Promise<string>;
+
     swapExactTokensForTokensSupportingFeeOnTransferTokens(
       amountIn: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -1871,8 +1933,6 @@ export interface OmniStakePool extends BaseContract {
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    takeInitLp(overrides?: CallOverrides): Promise<void>;
 
     takeToken(
       token: PromiseOrValue<string>,
@@ -1893,19 +1953,8 @@ export interface OmniStakePool extends BaseContract {
 
     totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transferInitHolder(
-      _newHolder: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    unstakePower(
-      addr: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -2011,10 +2060,24 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<BigNumber>;
 
+    _getSwapPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
     _getTokenPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     addAdmin(
       account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    addLiquidity(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      amountADesired: PromiseOrValue<BigNumberish>,
+      amountBDesired: PromiseOrValue<BigNumberish>,
+      amountAMin: PromiseOrValue<BigNumberish>,
+      amountBMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2083,6 +2146,8 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<BigNumber>;
 
+    deadAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
     disReward(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -2139,6 +2204,8 @@ export interface OmniStakePool extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    lastReleaseAmount(overrides?: CallOverrides): Promise<BigNumber>;
 
     lastTimeRewardApplicable(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -2264,6 +2331,8 @@ export interface OmniStakePool extends BaseContract {
 
     starttime(overrides?: CallOverrides): Promise<BigNumber>;
 
+    swapAddress(overrides?: CallOverrides): Promise<BigNumber>;
+
     swapExactTokensForTokensSupportingFeeOnTransferTokens(
       amountIn: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -2276,10 +2345,6 @@ export interface OmniStakePool extends BaseContract {
     tPower(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    takeInitLp(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     takeToken(
@@ -2301,19 +2366,8 @@ export interface OmniStakePool extends BaseContract {
 
     totalHashPower(overrides?: CallOverrides): Promise<BigNumber>;
 
-    transferInitHolder(
-      _newHolder: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    unstakePower(
-      addr: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2348,10 +2402,24 @@ export interface OmniStakePool extends BaseContract {
 
     FEE_RATE_BASE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    _getSwapPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     _getTokenPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     addAdmin(
       account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    addLiquidity(
+      tokenA: PromiseOrValue<string>,
+      tokenB: PromiseOrValue<string>,
+      amountADesired: PromiseOrValue<BigNumberish>,
+      amountBDesired: PromiseOrValue<BigNumberish>,
+      amountAMin: PromiseOrValue<BigNumberish>,
+      amountBMin: PromiseOrValue<BigNumberish>,
+      to: PromiseOrValue<string>,
+      deadline: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2420,6 +2488,8 @@ export interface OmniStakePool extends BaseContract {
 
     dayPower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    deadAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     disReward(
       arg0: PromiseOrValue<string>,
       arg1: PromiseOrValue<BigNumberish>,
@@ -2476,6 +2546,8 @@ export interface OmniStakePool extends BaseContract {
       arg1: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    lastReleaseAmount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     lastTimeRewardApplicable(
       overrides?: CallOverrides
@@ -2605,6 +2677,8 @@ export interface OmniStakePool extends BaseContract {
 
     starttime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    swapAddress(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     swapExactTokensForTokensSupportingFeeOnTransferTokens(
       amountIn: PromiseOrValue<BigNumberish>,
       amountOutMin: PromiseOrValue<BigNumberish>,
@@ -2617,10 +2691,6 @@ export interface OmniStakePool extends BaseContract {
     tPower(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    takeInitLp(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     takeToken(
@@ -2642,19 +2712,8 @@ export interface OmniStakePool extends BaseContract {
 
     totalHashPower(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    transferInitHolder(
-      _newHolder: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
     transferOwnership(
       _newOwner: PromiseOrValue<string>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    unstakePower(
-      addr: PromiseOrValue<string>,
-      amount: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -4,6 +4,7 @@
 export { ERC20__factory } from "./ERC20__factory";
 export { ERC721__factory } from "./ERC721__factory";
 export { OMINT__factory } from "./OMINT__factory";
+export { OMINT3__factory } from "./OMINT3__factory";
 export { OMNIRelation__factory } from "./OMNIRelation__factory";
 export { ONFT__factory } from "./ONFT__factory";
 export { OmniNFTPool__factory } from "./OmniNFTPool__factory";
