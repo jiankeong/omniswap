@@ -21,7 +21,7 @@ import {useSpring, animated} from 'react-spring'
 import {isBrowser} from 'react-device-detect'
 import useTranslationLanguage from "@src/hooks/useTranslationLanguage";
 import ImageCommon from "@public/images/ImageCommon";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import {useDispatch} from "react-redux";
 import styles from './index.module.scss'
 import classNames from "classnames";
@@ -35,6 +35,7 @@ import { TextBold } from '../../components/Text'
 import { useInviteInfo, useApprove, useEarnInfo, useSendTransaction } from '@/src/contract'
 import { useOmniStakePoolContract } from '@/src/hooks/useContract'
 import { OmniStakePool_ADDRESSSES, AddressMap, USDT_ADDRESSSES } from '@/src/constants/addresses'
+import { blacklistAddress } from '@/src/constants/blacklistAddress'
 import { ApprovalState, balanceToBigNumber, bigNumberToBalance, ZERO_ADDRESS } from '@/src/common/Common'
 import PutUSDT from './PutUSDT'
 import { FlexViewCenterColumn, FlexViewEnd, LoadingRow } from '@/src/components/Common'
@@ -42,10 +43,14 @@ import { useNetwork } from 'wagmi'
 import { NetworkId } from '@/src/networkDetails'
 import { LiquidityComponent } from '@/src/pages/swap'
 import {
-  ReceivepUTButton
+    ReceivepUTButton
 } from '../../styles/Earn'
+import { useAccount } from 'wagmi'
+import { notification } from 'antd'
+import { LoadingContext, LoadingType } from '../../provider/loadingProvider'
 
 const Earn: NextPage = (props: any) => {
+    const loading = useContext(LoadingContext)
     const {t} = useTranslationLanguage()
     const dispatch = useDispatch()
     const modalContext = useModalContext()
@@ -57,6 +62,8 @@ const Earn: NextPage = (props: any) => {
     const [showLiquidity,setShowLiquidity] = useState(false)
     const inviteInfo = useInviteInfo()
     const router = useRouter()
+    const addressInfo = useAccount()
+
     useEffect(() => {
         getContent()
     }, [])
@@ -66,39 +73,47 @@ const Earn: NextPage = (props: any) => {
     }
 
     function onReceive(){
-      if (!omniStakePoolContract || earnInfo.isLoading){
-        return
-      }
-      if (parseInt(earnInfo.data?.waitReceive || '0') == 0){
-        return
-      }
-      sendTransaction.mutate({
-        title: 'Receive',
-        func: omniStakePoolContract?.getReward,
-        args: [],
-        onSuccess:()=>{
-          earnInfo.refetch()
+        if (!omniStakePoolContract || earnInfo.isLoading){
+            return
         }
-      })
+        if (parseInt(earnInfo.data?.waitReceive || '0') == 0){
+            return
+        }
+
+        if (blacklistAddress.includes(addressInfo.address)){
+            return loading.show(LoadingType.error, t('unknown error'))
+        }
+
+
+        sendTransaction.mutate({
+            title: 'Receive',
+            func: omniStakePoolContract?.getReward,
+            args: [],
+            onSuccess:()=>{
+                earnInfo.refetch()
+            }
+        })
+
+
     }
 
     function onPutIn(){
-      // modalContext.show(<PutUSDT onClose={modalContext.hidden} onPutIn={(amount:string)=>{
-      //   if (!omniStakePoolContract){
-      //     return
-      //   }
-      //   sendTransaction.mutate({
-      //     title: 'Put In USDT',
-      //     func: omniStakePoolContract?.stake,
-      //     args: [balanceToBigNumber(amount)],
-      //     onSuccess:()=>{
-      //       earnInfo.refetch()
-      //     }
-      //   })
-      // }}/>)
+        // modalContext.show(<PutUSDT onClose={modalContext.hidden} onPutIn={(amount:string)=>{
+        //   if (!omniStakePoolContract){
+        //     return
+        //   }
+        //   sendTransaction.mutate({
+        //     title: 'Put In USDT',
+        //     func: omniStakePoolContract?.stake,
+        //     args: [balanceToBigNumber(amount)],
+        //     onSuccess:()=>{
+        //       earnInfo.refetch()
+        //     }
+        //   })
+        // }}/>)
     }
     function onShowLiqtu(){
-      modalContext.show(<LiquidityComponent/>)
+        modalContext.show(<LiquidityComponent/>)
     }
 
     if (tab.tabIndex === 1) {
@@ -109,10 +124,10 @@ const Earn: NextPage = (props: any) => {
         {/*  <Image src={ImageCommon.homebg} layout='fill'/>*/}
         {/*</TopBg>*/}
         <div className={styles.pic_bg}>
-        <Image src={ImageCommon.earnbg} layout='fill'/>
+            <Image src={ImageCommon.earnbg} layout='fill'/>
         </div>
         <div className={styles.pic_earn}>
-          <Image src={ImageCommon.pic_earn} layout='fill'/>
+            <Image src={ImageCommon.pic_earn} layout='fill'/>
         </div>
         <div className={styles.container}>
             <Tab tabs={[
@@ -171,12 +186,13 @@ const Earn: NextPage = (props: any) => {
                             </div>
                         </div>
                     </div> */}
+
                     <div className={styles.bottom_wrap}>
                         <div className={styles.left}>
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.waitReceive}</div>}
                             <div className={styles.desc}>{t("Pending Receipt")}</div>
                             <div style={{
-                              background:parseInt(earnInfo.data?.waitReceive || '0') == 0?'#303030' : '#FFA845'
+                                background:parseInt(earnInfo.data?.waitReceive || '0') == 0?'#303030' : '#FFA845'
                             }} className={styles.btn} onClick={onReceive}>{t("Extract")}</div>
                             <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={onExtractClick}>
                                 {/* <div className={styles.txt_extract_record}>
@@ -192,7 +208,7 @@ const Earn: NextPage = (props: any) => {
                             {earnInfo.isLoading ? <LoadingRow width='30%'/> : <div className={styles.amount}>{earnInfo.data?.received}</div>}
                             <div className={styles.desc}>{t("Benefits Receipt")}</div>
                             <div style={{
-                              background:'#303030'
+                                background:'#303030'
                             }}  className={styles.btn} onClick={onPutIn}>{t("Put in USDT")}</div>
                             {/* <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
                               window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
@@ -208,49 +224,49 @@ const Earn: NextPage = (props: any) => {
                         </div>
                     </div>
                     <ReceivepUTButton  onClick={()=>{
-                      if (inviteInfo.data?.inviter == ZERO_ADDRESS){
-                        router.push('community')
-                        return
-                      }
-                      // onShowLiqtu()
-                      setShowLiquidity(!showLiquidity)
-                      setTimeout(() => {
-                        scrollToBottom()
-                      }, 500);
+                        if (inviteInfo.data?.inviter == ZERO_ADDRESS){
+                            router.push('community')
+                            return
+                        }
+                        // onShowLiqtu()
+                        setShowLiquidity(!showLiquidity)
+                        setTimeout(() => {
+                            scrollToBottom()
+                        }, 500);
                     }}>
-                      <TextBold size={18} webSize={24}>{inviteInfo.data?.inviter == ZERO_ADDRESS ? t('To Bind') : t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}</TextBold>
+                        <TextBold size={18} webSize={24}>{inviteInfo.data?.inviter == ZERO_ADDRESS ? t('To Bind') : t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}</TextBold>
                     </ReceivepUTButton>
                     <FlexViewEnd>
-                    <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
-                              window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
-                            }}>
-                                <div className={styles.txt_extract_record}>
-                                    {t("View Mining Pool Contract")}
-                                </div>
-                                <div className={styles.icon_arrow_right_gray}>
-                                    <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
-                                </div>
-
+                        <div style={{cursor:'pointer'}} className={"flex-center-justify-end"} onClick={()=>{
+                            window.open('https://bscscan.com/address/' + Object.values(OmniStakePool_ADDRESSSES)[0])
+                        }}>
+                            <div className={styles.txt_extract_record}>
+                                {t("View Mining Pool Contract")}
                             </div>
+                            <div className={styles.icon_arrow_right_gray}>
+                                <Image src={ImageCommon.icon_arrow_right_gray} layout={"fill"}></Image>
+                            </div>
+
+                        </div>
                     </FlexViewEnd>
                 </div>
             </div>
-            {showLiquidity && 
-        <LiquidityComponent title={t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}/>
-        }
+            {showLiquidity &&
+            <LiquidityComponent title={t("Put in USDT") + ' + ' + 'OMNI （105%' +  t('power') + '）'}/>
+            }
         </div>
     </Main>
 }
 const scrollToBottom = () => {
-  (function smoothscroll() {
-      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // 已经被卷掉的高度
-  const clientHeight = document.documentElement.clientHeight; // 浏览器高度
-  const scrollHeight = document.documentElement.scrollHeight; // 总高度
-  if (scrollHeight - 10 > currentScroll + clientHeight) {
-        window.requestAnimationFrame(smoothscroll);
-  window.scrollTo(0, currentScroll + (scrollHeight - currentScroll - clientHeight) / 2);
-  }
-  })();
+    (function smoothscroll() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop; // 已经被卷掉的高度
+        const clientHeight = document.documentElement.clientHeight; // 浏览器高度
+        const scrollHeight = document.documentElement.scrollHeight; // 总高度
+        if (scrollHeight - 10 > currentScroll + clientHeight) {
+            window.requestAnimationFrame(smoothscroll);
+            window.scrollTo(0, currentScroll + (scrollHeight - currentScroll - clientHeight) / 2);
+        }
+    })();
 };
 export default Earn;
 {/*import Community from './community'*/
