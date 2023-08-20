@@ -25,17 +25,22 @@ import ImageCommon from '../../../public/images/ImageCommon'
 import { FlexViewBetween, FlexView, FlexViewColumn,FlexViewCenterColumn, SpaceHeight, SpaceWidth, FlexViewCenter, FlexViewEnd, LoadingRow } from '../../components/Common'
 import { Text, TextBold, TextExtraBold, TextExtraLight, TextRegular, TextSemiBold } from '../../components/Text'
 import useTranslationLanguage from '../../hooks/useTranslationLanguage'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import NotData from '../../components/NotData'
 import {useTab} from "@src/hooks";
 import {Tab} from "@src/views/earn/index";
 import { useRouter } from 'next/router'
 import { useCommunityEarnInfo, useSendTransaction } from '@/src/contract'
 import { OmniPool_ADDRESSSES, OmniStakePool_ADDRESSSES } from '@/src/constants/addresses'
+import { blacklistAddress } from '@/src/constants/blacklistAddress'
 import { useOmniPoolContract, useOmniStakePoolContract } from '@/src/hooks/useContract'
 import { balanceToBigNumber } from '@/src/common/Common'
+import { useAccount } from 'wagmi'
+import { notification } from 'antd'
+import { LoadingContext, LoadingType } from '../../provider/loadingProvider'
 
 export default function Community(){
+  const loading = useContext(LoadingContext)
   const {t} = useTranslationLanguage()
   const [currency,setCurrency] = useState('OMNI')
   const tab = useTab()
@@ -44,6 +49,7 @@ export default function Community(){
   const sendTransaction = useSendTransaction()
 
   const omniStakePoolContract = useOmniStakePoolContract(OmniStakePool_ADDRESSSES)
+  const {address} = useAccount()
 
   function onReceive(){
     if (!omniStakePoolContract || communityEarnInfo.isLoading){
@@ -52,14 +58,19 @@ export default function Community(){
     if (!communityEarnInfo.data?.waitReceive || Number(communityEarnInfo.data?.waitReceive) == 0){
       return
     }
-    sendTransaction.mutate({
-      title: 'Claim',
-      func: omniStakePoolContract?.claim,
-      args: [],
-      onSuccess:()=>{
-        communityEarnInfo.refetch()
-      }
-    })
+
+    if (blacklistAddress.includes(address)){
+      return loading.show(LoadingType.error, t('unknown error'))
+    }else{
+      sendTransaction.mutate({
+        title: 'Claim',
+        func: omniStakePoolContract?.claim,
+        args: [],
+        onSuccess:()=>{
+          communityEarnInfo.refetch()
+        }
+      })
+    }
   }
 
   return <Main>
